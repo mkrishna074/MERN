@@ -18,7 +18,7 @@ const dbConn = mongoose.connect(process.env.DB_CONNECTION,
     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
     () => console.log('Connected to DB.'));
 
-app.get('/', function(req, res) {
+app.get('/createitem', function(req, res) {
         res.sendFile(path.join(__dirname + '/index.html'));
     });
     
