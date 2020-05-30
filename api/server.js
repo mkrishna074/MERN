@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const todayiRouter = require('./routes/todayi.route');
 const path = require('path');
+const authRouter = require('./routes/auth.route');
 
 require('dotenv').config();
 
@@ -23,6 +24,7 @@ app.get('/createitem', function(req, res) {
     });
     
 app.use('/items', todayiRouter);
+app.use('/users', authRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

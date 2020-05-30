@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const verify = require('./verifyToken');
+const verify = require('../middlewares/verifyToken');
 const {itemValidation} = require('../validation');
 let item = require('../models/item.model')
 const multer = require('multer');
