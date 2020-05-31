@@ -3,8 +3,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 const {registerValidation, loginValidation} = require('../validation')
+const verify = require('../middlewares/verifyToken');
 
-//register
+/**
+ * @route   POST api/users
+ * @desc    Register new user
+ * @access  Public
+ */
 router.post('/register', async (req, res) => {
     console.log(req.body);
     const validationRes = registerValidation(req.body);
@@ -24,24 +29,66 @@ router.post('/register', async (req, res) => {
     })
     try {
         const savedUser = await user.save();
-        res.send({user: savedUser._id});
-    } catch (error) {
-        res.status(400).send(error);
+        const token = jwt.sign({ id: savedUser._id }, process.env.PRIVATE_TOKEN, {
+            expiresIn: 3600
+          });
+        res.send({
+            token,
+            user: {
+              id: savedUser.id,
+              name: savedUser.name,
+              email: savedUser.email
+            }
+        });
+    } catch (e) {
+        res.status(400).json({ msg: e.message });
     }
 })
 
-//login
+/**
+ * @route   POST api/auth/login
+ * @desc    Login user
+ * @access  Public
+ */
 router.post('/login', async (req, res) => {
     const validationRes = loginValidation(req.body);
     if(validationRes.error) return res.status(400).send(validationRes.error.details[0].message);
+    try {
+        const user = await User.findOne({email: req.body.email});
+        if(!user) return res.status(400).send('Email does not exist!');
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if(!validPassword) return res.status(400).send('Invalid password!');
 
-    const user = await User.findOne({email: req.body.email});
-    if(!user) return res.status(400).send('Email doesnt exist!');
-    const validPassword = await bcrypt.compare(req.body.password, user.password);
-    if(!validPassword) return res.status(400).send('Invalid password!');
+        const token = jwt.sign({_id:user._id}, process.env.PRIVATE_TOKEN, { expiresIn: 3600 });
+        if (!token) throw Error('Couldnt sign the token');
 
-    const token = jwt.sign({_id:user._id}, process.env.PRIVATE_TOKEN)
-    res.header('auth-token', token).send(token);
+        res.status(200).json({
+        token,
+        user: {
+            id: user._id,
+            name: user.name,
+            email: user.email
+        }
+        });
+     } catch (e) {
+        res.status(400).json({ msg: e.message });
+     }
 })
+
+/**
+ * @route   GET api/auth/user
+ * @desc    Get user data
+ * @access  Private
+ */
+
+router.get('/user', verify, async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      if (!user) throw Error('User does not exist!');
+      res.json(user);
+    } catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+});
 
 module.exports = router;
