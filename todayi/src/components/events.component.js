@@ -1,31 +1,28 @@
-import React, {useEffect} from 'react';
-import {useHttp} from '../hooks/useHttp'
+import React, {useEffect, useState} from 'react';
 import Detail from './detail.component'
 
 const Events = props => {
-    let [isLoading, fetchedData] = useHttp(
-        'https://jsonplaceholder.typicode.com/posts',
-        []
-      );
+  const  [error, setError] =  useState({});
+  const  [events,setEvents]= useState([]);
 
-      useEffect(() => {
-        return () => {
-          console.log('component did unmount');
-        };
-      }, []);
-      let content = <p>Loading data...</p>;
-
-      if (!isLoading && fetchedData) {
-        fetchedData = fetchedData.slice(0, 2).map(i => i);
-        content = (
-            <div className="customContainer"> 
-            {fetchedData.map(i => <Detail key = {i.id} id = {i.id}/>)}
-            </div>
-        );
-      } else if (!isLoading && !fetchedData) {
-        content = <p>Failed to fetch data.</p>;
+  useEffect(() => {
+    async function getData() {
+      try{
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const json1 = await res.json();
+      setEvents(json1.slice(0, 10));
+        } catch (e) {
+          setError(e);
       }
-      return content;
+    }
+    getData()
+  }, [])
+
+  return (
+    <div className="customContainer"> 
+    {events.map(i => <Detail key = {i.id} id = {i.id}/>)}
+    </div>
+  )
 }
 
 

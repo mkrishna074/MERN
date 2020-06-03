@@ -30,8 +30,7 @@ nav ul a {
   color:$midnight;
   margin:0 15px;
   letter-spacing:1px;
-  position:relative;
-  display:inline-block;
+  text-decoration:none;
 }
 nav ul a:hover {
   text-decoration:none;
@@ -48,14 +47,14 @@ nav ul a:hover {
   margin-top: 1rem;
 }
 .customCard{
-  border: 0.2rem solid $midnight;
-  border-radius: 2rem;
-  width: 95vw;
+  border: 0.1rem solid $midnight;
+  border-radius: 1rem;
+  width: 98vw;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  padding: 0.6rem;
+  padding: 0.1rem;
 }
 .detailContainer{
   clear: both;
@@ -88,6 +87,24 @@ nav ul a:hover {
 }
 .btn{
   margin: 0.2rem;
+}
+.detailHeader{
+  background-color: $midnight;
+  color: $clouds;
+  border-top-right-radius: 0.8rem;
+  border-top-left-radius: 0.8rem;
+  text-transform: capitalize;
+  padding: 0.5rem;
+}
+.btn{
+  color: #212529;
+  background-color: #b3ac97;
+  border-color: #b3ac97;
+  border-radius: 2rem;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1;
 }
 @media screen and (max-width: 768px) {
   .rowDetailCard{
