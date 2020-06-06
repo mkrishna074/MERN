@@ -10,9 +10,10 @@ $midnight: #64696e;
 $clouds: #ecf0f1;
 $yolk: #f6d365;
 $hardyolk: #fda085;
+$harderyolk: #f3704c;
 body{
   font-family: 'Poppins', sans-serif;
-  background-image: linear-gradient(120deg, $yolk, $hardyolk);
+  background-image: linear-gradient(180deg, $yolk, $hardyolk);
   min-height: 100vh;
 }
 header,
@@ -58,12 +59,13 @@ nav ul a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center; 
-  margin-top: 1rem;
+  padding-top: 1rem;
 }
-.menu-container{
+.component-container{
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 1rem;
 }
 .custom-card{
   border: 0.1rem solid $midnight;
@@ -118,7 +120,47 @@ form input, form button{
   padding: 0.5rem;
   font-size: 2rem;
   border: none;
-  background: white;
+  background: $clouds;
+}
+form button{
+  background: $harderyolk;
+  color: $clouds;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+form button:hover{
+  color: $harderyolk;
+  background: $clouds;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.type-list{
+  list-style: none;
+  min-width: 30%;
+}
+.type{
+  margin: 0.5rem;
+  background: $clouds;
+  color: $midnight;
+  font-size: 1.5 rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.type li{
+  flex: 1;
+}
+.trash-btn{
+  background: $harderyolk;
+  color:$clouds;
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+}
+.trash-btn:hover{
+  color: $harderyolk;
+  background:$clouds;
 }
 @media screen and (max-width: 768px) {
   .row-detail-card{

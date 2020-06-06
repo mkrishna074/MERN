@@ -40,3 +40,32 @@ export const addEvent = (item) => (dispatch, getState) => {
         });
       });
   };
+  export const addEventType = ({name, isActive}) => (dispatch, getState) => {
+
+    const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+    
+      // Request body
+      const body = JSON.stringify({name, isActive});
+
+    // User loading
+    dispatch({ type: ADD_ITEM });
+  
+    axios
+      .post('/api/todayi/addType',body, config)
+      .then(res =>
+        dispatch({
+          type: ADDED_ITEM,
+          payload: res.data
+        })
+      )
+      .catch(err => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({
+          type: ITEM_ERROR
+        });
+      });
+  };

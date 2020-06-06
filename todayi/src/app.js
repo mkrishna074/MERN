@@ -4,7 +4,7 @@ import Nav from './components/nav.component'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Events from './components/events.component'
 import AddEvent from './components/addEvent.component'
-import AddMenuItem from './components/addMenuItem.component'
+import AddEventType from './components/addEventType.component'
 import { Provider } from 'react-redux'
 import store from './store/store'
 
@@ -19,7 +19,7 @@ function App() {
           <Route path="/" exact component={HomePage} />
           <Route path="/works" exact component={Events} />
           <Route path="/partners" exact component={AddEvent} />
-          <Route path="/price" exact component={AddMenuItem} />
+          <Route path="/price" exact component={AddEventType} />
           <Route path="/contacts" exact component={Events} />
         </Switch>
     </div>

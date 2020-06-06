@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 const AddEvent = () => {
-return(<div className="menu-container clear"><form>
+return(<div className="component-container clear"><form>
             <div className="form-group">
                 <label >Category</label>
                 <input type="text" name="category" className="form-control"/>
