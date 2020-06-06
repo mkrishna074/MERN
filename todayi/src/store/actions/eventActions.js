@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Item from '../../models/item.model'
+import Event from '../../models/event.model'
 
 import { returnErrors } from './errorActions';
 import {

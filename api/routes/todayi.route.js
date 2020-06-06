@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const verify = require('../middlewares/verifyToken');
-const {itemValidation} = require('../validation');
-let item = require('../models/item.model')
+const {eventValidation} = require('../validation');
+let event = require('../models/event.model')
+let eventType = require('../models/eventType.model')
 const multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -16,10 +17,6 @@ var storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 router.get('/learns', (req, res) =>{
-    /* item.find()
-    .then(items => res.json(items))
-    .catch(err => res.status(400).json('Error: ' + err)) */
-    res.json('Item added!')
 
 })
 
@@ -27,9 +24,18 @@ router.post('/add', upload.array('files'), (req, res, next) =>{
     const title = req.body.title;
     const category = req.body.category;
     const media = req.files.map(f => f.filename);
-    const newItem = new item({title: title, category: category, media: media});
-    newItem.save()
-    .then(() => res.json('Item added!'))
+    const newEvent = new event({title: title, category: category, media: media});
+    newEvent.save()
+    .then(() => res.json('Event added!'))
+    .catch(err => res.status(400).json('Error: ' + err))
+})
+
+router.post('/addType', (req, res, next) =>{
+    const name = req.body.name;
+    const isActive = req.body.isActive;
+    const newEventType = new eventType({name: name, isActive: isActive});
+    newEventType.save()
+    .then(() => res.json('Event type added!'))
     .catch(err => res.status(400).json('Error: ' + err))
 })
 

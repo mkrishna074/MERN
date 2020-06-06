@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const itemSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
@@ -30,4 +30,4 @@ const itemSchema = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model('Item', itemSchema);
+module.exports = mongoose.model('Event', eventSchema);
