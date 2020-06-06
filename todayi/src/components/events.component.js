@@ -19,7 +19,7 @@ const Events = props => {
   }, [])
 
   return (
-    <div className="customContainer"> 
+    <div className="customContainer clear"> 
     {events.map(i => <Detail key = {i.id} id = {i.id}/>)}
     </div>
   )

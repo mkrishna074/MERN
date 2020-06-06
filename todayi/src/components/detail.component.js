@@ -5,8 +5,7 @@ import horizontalCss from './controls/controls.scss'
 const Detail = props => {
   const  [error, setError] =  useState({});
   const  [details,setDetails]= useState({});
-  const images = ['https://picsum.photos/200/200', 
-  'https://picsum.photos/200/200', 'https://picsum.photos/200/200'];
+  const images = [];
   const highlights = ['one', 'two', 'three'];
 
   useEffect(() => {
@@ -22,24 +21,24 @@ const Detail = props => {
     }
     getData()
   }, [props.id]);
-  return (<div key={details.id} className="customCard">
-           <div className="detailContainer detailHeader">
-      <div className="colDetailCard two">
-            <h4>{details.title}</h4>
+  return (<div key={details.id} className="custom-card">
+           <div className="detail-container detail-header">
+      <div className="col-detail-card two">
+            <p>{details.title}</p>
       </div>
-      <div className="rowDetailCard one">
+      <div className="row-detail-card one">
       {highlights.map((item, index) => ( <button key={index} type="button" className="btn btn-warning btn-sm" disabled> {item}</button>))}
       </div>
     </div>
-            <div className="detailContainer">
-              <div className="colDetailCard one">
+            <div className="detail-container">
+              <div className="col-detail-card one">
               <p>{details.body}</p>
               <p>{details.body}</p>
               <p>{details.body}</p>
               <p>{details.body}</p>
               <p>{details.body}</p>
               </div>
-              <div className="colDetailCard two">
+              <div className="col-detail-card two">
               <Slider classNames={horizontalCss}>
               {images.map((item, index) => (
                   <div

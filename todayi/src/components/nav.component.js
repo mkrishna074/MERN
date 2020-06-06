@@ -6,7 +6,7 @@ const Nav = props => {
         color: '#2c3e50',textDecoration: 'none'
       };
       const activeStyle = {
-        color: '#ecf0f1', background: '#64696e'
+        color: '#64696e', background: '#ecf0f1', textDecoration: 'none'
       };
   return (
     <>

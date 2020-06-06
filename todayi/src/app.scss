@@ -1,7 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Life+Savers:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+*{
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;;
+}
 $midnight: #64696e;
 $clouds: #ecf0f1;
+$yolk: #f6d365;
+$hardyolk: #fda085;
+body{
+  font-family: 'Poppins', sans-serif;
+  background-image: linear-gradient(120deg, $yolk, $hardyolk);
+  min-height: 100vh;
+}
 header,
 .heading,
 nav {
@@ -17,7 +30,7 @@ nav{
 .heading{
   font-family:'Indie Flower', cursive;
   text-transform:lowercase;
-  font-size: 3rem;
+  font-size: 4rem;
   margin-left: 0.2em;
 }
 header {
@@ -34,19 +47,25 @@ nav ul a {
 }
 nav ul a:hover {
   text-decoration:none;
-  color: $clouds; 
-  background: $midnight;
+  color: $midnight; 
+  background: $clouds;
 }
-
-.customContainer{
+.clear{
   clear: both;
+}
+.custom-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; 
   margin-top: 1rem;
 }
-.customCard{
+.menu-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.custom-card{
   border: 0.1rem solid $midnight;
   border-radius: 1rem;
   width: 98vw;
@@ -56,7 +75,7 @@ nav ul a:hover {
   flex-direction: column;
   padding: 0.1rem;
 }
-.detailContainer{
+.detail-container{
   clear: both;
   display: flex;
   flex-direction: row;
@@ -64,13 +83,13 @@ nav ul a:hover {
   align-items: center; 
   flex-wrap: nowrap;
 }
-.colDetailCard{
+.col-detail-card{
   display: flex;
   justify-content: flex-start;
   align-content: center;
   flex-direction: column;
 }
-.rowDetailCard{
+.row-detail-card{
   display: flex;
   justify-content: flex-start;
   align-content: center;
@@ -78,36 +97,32 @@ nav ul a:hover {
 }
 .one {
   width: 40vw;
-  font-size: 0.8rem;
 }
 
 .two {
   width: 60vw;
-  font-size: 0.8rem;
 }
 .btn{
   margin: 0.2rem;
+  color: black;
 }
-.detailHeader{
-  background-color: $midnight;
-  color: $clouds;
+.detail-header{
+  background-color: $clouds;
+  color: $midnight;
   border-top-right-radius: 0.8rem;
   border-top-left-radius: 0.8rem;
   text-transform: capitalize;
   padding: 0.5rem;
+  font-size: medium;
 }
-.btn{
-  color: #212529;
-  background-color: #b3ac97;
-  border-color: #b3ac97;
-  border-radius: 2rem;
-  user-select: none;
-  border: 1px solid transparent;
-  font-size: 1rem;
-  line-height: 1;
+form input, form button{
+  padding: 0.5rem;
+  font-size: 2rem;
+  border: none;
+  background: white;
 }
 @media screen and (max-width: 768px) {
-  .rowDetailCard{
+  .row-detail-card{
     flex-direction: column;
   }
   .heading{
