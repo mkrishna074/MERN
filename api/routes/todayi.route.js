@@ -26,6 +26,7 @@ router.post('/addEvent', upload.array('files'), (req, res, next) =>{
     const highlights = req.body.highlights;
     const tags = req.body.tags;
     const media = req.files.map(f => f.filename);
+    console.log(req.body);
     console.log(title);
     console.log(tags);
     console.log(req.files);
