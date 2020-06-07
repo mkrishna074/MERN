@@ -23,7 +23,7 @@ app.get('/createitem', function(req, res) {
         res.sendFile(path.join(__dirname + '/index.html'));
     });
     
-app.use('/api/items', todayiRouter);
+app.use('/api/todayi', todayiRouter);
 app.use('/api/auth', authRouter);
 
 app.listen(port, () => {

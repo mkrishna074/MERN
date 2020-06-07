@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 router.get('/learns', (req, res) =>{
-
+  res.json('todayi');
 })
 
 router.post('/add', upload.array('files'), (req, res, next) =>{
@@ -30,13 +30,58 @@ router.post('/add', upload.array('files'), (req, res, next) =>{
     .catch(err => res.status(400).json('Error: ' + err))
 })
 
-router.post('/addType', (req, res, next) =>{
+/**
+ * @route   GET api/types
+ * @desc    Get All types
+ * @access  Public
+ */
+
+router.get('/', async (req, res) => {
+    try {
+      const items = await event.find();
+      if (!items) throw Error('No items');
+  
+      res.status(200).json(items);
+    } catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+  });
+  
+  /**
+   * @route   POST api/addType
+   * @desc    Create A type
+   * @access  Private
+   */
+  
+  router.post('/addType', async (req, res) => {
+
     const name = req.body.name;
-    const isActive = req.body.isActive;
-    const newEventType = new eventType({name: name, isActive: isActive});
+    console.log('server' + name);
+    const newEventType = new eventType({name: name, isActive: true});
     newEventType.save()
     .then(() => res.json('Event type added!'))
     .catch(err => res.status(400).json('Error: ' + err))
-})
+  });
+  
+  /**
+   * @route   DELETE api/type/:id
+   * @desc    Delete A type
+   * @access  Private
+   */
+  
+  router.delete('/:id', async (req, res) => {
+    try {
+      const item = await Item.findById(req.params.id);
+      if (!item) throw Error('No item found');
+  
+      const removed = await item.remove();
+      if (!removed)
+        throw Error('Something went wrong while trying to delete the item');
+  
+      res.status(200).json({ success: true });
+    } catch (e) {
+      res.status(400).json({ msg: e.message, success: false });
+    }
+  });
 
 module.exports = router;

@@ -30,7 +30,7 @@ const eventValidation = (data) => {
 const eventTypeValidation = (data) => {
     const schema = Joi.object({
         name: Joi.string().min(5).max(25).required(),
-        isActive: Joi.boolean().required()
+        isActive: Joi.boolean()
     });
     return schema.validate(data);
 }

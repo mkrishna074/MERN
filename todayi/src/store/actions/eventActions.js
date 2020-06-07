@@ -11,22 +11,14 @@ import {
   ITEM_ERROR
 } from './types';
 
-export const addEvent = (item) => (dispatch, getState) => {
-
-    const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-    
-      // Request body
+export const addType = (item) => (dispatch, getState) => {
+      console.log(item);
       const body = JSON.stringify(item);
-
-    // User loading
+      console.log(body);
     dispatch({ type: ADD_ITEM });
   
     axios
-      .post('/api/todayi/add',item, config)
+      .post('/api/todayi/addType',body)
       .then(res =>
         dispatch({
           type: ADDED_ITEM,
@@ -68,4 +60,9 @@ export const addEvent = (item) => (dispatch, getState) => {
           type: ITEM_ERROR
         });
       });
+  };
+  export const setItemsLoading = () => {
+    return {
+      type: ITEMS_LOADING
+    };
   };

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 const AddEvent = () => {
+    
 return(<div className="component-container clear"><form>
             <div className="form-group">
                 <label >Category</label>
@@ -22,7 +23,7 @@ return(<div className="component-container clear"><form>
                 <label>Media</label>
                 <input type="file" multiple className="form-control-file" name="media"/>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="add-event-btn">Add</button>
             </form> </div>);
 }
 

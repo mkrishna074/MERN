@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Life+Savers:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 *{
   border: 0;
   margin: 0;
@@ -12,6 +9,7 @@ $yolk: #f6d365;
 $hardyolk: #fda085;
 $harderyolk: #f3704c;
 body{
+  font-display: block;
   font-family: 'Poppins', sans-serif;
   background-image: linear-gradient(180deg, $yolk, $hardyolk);
   min-height: 100vh;
@@ -29,6 +27,7 @@ nav{
   min-height: 5vh;
 }
 .heading{
+  font-display: block;
   font-family:'Indie Flower', cursive;
   text-transform:lowercase;
   font-size: 4rem;
@@ -39,6 +38,7 @@ header {
   text-decoration:none;
 }
 nav ul a {
+  font-display: block;
   font-family: 'Life Savers', cursive;
   text-transform:uppercase;
   color:$midnight;
@@ -133,6 +133,9 @@ form button:hover{
   background: $clouds;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+.add-event-btn{
+  border-radius: 5px;
 }
 .type-list{
   list-style: none;
