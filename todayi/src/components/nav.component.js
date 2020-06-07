@@ -12,7 +12,7 @@ const Nav = props => {
     <>
     <header>
         <NavLink to='/' style={logo}>
-        <span className="heading">today i</span>
+        <span className="heading">nikki my love</span>
         </NavLink>
     </header>
     <nav>
