@@ -13,8 +13,12 @@ const AddEvent = () => {
             }
           };
         console.log(event);
+        let formData = getFormData(event);
+        for (const key of Object.keys(event.media)) {
+            formData.append('media', event.media[key]);
+        }
         axios
-        .post('http://localhost:5000/api/todayi/addEvent', getFormData(event), config)
+        .post('http://localhost:5000/api/todayi/addEvent', formData, config)
         .then(res => {
             console.log(res);
             clearForm();
@@ -26,13 +30,13 @@ const AddEvent = () => {
     const clearForm = () => { 
         document.getElementById("create-event-form").reset();
     }
-    const getFormData = object => Object.keys(object).reduce((formData, key) => {
-        formData.append(key, object[key]);
+    const getFormData = obj => Object.keys(obj).reduce((formData, key) => {
+        formData.append(key, obj[key]);
         console.log(formData);
         return formData;
     }, new FormData());
     
-return(<div className="component-container clear"><form id ="create-event-form">
+return(<div className="component-container clear"><form id ="create-event-form" encType="multipart/form-data">
             <div className="form-group">
                 <label >Category</label>
                 <input type="text" 
@@ -65,8 +69,8 @@ return(<div className="component-container clear"><form id ="create-event-form">
                 <label>Media</label>
                 <input type="file" multiple 
                        className="form-control-file" 
-                       name="files"  
-                       onChange={(e) => setEvent({...event, files: Array.from(e.target.files)})}/>
+                       name="media"  
+                       onChange={(e) => setEvent({...event, media: Array.from(e.target.files)})}/>
             </div>
             <button type="submit" className="add-event-btn"  onClick={handleOnSubmit}>Add</button>
             </form> </div>);

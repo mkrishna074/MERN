@@ -20,23 +20,14 @@ router.get('/learns', (req, res) =>{
   res.json('todayi');
 })
 
-router.post('/addEvent', upload.array('files'), (req, res, next) =>{
-    const title = req.body.title;
-    const category = req.body.category;
-    const highlights = req.body.highlights;
-    const tags = req.body.tags;
-    const media = req.files.map(f => f.filename);
-    console.log(req.body);
-    console.log(title);
-    console.log(tags);
-    console.log(req.files);
-    console.log(media);
+router.post('/addEvent', upload.array('media', 12), (req, res, next) =>{
+    const media = req.files.map(f => f.filename);;
     const newEvent = new event({
-      title: title, 
-      category: category, 
+      title: req.body.title, 
+      category: req.body.category,
       media: media, 
-      highlights: highlights,
-      tags: tags
+      highlights: req.body.highlights,
+      tags: req.body.tags
     });
     newEvent.save()
     .then(() => res.json('Event added!'))
