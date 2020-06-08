@@ -16,16 +16,6 @@ const Login = () => {
               'Content-Type': 'application/json'
             }
           };
-        const body = JSON.stringify(type);
-        axios
-        .post('http://localhost:5000/api/todayi/addType',body, config)
-        .then(res => {
-            console.log(res);
-            clearForm();
-        })
-        .catch(err => {
-            console.log(err)
-        });
     };
     const clearForm = () => { 
         document.getElementById("create-login-form").reset();
