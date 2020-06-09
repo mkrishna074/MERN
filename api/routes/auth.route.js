@@ -14,7 +14,8 @@ router.post('/register', async (req, res) => {
     console.log(req.body);
     const validationRes = registerValidation(req.body);
     console.log(validationRes.error.details);
-    if(validationRes.error) return res.status(400).send(validationRes.error.details[0].message);
+    if(validationRes.error) return res.status(500).json({
+    message:validationRes.error.details[0].message, type: 'Validation'});
 
     const emailExists = await User.findOne({email: req.body.email});
     if(emailExists) return res.status(400).send('Email already exists!');
@@ -27,7 +28,6 @@ router.post('/register', async (req, res) => {
         email: req.body.email,
         password: hashedPassword
     })
-    try {
         const savedUser = await user.save();
         const token = jwt.sign({ id: savedUser._id }, process.env.PRIVATE_TOKEN, {
             expiresIn: 3600
@@ -40,9 +40,6 @@ router.post('/register', async (req, res) => {
               email: savedUser.email
             }
         });
-    } catch (e) {
-        res.status(400).json({ msg: e.message });
-    }
 })
 
 /**

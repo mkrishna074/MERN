@@ -165,6 +165,13 @@ form button:hover{
   color: $harderyolk;
   background:$clouds;
 }
+.margin-auto{
+  margin: auto;
+}
+.error-msg{
+  color: white;
+  background-color: red;
+}
 @media screen and (max-width: 768px) {
   .row-detail-card{
     flex-direction: column;
