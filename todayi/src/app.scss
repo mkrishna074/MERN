@@ -6,7 +6,7 @@
 $midnight: #64696e;
 $clouds: #ecf0f1;
 $yolk: #f6d365;
-$hardyolk: #fda085;
+$hardyolk: #f5a48d;
 $harderyolk: #f3704c;
 body{
   font-display: block;
@@ -172,6 +172,20 @@ form button:hover{
   padding: 0 1rem;
   color: white;
   background-color: red;
+}
+.tag {
+  display: inline;
+  padding: .2rem .6rem .3rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .75rem;
+  margin: 0.5rem;
+  background-color: $midnight;
 }
 @media screen and (max-width: 768px) {
   .row-detail-card{

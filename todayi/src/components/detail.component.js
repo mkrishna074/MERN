@@ -27,7 +27,7 @@ const Detail = props => {
             <p>{details.title}</p>
       </div>
       <div className="row-detail-card one">
-      {highlights.map((item, index) => ( <button key={index} type="button" className="btn btn-warning btn-sm" disabled> {item}</button>))}
+      {highlights.map((item, index) => ( <span key={index} className="tag"> {item}</span>))}
       </div>
     </div>
             <div className="detail-container">
