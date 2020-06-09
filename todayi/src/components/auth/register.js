@@ -40,7 +40,7 @@ const Register = (props) => {
                 clearForm();
             } else {
                 setIsError(true);
-                setErrorMsg(result.data.msg);
+                setErrorMsg(result.data.message);
             }
             }).catch(e => {
             setIsError(true);

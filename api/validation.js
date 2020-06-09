@@ -22,7 +22,8 @@ const eventValidation = (data) => {
     const schema = Joi.object({
         category: Joi.string().min(6).required(),
         title: Joi.string().min(25).required(),
-        highlights: Joi.array().min(1).required().items(Joi.string())
+        highlights: Joi.array().min(1).required().items(Joi.string()),
+        tags: Joi.array().min(1).required().items(Joi.string())
     });
     return schema.validate(data);
 }

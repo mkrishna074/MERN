@@ -4,22 +4,23 @@ const eventSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        max: 25,
+        max: 15,
         unique: true,
-        min: 6
+        trim: true,
+        min: 4
     },
     title: {
         type: String,
         required: true,
         max: 255,
-        trim: true,
-        min: 25
+        min: 10
     },
     highlights: [{
         type: String
     }],
     tags: [{
-        type: String
+        type: String,
+        trim: true,
     }],
     media: [{
         type: String

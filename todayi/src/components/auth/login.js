@@ -7,7 +7,8 @@ import {Redirect} from 'react-router-dom'
 const Login = (props) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthTokens } = useAuth();
 
@@ -20,7 +21,7 @@ const Login = (props) => {
         }
     };
     axios.post("http://localhost:5000/api/auth/login", {
-      userName,
+      email,
       password
     }, config).then(result => {
       if (result.status === 200) {
@@ -30,9 +31,11 @@ const Login = (props) => {
         clearForm();
       } else {
         setIsError(true);
+        setErrorMsg(result.data.message);
       }
     }).catch(e => {
       setIsError(true);
+      setErrorMsg(e.response.data.message);
     });
   };
   const clearForm = () => { 
@@ -42,14 +45,14 @@ const Login = (props) => {
   if (isLoggedIn) {
     return <Redirect to={referer} />;
   }
-    return(
+    return(<>
         <div className="component-container clear">
             <form id="create-login-form">
                 <div className="form-group">
                     <label >Email</label>
                     <input type="email" 
                     className="form-control" 
-                    onChange={e => { setUserName(e.target.value);}}/>
+                    onChange={e => { setEmail(e.target.value);}}/>
                 </div>
                 <div className="form-group">
                     <label >Password</label>
@@ -61,8 +64,9 @@ const Login = (props) => {
                     Sign In
                 </button>
             </form>
-            { isError &&<error>The email or password provided were incorrect!</error> }
         </div>
+      <div className="component-container">{ isError &&<p className="error-msg">{errorMsg}</p>}</div>
+      </>
     );
 }
 export default React.memo(Login);
