@@ -4,7 +4,7 @@ import {useAuth} from './auth'
 
 function ProtectedRoute({ component: Component, ...rest }) {
   
-    const isAuthenticated = useAuth();
+    const isAuthenticated = false;//useAuth();
 
     return (
       <Route
@@ -13,7 +13,10 @@ function ProtectedRoute({ component: Component, ...rest }) {
           isAuthenticated ? (
             <Component {...props} />
           ) : (
-            <Redirect to="/login" />
+            <Redirect to={{
+              pathname: '/login',
+              state: { from: props.location }
+          }} />
           )
         }
       />

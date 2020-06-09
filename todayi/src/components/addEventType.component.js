@@ -30,26 +30,22 @@ const AddEventType = () => {
     const clearForm = () => { 
         document.getElementById("create-type-form").reset();
     }
-return(<>
+return(
     <div className="component-container clear">
         <form id="create-type-form">
-            <input type="text" className="item-input" onChange={handleInput}></input>
-            <button type="submit" className="submit-button" onClick={handleOnSubmit}>
+
+        <div className="form-group">
+            <label>Type</label>
+            <input type="text" 
+            name="type"
+            className="form-control" 
+            onChange={handleInput}></input>
+        </div>
+            <button type="submit" onClick={handleOnSubmit}>
                 <i className="fas fa-plus-square"></i>
             </button>
         </form>
      </div>
-        <div className="component-container">
-            <ul className="type-list">
-            <div className="type">
-            <li>Test</li>
-            <button className="trash-btn">
-                <i className="fas fa-trash"></i>
-            </button>
-            </div>
-            </ul>
-        </div>
-     </>
 );
 }
 export default React.memo(AddEventType);

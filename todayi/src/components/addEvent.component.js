@@ -36,7 +36,8 @@ const AddEvent = () => {
         return formData;
     }, new FormData());
     
-return(<div className="component-container clear"><form id ="create-event-form" encType="multipart/form-data">
+return(<div className="component-container clear">
+    <form id ="create-event-form" encType="multipart/form-data">
             <div className="form-group">
                 <label >Category</label>
                 <input type="text" 
@@ -68,11 +69,11 @@ return(<div className="component-container clear"><form id ="create-event-form" 
             <div className="form-group">
                 <label>Media</label>
                 <input type="file" multiple 
-                       className="form-control-file" 
+                       className="form-control" 
                        name="media"  
                        onChange={(e) => setEvent({...event, media: Array.from(e.target.files)})}/>
             </div>
-            <button type="submit" className="add-event-btn"  onClick={handleOnSubmit}>Add</button>
+            <button type="submit" className="btn-border-radius" onClick={handleOnSubmit}>Add</button>
             </form> </div>);
 }
 
