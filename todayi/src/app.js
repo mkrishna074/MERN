@@ -12,11 +12,10 @@ import ProtectedRoute from './components/auth/protectedRoute'
 
 function App() {
 
-  const existingToken = JSON.parse(localStorage.getItem("token"));
-  const [authTokens, setAuthTokens] = useState(existingToken);
+  const [authTokens, setAuthTokens] = useState(localStorage.getItem('token') || '');
   
   const setTokens = (data) => {
-    localStorage.setItem("token", JSON.stringify(data));
+    localStorage.setItem('token', JSON.stringify(data));
     setAuthTokens(data);
   }
 

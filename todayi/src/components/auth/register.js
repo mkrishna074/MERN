@@ -13,7 +13,6 @@ const Register = (props) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const { setAuthTokens } = useAuth();
-    const referer = props.location.state || '/';
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -32,7 +31,6 @@ const Register = (props) => {
             email,
             password
             }, config).then(result => {
-                console.log(result);
             if (result.status === 200) {
                 console.log(result.data);
                 setAuthTokens(result.data);
@@ -44,14 +42,14 @@ const Register = (props) => {
             }
             }).catch(e => {
             setIsError(true);
-            setErrorMsg(e.response.data.message);
+            setErrorMsg(e);
     });
     };
     const clearForm = () => { 
         document.getElementById("create-register-form").reset();
     }
     if (isLoggedIn) {
-        return <Redirect to={referer} />;
+        return <Redirect to={'/'} />;
     }
 return(<>
     <div className="component-container clear">
@@ -69,7 +67,7 @@ return(<>
                     onChange={e => { setUserEmail(e.target.value);}}/>
         </div>
         <div className="form-group">
-                <label >Password</label>
+                <label >Password</label> <span className="tag"> Password must contain one uppercase letter, one lowercase letter, one numeric and one symbol. </span>
             <input type="password" 
                     className="form-control" 
                     onChange={e => { setPassword(e.target.value);}}/>

@@ -4,8 +4,8 @@ import {useAuth} from './auth'
 
 function ProtectedRoute({ component: Component, ...rest }) {
   
-    const isAuthenticated = false;//useAuth();
-
+    const isAuthenticated = useAuth().authTokens !== "";
+    
     return (
       <Route
         {...rest}

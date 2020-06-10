@@ -1,11 +1,21 @@
 const Joi = require('@hapi/Joi');
+const passwordComplexity = require("joi-password-complexity");
 
+const complexityOptions = {
+    min: 8,
+    max: 25,
+    lowerCase: 1,
+    upperCase: 1,
+    numeric: 1,
+    symbol: 1,
+    requirementCount: 4,
+  };
 
 const registerValidation = (data) => {
     const schema = Joi.object({
         name: Joi.string().min(6).required(),
         email: Joi.string().min(6).required().email(),
-        password: Joi.string().min(6).required()
+        password: passwordComplexity(complexityOptions)
     });
     return schema.validate(data);
 }
