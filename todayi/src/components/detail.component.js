@@ -21,7 +21,7 @@ const Detail = props => {
     }
     getData()
   }, [props.id]);
-  return (<div key={details.id} className="custom-card">
+  return (<><div key={details.id} className="custom-card">
            <div className="detail-container detail-header">
       <div className="col-detail-card two">
             <p>{details.title}</p>
@@ -49,7 +49,9 @@ const Detail = props => {
               </Slider>
               </div>
             </div>
-          </div>);
+          </div>
+          <div className="component-container">{ error.response &&<p className="error-msg">{error.response}</p>}</div>
+          </>);
 }
       
 export default React.memo(Detail);

@@ -1,11 +1,13 @@
 import { USER_LOADING, USER_LOADED, AUTH_ERROR,
      LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, 
-     REGISTER_SUCCESS, REGISTER_FAIL } from "../actions/types";
+     REGISTER_SUCCESS, REGISTER_FAIL, PASSWORD_MATCH } from "../actions/types";
 
 const initialState = {
     token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    isAuthenticated: false,
     isLoading: false,
+    isError: false,
+    responseMsg: '',
     user: null
 };
       
@@ -37,13 +39,26 @@ export default function(state = initialState, action) {
         case LOGOUT_SUCCESS:
         case REGISTER_FAIL:
         localStorage.removeItem('token');
+        console.log(action.payload);
         return {
             ...state,
             token: null,
             user: null,
             isAuthenticated: false,
-            isLoading: false
+            isLoading: false,
+            isError: true,
+            responseMsg: action.payload.data.message
         };
+        case PASSWORD_MATCH:
+            return{
+                ...state,
+            token: null,
+            user: null,
+            isAuthenticated: false,
+            isLoading: false,
+            isError: true,
+            responseMsg: 'Password doesn\'t match.'
+            };
         default:
         return state;
     }

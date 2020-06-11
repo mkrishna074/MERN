@@ -14,3 +14,5 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const PASSWORD_MATCH = 'PASSWORD_MATCH';
+export const API_ERROR = 'API_ERROR'

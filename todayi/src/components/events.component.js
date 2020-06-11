@@ -18,10 +18,12 @@ const Events = props => {
     getData()
   }, [])
 
-  return (
+  return (<>
     <div className="custom-container clear"> 
     {events.map(i => <Detail key = {i.id} id = {i.id}/>)}
     </div>
+    <div className="component-container">{ error.response &&<p className="error-msg">{error.response}</p>}</div>
+     </>
   )
 }
 

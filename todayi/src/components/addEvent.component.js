@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const AddEvent = () => {
     const[event, setEvent] = useState({});
+    const [isError, setIsError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -12,7 +14,9 @@ const AddEvent = () => {
               'Content-Type': 'multipart/form-data'
             }
           };
-        console.log(event);
+          if (localStorage.getItem('token')) {
+            config.headers['x-auth-token'] = localStorage.getItem('token');
+          }
         let formData = getFormData(event);
         for (const key of Object.keys(event.media)) {
             formData.append('media', event.media[key]);
@@ -23,8 +27,9 @@ const AddEvent = () => {
             console.log(res);
             clearForm();
         })
-        .catch(err => {
-            console.log(err)
+        .catch(e => {
+            setIsError(true);
+            setErrorMsg(e.response.data.message);
         });
     };
     const clearForm = () => { 
@@ -36,7 +41,7 @@ const AddEvent = () => {
         return formData;
     }, new FormData());
     
-return(<div className="component-container clear">
+return(<><div className="component-container clear">
     <form id ="create-event-form" encType="multipart/form-data">
             <div className="form-group">
                 <label >Category</label>
@@ -74,7 +79,8 @@ return(<div className="component-container clear">
                        onChange={(e) => setEvent({...event, media: Array.from(e.target.files)})}/>
             </div>
             <button type="submit" className="btn-border-radius" onClick={handleOnSubmit}>Add</button>
-            </form> </div>);
+            </form> </div>
+            <div className="component-container">{ isError &&<p className="error-msg">{errorMsg}</p>}</div> </>);
 }
 
 export default React.memo(AddEvent);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './app.scss';
 import Nav from './components/nav.component'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
@@ -7,20 +7,10 @@ import AddEvent from './components/addEvent.component'
 import AddEventType from './components/addEventType.component'
 import Login from './components/auth/login'
 import Register from './components/auth/register'
-import {AuthContext} from './components/auth/auth'
-import ProtectedRoute from './components/auth/protectedRoute'
 
 function App() {
 
-  const [authTokens, setAuthTokens] = useState(localStorage.getItem('token') || '');
-  
-  const setTokens = (data) => {
-    localStorage.setItem('token', JSON.stringify(data));
-    setAuthTokens(data);
-  }
-
   return (
-    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
     <Router>
     <div className="App">
       <Nav/>
@@ -28,14 +18,13 @@ function App() {
           <Route path="/" exact component={HomePage} />
           <Route path="/works" exact component={Events} />
           <Route path="/partners" exact component={AddEvent} />
-          <ProtectedRoute path="/price" exact component={AddEventType} />
+          <Route path="/price" exact component={AddEventType} />
           <Route path="/contacts" exact component={Events} />
           <Route path="/login" exact component={Login} />
-          <Route path="/register" exact render={props => <Register {...props}/>} />
+          <Route path="/register" exact component={Register} />
         </Switch>
     </div>
     </Router>
-    </AuthContext.Provider>
   );
 }
 

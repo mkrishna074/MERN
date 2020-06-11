@@ -20,7 +20,7 @@ router.get('/learns', (req, res) =>{
   res.json('todayi');
 })
 
-router.post('/addEvent', upload.array('media', 12), (req, res, next) =>{
+router.post('/addEvent', verify,  upload.array('media', 12), (req, res, next) =>{
     const media = req.files.map(f => f.filename);;
     const newEvent = new event({
       title: req.body.title, 
@@ -57,7 +57,7 @@ router.get('/', async (req, res) => {
    * @access  Private
    */
   
-  router.post('/addType', async (req, res) => {
+  router.post('/addType', verify,  async (req, res) => {
 
     const name = req.body.name;
     console.log('server' + name);

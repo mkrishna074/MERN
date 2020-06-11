@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {useAuth} from './auth'
 import {Redirect} from 'react-router-dom'
 
 
@@ -10,7 +9,6 @@ const Login = (props) => {
   const [errorMsg, setErrorMsg] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setAuthTokens } = useAuth();
 
   const referer = props.location.state.from.pathname|| '/';
   const handleOnSubmit = (e) => {   
@@ -26,7 +24,6 @@ const Login = (props) => {
     }, config).then(result => {
       if (result.status === 200) {
         console.log(result.data);
-        setAuthTokens(result.data);
         setLoggedIn(true);
         clearForm();
       } else {

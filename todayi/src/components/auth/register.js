@@ -1,56 +1,32 @@
 import React, {useState} from 'react';
-import axios from 'axios';
-import {useAuth} from './auth'
 import {Link, Redirect} from 'react-router-dom'
+import {useSelector, useDispatch, shallowEqual} from 'react-redux'
+import { register } from '../../store/actions/authActions';
 
 
 const Register = (props) => {
-    const [isLoggedIn, setLoggedIn] = useState(false);
-    const [isError, setIsError] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
     const [name, setUserName] = useState('');
     const [email, setUserEmail] = useState('');
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const { setAuthTokens } = useAuth();
+    const dispatch = useDispatch();
+
+    const state = useSelector(state => state, shallowEqual);
 
     const handleOnSubmit = (e) => {
-        e.preventDefault();
-        if(password !== confirmPassword){
-            setIsError(true);
-            setErrorMsg('Passwords dont match!');
-            return false;
+        try{
+            e.preventDefault();
+            dispatch(register({name, email, password, confirmPassword}));
+            document.getElementById("create-register-form").reset();
+        } catch (e){
+            console.log(state);
         }
-        const config = {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-        };
-        axios.post("http://localhost:5000/api/auth/register", {
-            name,
-            email,
-            password
-            }, config).then(result => {
-            if (result.status === 200) {
-                console.log(result.data);
-                setAuthTokens(result.data);
-                setLoggedIn(true);
-                clearForm();
-            } else {
-                setIsError(true);
-                setErrorMsg(result.data.message);
-            }
-            }).catch(e => {
-            setIsError(true);
-            setErrorMsg(e);
-    });
+        
     };
-    const clearForm = () => { 
-        document.getElementById("create-register-form").reset();
-    }
-    if (isLoggedIn) {
+    if (state.auth.isAuthenticated) {
         return <Redirect to={'/'} />;
     }
+
 return(<>
     <div className="component-container clear">
         <form id="create-register-form">
@@ -70,13 +46,15 @@ return(<>
                 <label >Password</label> <span className="tag"> Password must contain one uppercase letter, one lowercase letter, one numeric and one symbol. </span>
             <input type="password" 
                     className="form-control" 
-                    onChange={e => { setPassword(e.target.value);}}/>
+                    onChange={e => { setPassword(e.target.value);}} 
+                    autoComplete="off"/>
         </div>
         <div className="form-group">
                 <label >Confirm Password</label>
             <input type="password" 
                     className="form-control" 
-                    onChange={e => { setConfirmPassword(e.target.value);}}/>
+                    onChange={e => { setConfirmPassword(e.target.value);}}
+                    autoComplete="off"/>
         </div>
             <button type="submit" className="btn-border-radius" onClick={handleOnSubmit}>
                 Sign Up
@@ -89,7 +67,7 @@ return(<>
               state: { from: props.location }
           }}>Already have an account?</Link>
       </div>
-      <div className="component-container">{ isError &&<p className="error-msg">{errorMsg}</p>}</div>
+      <div className="component-container">{ state.auth.isError &&<p className="error-msg">{state.auth.responseMsg}</p>}</div>
 </>
 );
 }

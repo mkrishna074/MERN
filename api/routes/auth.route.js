@@ -11,9 +11,12 @@ const verify = require('../middlewares/verifyToken');
  * @access  Public
  */
 router.post('/register', async (req, res) => {
+  console.log(req.body);
     const validationRes = registerValidation(req.body);
-    if(validationRes.error) return res.status(500).json({
-    message:validationRes.error.details[0].message});
+    if(validationRes.error) {
+      console.log(validationRes.error);
+      return res.status(500).json({message:validationRes.error.details[0].message});
+    }
 
     const emailExists = await User.findOne({email: req.body.email});
     if(emailExists) return res.status(500).json({message:'Email already exists!'});

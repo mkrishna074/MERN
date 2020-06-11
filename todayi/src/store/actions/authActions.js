@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import { returnErrors } from './errorActions';
 import {
   USER_LOADED,
   USER_LOADING,
@@ -9,7 +8,9 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  PASSWORD_MATCH,
+  API_ERROR
 } from './types';
 
 // Check token & load user
@@ -26,7 +27,6 @@ export const loadUser = () => (dispatch, getState) => {
       })
     )
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: AUTH_ERROR
       });
@@ -34,7 +34,7 @@ export const loadUser = () => (dispatch, getState) => {
 };
 
 // Register User
-export const register = ({ name, email, password }) => (
+export const register = ({ name, email, password, confirmPassword }) => (
   dispatch
 ) => {
   // Headers
@@ -44,11 +44,15 @@ export const register = ({ name, email, password }) => (
     }
   };
 
-  // Request body
-  const body = JSON.stringify({ name, email, password });
+  if(password !== confirmPassword){
+    dispatch({
+      type: PASSWORD_MATCH
+    })
+    return false;
+  }
 
   axios
-    .post('/api/auth/register', body, config)
+    .post('http://localhost:5000/api/auth/register', { name, email, password }, config)
     .then(res =>
       dispatch({
         type: REGISTER_SUCCESS,
@@ -56,11 +60,9 @@ export const register = ({ name, email, password }) => (
       })
     )
     .catch(err => {
-      dispatch(
-        returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
-      );
       dispatch({
-        type: REGISTER_FAIL
+        type: REGISTER_FAIL,
+        payload: err.response
       });
     });
 };
@@ -88,9 +90,10 @@ export const login = ({ email, password }) => (
       })
     )
     .catch(err => {
-      dispatch(
-        returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
-      );
+      dispatch({
+        type: API_ERROR,
+        payload: err.response
+      });
       dispatch({
         type: LOGIN_FAIL
       });
