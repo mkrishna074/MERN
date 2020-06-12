@@ -103,10 +103,11 @@ export const login = ({ email, password, referer }) => (
 };
 
 // Logout User
-export const logout = () => {
-  return {
+export const logout = () => (dispatch) => {
+  dispatch({
     type: LOGOUT_SUCCESS
-  };
+  });
+  history.push('/');
 };
 
 
