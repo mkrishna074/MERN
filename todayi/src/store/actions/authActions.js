@@ -1,5 +1,6 @@
 import axios from 'axios';
-import history from '../../history'
+import history from '../../components/auth/history'
+import jwt from 'jsonwebtoken'
 
 
 import {
@@ -71,7 +72,7 @@ export const register = ({ name, email, password, confirmPassword }) => (
 };
 
 // Login User
-export const login = ({ email, password }) => (
+export const login = ({ email, password, referer }) => (
   dispatch
 ) => {
   // Headers
@@ -85,12 +86,14 @@ export const login = ({ email, password }) => (
   const body = JSON.stringify({ email, password });
 
   axios
-    .post('/api/auth/login', body, config)
-    .then(res =>
+    .post('http://localhost:5000/api/auth/login', body, config)
+    .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
-      })
+      });
+      history.push(referer)
+    }
     )
     .catch(err => {
       dispatch({
@@ -109,6 +112,7 @@ export const logout = () => {
     type: LOGOUT_SUCCESS
   };
 };
+
 
 // Setup config/headers and token
 export const tokenConfig = (getState) => {

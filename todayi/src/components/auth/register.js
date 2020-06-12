@@ -9,8 +9,8 @@ const Register = (props) => {
     const [email, setUserEmail] = useState('');
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
     const state = useSelector(state => state, shallowEqual);
 
     const handleOnSubmit = (e) => {

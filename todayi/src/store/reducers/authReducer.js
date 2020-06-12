@@ -45,6 +45,7 @@ export default function(state = initialState, action) {
         case LOGOUT_SUCCESS:
         case REGISTER_FAIL:
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         console.log(action.payload);
         return {
             ...state,
@@ -53,7 +54,7 @@ export default function(state = initialState, action) {
             isAuthenticated: false,
             isLoading: false,
             isError: true,
-            responseMsg: action.payload.data.message.replace(/"/g, '')
+            responseMsg: action.payload?.data?.message.replace(/"/g, '')
         };
         case PASSWORD_MATCH:
             return{

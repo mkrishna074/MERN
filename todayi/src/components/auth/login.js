@@ -1,47 +1,32 @@
-import React, {useState} from 'react';
-import axios from 'axios';
-import {Redirect, withRouter} from 'react-router-dom'
+import React, {useState, useEffect} from 'react';
+import {withRouter} from 'react-router-dom'
+import {useSelector, useDispatch, shallowEqual} from 'react-redux'
+import { login } from '../../store/actions/authActions';
 
 
-const Login = () => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+const Login = (props) => {
+  //inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const referer = '/';
+  //store
+  const dispatch = useDispatch();
+  const state = useSelector(state => state, shallowEqual);
+
+  const referer = props.location.state.from.pathname|| '/';
   const handleOnSubmit = (e) => {   
     e.preventDefault();
-    const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
-    axios.post("http://localhost:5000/api/auth/login", {
-      email,
-      password
-    }, config).then(result => {
-      if (result.status === 200) {
-        console.log(result.data);
-        setLoggedIn(true);
-        clearForm();
-      } else {
-        setIsError(true);
-        setErrorMsg(result.data.message);
-      }
-    }).catch(e => {
-      setIsError(true);
-      setErrorMsg(e.response.data.message);
-    });
+    console.log(referer);
+    dispatch(login({email, password, referer}));
   };
-  const clearForm = () => { 
-    document.getElementById("create-login-form").reset();
-  }
 
-  if (isLoggedIn) {
-    return <Redirect to={referer} />;
-  }
+  useEffect(() => {
+    if(!state.auth.isError){
+        document.getElementById("create-login-form").reset();
+    }
+    console.log(state.auth.isAuthenticated);
+}, [state.auth.isAuthenticated, state.auth.isError]);
+
     return(<>
         <div className="component-container clear">
             <form id="create-login-form">
@@ -62,7 +47,7 @@ const Login = () => {
                 </button>
             </form>
         </div>
-      <div className="component-container">{ isError &&<p className="error-msg">{errorMsg}</p>}</div>
+        <div className="component-container">{ state.auth.isError &&<p className="error-msg">{state.auth.responseMsg}</p>}</div>
       </>
     );
 }

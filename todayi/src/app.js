@@ -8,10 +8,10 @@ import AddEventType from './components/addEventType.component'
 import Home from './components/home.component'
 import Login from './components/auth/login'
 import Register from './components/auth/register'
-import history from './history'
+import history from './components/auth/history'
+import ProtectedRoute from './components/auth/protectedRoute'
 
 function App() {
-
   return (
     <Router history={history}>
     <div className="App">
@@ -19,8 +19,8 @@ function App() {
       <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/works" exact component={Events} />
-          <Route path="/partners" exact component={AddEvent} />
-          <Route path="/price" exact component={AddEventType} />
+          <ProtectedRoute path="/partners" exact component={AddEvent} />
+          <ProtectedRoute path="/price" exact component={AddEventType} />
           <Route path="/contacts" exact component={Events} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />

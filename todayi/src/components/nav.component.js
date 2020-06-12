@@ -1,10 +1,11 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import { logout } from '../store/actions/authActions';
 
 const Nav = props => {
-
-    const state = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
     const logo = {
         color: '#2c3e50',textDecoration: 'none'
       };
@@ -12,6 +13,11 @@ const Nav = props => {
         color: '#64696e', background: '#ecf0f1', textDecoration: 'none'
       };
       console.log(state);
+      const onLogout = () =>{
+          console.log('logout')
+        dispatch(logout());
+        console.log('logout success')
+      }
   return (
     <>
     <header>
@@ -19,7 +25,7 @@ const Nav = props => {
         <span className="heading">nikki my love</span>
         </NavLink>
         <div>
-        { state.isAuthenticated &&<><p>Hi {state.username}</p> <button className="btn btn-primary">Log Out</button></>}
+        { state.auth.isAuthenticated &&<><p>Hi {state.auth.username}</p> <button className="btn btn-primary" onClick={onLogout}>Log Out</button></>}
         </div>
     </header>
     <nav>
