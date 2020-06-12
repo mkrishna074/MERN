@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom'
+import {Redirect, withRouter} from 'react-router-dom'
 
 
-const Login = (props) => {
+const Login = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const referer = props.location.state.from.pathname|| '/';
+  const referer = '/';
   const handleOnSubmit = (e) => {   
     e.preventDefault();
     const config = {
@@ -66,4 +66,4 @@ const Login = (props) => {
       </>
     );
 }
-export default React.memo(Login);
+export default React.memo(withRouter(Login));

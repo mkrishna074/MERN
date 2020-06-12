@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Detail from './detail.component'
+import {withRouter} from 'react-router-dom'
 
 const Events = props => {
   const  [error, setError] =  useState({});
@@ -28,4 +29,4 @@ const Events = props => {
 }
 
 
-export default React.memo(Events);
+export default React.memo(withRouter(Events));

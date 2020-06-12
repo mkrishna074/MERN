@@ -1,4 +1,6 @@
 import axios from 'axios';
+import history from '../../history'
+
 
 import {
   USER_LOADED,
@@ -53,12 +55,13 @@ export const register = ({ name, email, password, confirmPassword }) => (
 
   axios
     .post('http://localhost:5000/api/auth/register', { name, email, password }, config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+      history.push('/')
+    })
     .catch(err => {
       dispatch({
         type: REGISTER_FAIL,

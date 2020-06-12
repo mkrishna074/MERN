@@ -4,11 +4,12 @@ import { USER_LOADING, USER_LOADED, AUTH_ERROR,
 
 const initialState = {
     token: localStorage.getItem('token'),
-    isAuthenticated: false,
+    isAuthenticated: localStorage.getItem('token') !== null,
     isLoading: false,
     isError: false,
     responseMsg: '',
-    user: null
+    user: null,
+    username: localStorage.getItem('user')
 };
       
 export default function(state = initialState, action) {
@@ -28,11 +29,16 @@ export default function(state = initialState, action) {
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
         localStorage.setItem('token', action.payload.token);
+        localStorage.setItem('user', action.payload.user.name);
         return {
             ...state,
-            ...action.payload,
+            token: action.payload.token,
+            user: action.payload.user,
             isAuthenticated: true,
-            isLoading: false
+            isError: false,
+            isLoading: false,
+            responseMsg: '',
+            username: action.payload.user.name
         };
         case AUTH_ERROR:
         case LOGIN_FAIL:
@@ -47,7 +53,7 @@ export default function(state = initialState, action) {
             isAuthenticated: false,
             isLoading: false,
             isError: true,
-            responseMsg: action.payload.data.message
+            responseMsg: action.payload.data.message.replace(/"/g, '')
         };
         case PASSWORD_MATCH:
             return{

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Link, Redirect} from 'react-router-dom'
+import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom'
 import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 import { register } from '../../store/actions/authActions';
 
@@ -14,18 +14,15 @@ const Register = (props) => {
     const state = useSelector(state => state, shallowEqual);
 
     const handleOnSubmit = (e) => {
-        try{
-            e.preventDefault();
-            dispatch(register({name, email, password, confirmPassword}));
-            document.getElementById("create-register-form").reset();
-        } catch (e){
-            console.log(state);
-        }
-        
+        e.preventDefault();
+        dispatch(register({name, email, password, confirmPassword}));
     };
-    if (state.auth.isAuthenticated) {
-        return <Redirect to={'/'} />;
-    }
+    useEffect(() => {
+        if(!state.auth.isError){
+            document.getElementById("create-register-form").reset();
+        }
+        console.log(state.auth.isAuthenticated);
+    }, [state.auth.isAuthenticated, state.auth.isError]);
 
 return(<>
     <div className="component-container clear">
