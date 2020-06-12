@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Slider from './controls/slider.control'
-import horizontalCss from './controls/controls.scss'
 
 const Detail = props => {
   const  [error, setError] =  useState({});
@@ -39,14 +37,6 @@ const Detail = props => {
               <p>{details.body}</p>
               </div>
               <div className="col-detail-card two">
-              <Slider classNames={horizontalCss}>
-              {images.map((item, index) => (
-                  <div
-                    key={index}
-                    style={{ background: `url('${item}') no-repeat center center` }}>
-                  </div>
-                  ))}
-              </Slider>
               </div>
             </div>
           </div>

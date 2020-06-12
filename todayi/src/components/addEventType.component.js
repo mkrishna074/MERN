@@ -38,16 +38,17 @@ const AddEventType = () => {
 return(<>
     <div className="component-container clear">
         <form id="create-type-form">
-
-        <div className="form-group">
+        <div className="row">
+        <div className="form-group col-xs-3">
             <label>Type</label>
             <input type="text" 
             name="type"
             className="form-control" 
             onChange={handleInput}></input>
         </div>
-            <button type="submit" onClick={handleOnSubmit}>
-                <i className="fas fa-plus-square"></i>
+        </div>
+            <button type="submit" className="ti-btn" onClick={handleOnSubmit}>
+                Add
             </button>
         </form>
      </div>

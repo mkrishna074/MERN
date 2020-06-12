@@ -53,7 +53,7 @@ return(<>
                     onChange={e => { setConfirmPassword(e.target.value);}}
                     autoComplete="off"/>
         </div>
-            <button type="submit" className="btn-border-radius" onClick={handleOnSubmit}>
+            <button type="submit" className="ti-btn" onClick={handleOnSubmit}>
                 Sign Up
             </button>
         </form>

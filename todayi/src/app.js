@@ -8,8 +8,8 @@ import AddEventType from './components/addEventType.component'
 import Home from './components/home.component'
 import Login from './components/auth/login'
 import Register from './components/auth/register'
-import history from './components/auth/history'
-import ProtectedRoute from './components/auth/protectedRoute'
+import history from './helpers/history'
+import ProtectedRoute from './helpers/protectedRoute'
 
 function App() {
   return (

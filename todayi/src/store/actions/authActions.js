@@ -1,6 +1,5 @@
 import axios from 'axios';
-import history from '../../components/auth/history'
-import jwt from 'jsonwebtoken'
+import history from '../../helpers/history'
 
 
 import {
@@ -97,11 +96,8 @@ export const login = ({ email, password, referer }) => (
     )
     .catch(err => {
       dispatch({
-        type: API_ERROR,
+        type: LOGIN_FAIL,
         payload: err.response
-      });
-      dispatch({
-        type: LOGIN_FAIL
       });
     });
 };

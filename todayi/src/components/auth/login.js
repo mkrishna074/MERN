@@ -13,7 +13,7 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const state = useSelector(state => state, shallowEqual);
 
-  const referer = props.location.state.from.pathname|| '/';
+  const referer = props.location.state?.from.pathname|| '/';
   const handleOnSubmit = (e) => {   
     e.preventDefault();
     console.log(referer);
@@ -24,7 +24,6 @@ const Login = (props) => {
     if(!state.auth.isError){
         document.getElementById("create-login-form").reset();
     }
-    console.log(state.auth.isAuthenticated);
 }, [state.auth.isAuthenticated, state.auth.isError]);
 
     return(<>
@@ -42,7 +41,7 @@ const Login = (props) => {
                     className="form-control" 
                     onChange={e => { setPassword(e.target.value);}}/>
                 </div>
-                <button type="submit" className="btn-border-radius" onClick={handleOnSubmit}>
+                <button type="submit" className="ti-btn" onClick={handleOnSubmit}>
                     Sign In
                 </button>
             </form>

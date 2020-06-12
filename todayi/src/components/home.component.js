@@ -7,9 +7,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state, shallowEqual);
 
-   return(<div className="component-container">
-      <h1>Home Page</h1>
-{state.auth.isAuthenticated && <p>Hello {state.auth.username} {state.auth.responseMsg}</p>}
+   return(<div className="component-container clear">
+      {state.auth.isAuthenticated && <p>Hello {state.auth.username} {state.auth.responseMsg}</p>}
     </div>)
 }
 

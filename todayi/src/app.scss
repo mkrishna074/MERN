@@ -3,6 +3,12 @@
   margin: 0;
   box-sizing: border-box;;
 }
+body, html {
+  overflow-x: hidden;
+}
+html {
+  overflow-y: scroll;
+}
 $midnight: #64696e;
 $clouds: #ecf0f1;
 $yolk: #f6d365;
@@ -11,7 +17,7 @@ $harderyolk: #f3704c;
 body{
   font-display: block;
   font-family: 'Poppins', sans-serif;
-  background-image: linear-gradient(180deg, $yolk, $hardyolk);
+  background-image: linear-gradient(180deg, $yolk, $yolk);
   min-height: 100vh;
 }
 header,
@@ -27,18 +33,20 @@ nav{
   min-height: 5vh;
 }
 .heading{
-  font-display: block;
   font-family:'Indie Flower', cursive;
   text-transform:lowercase;
   font-size: 4rem;
-  margin-left: 0.2em;
+  margin-left: 0.5rem;
+}
+.user-details{
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
 }
 header {
   justify-content: space-between;
   text-decoration:none;
 }
 nav ul a {
-  font-display: block;
   font-family: 'Life Savers', cursive;
   text-transform:uppercase;
   color:$midnight;
@@ -46,7 +54,7 @@ nav ul a {
   letter-spacing:1px;
   text-decoration:none;
 }
-nav ul a:hover {
+nav ul a:hover, nav ul a:focus {
   text-decoration:none;
   color: $midnight; 
   background: $clouds;
@@ -103,10 +111,6 @@ nav ul a:hover {
 .two {
   width: 58vw;
 }
-.btn{
-  margin: 0.2rem;
-  color: black;
-}
 .detail-header{
   background-color: $clouds;
   color: $midnight;
@@ -116,26 +120,24 @@ nav ul a:hover {
   padding: 0.5rem;
   font-size: medium;
 }
-form input, form button{
+form input{
   padding: 0.5rem;
-  font-size: 2rem;
   border: none;
   background: $clouds;
 }
-form button{
+.ti-btn{
   background: $harderyolk;
   color: $clouds;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-radius: 5px;
+  padding: 0.5rem;
 }
-form button:hover{
+.ti-btn:hover{
   color: $harderyolk;
   background: $clouds;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-.btn-border-radius{
-  border-radius: 5px;
 }
 .type-list{
   list-style: none;
@@ -172,6 +174,7 @@ form button:hover{
   padding: 0 1rem;
   color: white;
   background-color: red;
+  //animation: errorMsgFade 4s ease forwards;
 }
 .tag {
   display: inline;
@@ -186,6 +189,14 @@ form button:hover{
   border-radius: .75rem;
   margin: 0.5rem;
   background-color: $midnight;
+}
+@keyframes errorMsgFade {
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
 }
 @media screen and (max-width: 768px) {
   .row-detail-card{

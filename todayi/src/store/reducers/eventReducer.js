@@ -1,13 +1,15 @@
 import {
     GET_ITEMS,
-    ADD_ITEM,
+    ADDED_ITEM,
     DELETE_ITEM,
-    ITEMS_LOADING
+    ITEMS_LOADING,
+    ITEM_ERROR
   } from '../actions/types';
   
   const initialState = {
     events: [],
-    loading: false
+    loading: false,
+    responseMsg: ''
   };
   
   export default function(state = initialState, action) {
@@ -23,16 +25,21 @@ import {
           ...state,
           items: state.items.filter(item => item._id !== action.payload)
         };
-      case ADD_ITEM:
+      case ADDED_ITEM:
         return {
           ...state,
-          items: [action.payload, ...state.items]
+          responseMsg: 'Added event successfully.'
         };
       case ITEMS_LOADING:
         return {
           ...state,
           loading: true
         };
+      case ITEM_ERROR:
+        return {
+          ...state,
+          responseMsg: action.payload?.data?.message.replace(/"/g, '')
+        }
       default:
         return state;
     }

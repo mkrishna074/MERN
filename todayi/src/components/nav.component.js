@@ -24,8 +24,8 @@ const Nav = props => {
         <NavLink to='/' style={logo}>
         <span className="heading">nikki my love</span>
         </NavLink>
-        <div>
-        { state.auth.isAuthenticated &&<><p>Hi {state.auth.username}</p> <button className="btn btn-primary" onClick={onLogout}>Log Out</button></>}
+        <div className="user-details">
+        { state.auth.isAuthenticated &&<><span>Hi {state.auth.username}</span> <button type="submit" className="ti-btn" onClick={onLogout}>Log Out</button></>}
         </div>
     </header>
     <nav>

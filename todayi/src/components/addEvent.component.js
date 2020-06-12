@@ -78,7 +78,7 @@ return(<><div className="component-container clear">
                        name="media"  
                        onChange={(e) => setEvent({...event, media: Array.from(e.target.files)})}/>
             </div>
-            <button type="submit" className="btn-border-radius" onClick={handleOnSubmit}>Add</button>
+            <button type="submit" className="ti-btn" onClick={handleOnSubmit}>Add</button>
             </form> </div>
             <div className="component-container">{ isError &&<p className="error-msg">{errorMsg}</p>}</div> </>);
 }
