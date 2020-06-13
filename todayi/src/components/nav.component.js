@@ -22,7 +22,7 @@ const Nav = props => {
     <>
     <header>
         <NavLink to='/' style={logo}>
-        <span className="heading">nikki my love</span>
+        <span className="heading">test</span>
         </NavLink>
         <div className="user-details">
         { state.auth.isAuthenticated &&<><span>Hi {state.auth.username}</span> <button type="submit" className="ti-btn" onClick={onLogout}>Log Out</button></>}

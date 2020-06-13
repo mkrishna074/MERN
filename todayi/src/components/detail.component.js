@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import Carousel from 'react-images'
 
 const Detail = props => {
   const  [error, setError] =  useState({});
   const  [details,setDetails]= useState({});
-  const images = [];
+  const images = [{source: {regular: 'https://picsum.photos/200'}},
+  {source: {regular: 'https://picsum.photos/200'}},
+  {source: {regular: 'https://picsum.photos/200'}}];
   const highlights = ['one', 'two', 'three'];
 
   useEffect(() => {
@@ -37,6 +40,7 @@ const Detail = props => {
               <p>{details.body}</p>
               </div>
               <div className="col-detail-card two">
+                <Carousel views = {images}/>
               </div>
             </div>
           </div>
