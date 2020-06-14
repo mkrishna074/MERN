@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Carousel from 'react-images'
 
-const Detail = props => {
+const Detail = React.forwardRef((props, ref) => {
   const  [error, setError] =  useState({});
   const  [details,setDetails]= useState({});
   const images = [{source: {regular: 'https://picsum.photos/200'}},
@@ -9,23 +9,10 @@ const Detail = props => {
   {source: {regular: 'https://picsum.photos/200'}}];
   const highlights = ['one', 'two', 'three'];
 
-  useEffect(() => {
-    async function getData(){
-      try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts/"+ props.id);
-      const json1 = await res.json();
-      console.log(json1);
-      setDetails(json1)
-      } catch (e) {
-        setError(e);
-      }
-    }
-    getData()
-  }, [props.id]);
-  return (<><div key={details.id} className="custom-card">
+  return (<><div ref = {ref} key={details.id} className="custom-card">
            <div className="detail-container detail-header">
       <div className="col-detail-card two">
-            <p>{details.title}</p>
+            <p>{props.title}</p>
       </div>
       <div className="row-detail-card one">
       {highlights.map((item, index) => ( <span key={index} className="tag"> {item}</span>))}
@@ -33,19 +20,15 @@ const Detail = props => {
     </div>
             <div className="detail-container">
               <div className="col-detail-card one">
-              <p>{details.body}</p>
-              <p>{details.body}</p>
-              <p>{details.body}</p>
-              <p>{details.body}</p>
-              <p>{details.body}</p>
+              <p>{props.title}</p>
               </div>
               <div className="col-detail-card two">
-                <Carousel views = {images}/>
+                {/* <Carousel views = {images}/> */}
               </div>
             </div>
           </div>
           <div className="component-container">{ error.response &&<p className="error-msg">{error.response}</p>}</div>
           </>);
-}
+})
       
 export default React.memo(Detail);

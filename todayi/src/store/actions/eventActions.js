@@ -1,12 +1,12 @@
 import axios from 'axios';
-import Event from '../../models/event.model'
 
-import { returnErrors } from './errorActions';
 import {
   ITEMS_LOADING,
   ADD_ITEM,
   ADDED_ITEM,
-  ITEM_ERROR
+  ITEM_ERROR,
+  GET_EVENTS,
+  SET_PAGENUMBER
 } from './types';
 
 export const addType = (item) => (dispatch, getState) => {
@@ -23,12 +23,27 @@ export const addType = (item) => (dispatch, getState) => {
         })
       )
       .catch(err => {
-        dispatch(returnErrors(err.response.data, err.response.status));
         dispatch({
           type: ITEM_ERROR
         });
       });
   };
+
+  export const getEvents = (query) => (dispatch, state) => {
+    axios
+    .get('http://localhost:5000/api/todayi/getEvents',query)
+    .then(res =>
+      dispatch({
+        type: GET_EVENTS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      dispatch({
+        type: ITEM_ERROR
+      });
+    });
+  }
   export const addEventType = ({name, isActive}) => (dispatch, getState) => {
 
     const config = {
@@ -52,7 +67,6 @@ export const addType = (item) => (dispatch, getState) => {
         })
       )
       .catch(err => {
-        dispatch(returnErrors(err.response.data, err.response.status));
         dispatch({
           type: ITEM_ERROR,
           payload: err.response
@@ -64,3 +78,34 @@ export const addType = (item) => (dispatch, getState) => {
       type: ITEMS_LOADING
     };
   };
+  export const setEvents = (events, isLoading, hasMore) => (dispatch) => {
+    dispatch({
+      type: GET_EVENTS,
+      payload: {events, isLoading, hasMore}
+    })
+  };
+  export const setPageNumber = () => (dispatch) => {
+    console.log('set page number')
+    dispatch({
+      type: SET_PAGENUMBER
+    })
+  };
+  // Setup config/headers and token
+export const tokenConfig = (getState) => {
+  // Get token from localstorage
+  const token = getState().auth.token;
+
+  // Headers
+  const config = {
+    headers: {
+      'Content-type': 'application/json'
+    }
+  };
+
+  // If token, add to headers
+  if (token) {
+    config.headers['x-auth-token'] = token;
+  }
+
+  return config;
+};

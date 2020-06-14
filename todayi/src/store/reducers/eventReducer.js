@@ -1,24 +1,32 @@
 import {
-    GET_ITEMS,
+    GET_EVENTS,
     ADDED_ITEM,
     DELETE_ITEM,
     ITEMS_LOADING,
-    ITEM_ERROR
+    ITEM_ERROR,
+    SEARCH_EVENTS,
+    SET_PAGENUMBER
   } from '../actions/types';
   
   const initialState = {
     events: [],
     loading: false,
-    responseMsg: ''
+    responseMsg: '',
+    searchText: '',
+    isError: false,
+    hasMore: false,
+    pageNumber: 1
   };
   
   export default function(state = initialState, action) {
     switch (action.type) {
-      case GET_ITEMS:
+      case GET_EVENTS:
+        console.log(action.payload);
         return {
           ...state,
-          items: action.payload,
-          loading: false
+          events: action.payload.events,
+          loading: action.payload.isLoading,
+          hasMore: action.payload.hasMore,
         };
       case DELETE_ITEM:
         return {
@@ -39,6 +47,17 @@ import {
         return {
           ...state,
           responseMsg: action.payload?.data?.message.replace(/"/g, '')
+        }
+      case SEARCH_EVENTS:
+        return {
+          ...state,
+          searchText: action.payload
+        }
+      case SET_PAGENUMBER:
+        console.log(state.pageNumber);
+        return {
+          ...state,
+          pageNumber: state.pageNumber + 1
         }
       default:
         return state;

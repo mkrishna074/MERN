@@ -1,29 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef, useCallback} from 'react';
+import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 import Detail from './detail.component'
 import {withRouter} from 'react-router-dom'
+import {setPageNumber} from '../store/actions/eventActions'
 
 const Events = props => {
-  const  [error, setError] =  useState({});
-  const  [events,setEvents]= useState([]);
-
-  useEffect(() => {
-    async function getData() {
-      try{
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-      const json1 = await res.json();
-      setEvents(json1.slice(0, 10));
-        } catch (e) {
-          setError(e);
+  const state = useSelector(state => state, shallowEqual);
+  const dispatch = useDispatch();
+  const observer = useRef();
+  const lastEvent = (node) => {
+    console.log(node);
+    if(state.event.loading) return
+    if(observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(e =>{
+      console.log(state.event.hasMore);
+      if(e[0].isIntersecting && state.event.hasMore){
+        console.log('inside if');
+        dispatch(setPageNumber())
       }
-    }
-    getData()
-  }, [])
-
+    });
+    if(node) observer.current.observe(node);
+    console.log(node);
+  }
   return (<>
     <div className="custom-container clear"> 
-    {events.map(i => <Detail key = {i.id} id = {i.id}/>)}
+    {state.event.events.map((i, idx) => {
+      return <Detail {...state.event.events.length === idx +1 ? {ref:lastEvent}:null} key = {i} title = {i}>{i}</Detail>
+  })}
     </div>
-    <div className="component-container">{ error.response &&<p className="error-msg">{error.response}</p>}</div>
+    <div className="component-container">{ state.event?.loading &&<p>Loading...</p>}</div>
+    <div className="component-container">{ state.event?.isError &&<p className="error-msg">{}</p>}</div>
      </>
   )
 }
