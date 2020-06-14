@@ -10,12 +10,18 @@ import Login from './components/auth/login'
 import Register from './components/auth/register'
 import history from './helpers/history'
 import ProtectedRoute from './helpers/protectedRoute'
+import Header from './components/header.component'
 
 function App() {
   return (
     <Router history={history}>
     <div className="App">
-      <Nav/>
+      <div className="push">
+        <div className="head">
+          <Header/>
+          <Nav/>
+        </div>
+      </div>
       <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/works" exact component={Events} />

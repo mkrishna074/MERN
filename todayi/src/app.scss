@@ -17,8 +17,21 @@ $harderyolk: #f3704c;
 body{
   font-display: block;
   font-family: 'Poppins', sans-serif;
+  font-size: 85%;
   background-image: linear-gradient(180deg, $yolk, $yolk);
   min-height: 100vh;
+}
+.logo{
+color: #2c3e50;
+  text-decoration: none;
+}
+header a:hover{
+  color: #2c3e50;
+  text-decoration: none;
+}
+header a:focus{
+  color: #2c3e50;
+  text-decoration: none;
 }
 header,
 .heading,
@@ -27,16 +40,18 @@ nav {
   align-items: center;
 }
 nav{
-  float: right;
-}
-.nav{
-  min-height: 5vh;
+float: right;
 }
 .heading{
   font-family:'Indie Flower', cursive;
   text-transform:lowercase;
-  font-size: 4rem;
+  font-size: 2.5rem;
   margin-left: 0.5rem;
+}
+.active-style{
+  color: #64696e;
+  background: #ecf0f1;
+  text-decoration: none;
 }
 .user-details{
   margin-right: 0.5rem;
@@ -62,6 +77,33 @@ nav ul a:hover, nav ul a:focus {
 .clear{
   clear: both;
 }
+.form-group {
+  margin-bottom: 5px;
+}
+.form-control{
+  display: block;
+  width: 100%;
+  height: 2rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 100%;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
 .custom-container{
   display: flex;
   flex-direction: column;
@@ -76,11 +118,11 @@ nav ul a:hover, nav ul a:focus {
   padding-top: 1rem;
 }
 .custom-card{
-  border: 0.1rem solid $midnight;
+  border: 0.05rem solid $midnight;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   flex-direction: column;
   padding: 0.1rem;
 }
@@ -124,10 +166,12 @@ form input{
   padding: 0.5rem;
   border: none;
   background: $clouds;
+  font-family: 'Poppins', sans-serif;
 }
 .ti-btn{
   background: $harderyolk;
   color: $clouds;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 5px;
@@ -174,7 +218,7 @@ form input{
   padding: 0 1rem;
   color: white;
   background-color: red;
-  //animation: errorMsgFade 4s ease forwards;
+//animation: errorMsgFade 4s ease forwards;
 }
 .tag {
   display: inline;
@@ -190,27 +234,55 @@ form input{
   margin: 0.5rem;
   background-color: $midnight;
 }
+.head{
+  width: 99vw;
+  position: fixed;
+  background-image: linear-gradient(120deg, $yolk, $yolk);
+  top:0;
+}
+.push{
+  margin-bottom: 11vh;
+}
 @keyframes errorMsgFade {
-  from{
-    opacity: 1;
-  }
-  to{
-    opacity: 0;
-  }
+from{
+  opacity: 1;
+}
+to{
+  opacity: 0;
+}
 }
 @media screen and (max-width: 768px) {
+  body{
+    font-size: 100%;
+  }
   .row-detail-card{
     flex-direction: column;
   }
   .heading{
-    font-size: 2rem;
-  }
-  nav{
-    overflow-x: scroll;
+    font-size: 1.6rem;
   }
   nav ul a {
-    font-size: 1.2rem;
     letter-spacing:0px;
     margin:0 5px;
+  }
+  nav{
+    width: 100vw;
+    white-space: nowrap;
+    overflow-x: scroll; 
+    -webkit-overflow-scrolling: touch;
+  }
+  .ti-search{
+    margin-top: 0.5rem;
+  }
+  .custom-card{
+    width: 98vw;
+    margin-left: 1.2rem;
+    margin-right: 1.2rem
+  }
+  .detail-header{
+    width: 97vw;
+  }
+  .head{
+    width: 100vw;
   }
 }
