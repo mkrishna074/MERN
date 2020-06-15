@@ -16,7 +16,7 @@ const previousSlide = () => {
     const lastIndex = props.imgUrls.length - 1;
     const shouldResetIndex = currentIndex === lastIndex;
     const index =  shouldResetIndex ? 0 : currentIndex + 1;
-    console.log(index);
+    console.log(props.imgUrls[index]);
     setCurrentIndex(index);
   }
 
@@ -41,17 +41,15 @@ const ImageSlide = ({ url }) => {
       height: '200px',
       width: '200px'
     };
-  
+    console.log(url);
     return (
       <div className="image-slide" style={styles}></div>
     );
 }
 
 const Arrow = ({ direction, clickFunction, glyph }) => (
-    <div
-      className={ `slide-arrow ${direction}` }
-      onClick={ clickFunction }>
-      { glyph }
-    </div>
+  <button onClick={ clickFunction } className={`${direction}Btn`}> 
+  { glyph }
+ </button>
   );
 export default React.memo(Carousel);

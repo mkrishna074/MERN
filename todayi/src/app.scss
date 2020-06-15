@@ -251,6 +251,21 @@ to{
   opacity: 0;
 }
 }
+.leftBtn{
+  position: absolute;
+  left: 20vw;
+  top: 40vh;
+  border-radius: 1rem;
+  border: none;
+}
+
+.rightBtn{
+  position: absolute;
+  right: 20vw;
+  top: 40vh;
+  border-radius: 1rem;
+  border: none;
+}
 @media screen and (max-width: 768px) {
   body{
     font-size: 100%;

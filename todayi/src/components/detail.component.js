@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import Carousel from 'react-images'
+import Carousel from './controls/carousel.component' 
 
 const Detail = React.forwardRef((props, ref) => {
   const  [error, setError] =  useState({});
   const  [details,setDetails]= useState({});
-  const images = [{source: {regular: 'https://picsum.photos/200'}},
-  {source: {regular: 'https://picsum.photos/200'}},
-  {source: {regular: 'https://picsum.photos/200'}}];
   const highlights = ['one', 'two', 'three'];
+  const images = ['https://picsum.photos/200/300', '', 'https://picsum.photos/200/300', ''];
 
   return (<><div ref = {ref} key={details.id} className="custom-card">
            <div className="detail-container detail-header">
@@ -19,12 +17,7 @@ const Detail = React.forwardRef((props, ref) => {
       </div>
     </div>
             <div className="detail-container">
-              <div className="col-detail-card one">
-              <p>{props.title}</p>
-              </div>
-              <div className="col-detail-card two">
-                {/* <Carousel views = {images}/> */}
-              </div>
+            <Carousel imgUrls={images}/>
             </div>
           </div>
           <div className="component-container">{ error.response &&<p className="error-msg">{error.response}</p>}</div>
