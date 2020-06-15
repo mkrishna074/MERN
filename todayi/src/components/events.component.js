@@ -24,7 +24,7 @@ const Events = props => {
   }
   return (<>
     <div className="custom-container clear"> 
-    {state.event.events.map((i, idx) => {
+    {state.event.events.slice(0, 1).map((i, idx) => {
       return <Detail {...state.event.events.length === idx +1 ? {ref:lastEvent}:null} key = {i} title = {i}>{i}</Detail>
   })}
     </div>

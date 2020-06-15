@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './controls.scss'
 
 const Carousel = (props) => {
 
@@ -16,11 +17,10 @@ const previousSlide = () => {
     const lastIndex = props.imgUrls.length - 1;
     const shouldResetIndex = currentIndex === lastIndex;
     const index =  shouldResetIndex ? 0 : currentIndex + 1;
-    console.log(props.imgUrls[index]);
     setCurrentIndex(index);
   }
 
-return(<div className="container">
+return(<div key={props.key} className="container">
         <Arrow
           direction="left"
           clickFunction={ previousSlide }
@@ -35,13 +35,12 @@ return(<div className="container">
 
 const ImageSlide = ({ url }) => {
     const styles = {
-      backgroundImage: `url(${url})`,
+      backgroundImage: `url(${url})`, 
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      height: '200px',
-      width: '200px'
+      height: '60vh',
+      width: '80vw'
     };
-    console.log(url);
     return (
       <div className="image-slide" style={styles}></div>
     );

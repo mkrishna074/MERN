@@ -129,7 +129,7 @@ label {
 .detail-container{
   clear: both;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center; 
   flex-wrap: nowrap;
@@ -154,6 +154,7 @@ label {
   width: 58vw;
 }
 .detail-header{
+  flex-direction: row;
   background-color: $clouds;
   color: $midnight;
   border-top-right-radius: 0.8rem;
@@ -250,21 +251,6 @@ from{
 to{
   opacity: 0;
 }
-}
-.leftBtn{
-  position: absolute;
-  left: 20vw;
-  top: 40vh;
-  border-radius: 1rem;
-  border: none;
-}
-
-.rightBtn{
-  position: absolute;
-  right: 20vw;
-  top: 40vh;
-  border-radius: 1rem;
-  border: none;
 }
 @media screen and (max-width: 768px) {
   body{
