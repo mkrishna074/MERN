@@ -28,8 +28,7 @@ export default function Header() {
     }, [state.event.pageNumber])
     return (
         <header>
-        <NavLink to='/' className="logo">
-        <span className="heading">testing</span>
+        <NavLink to='/' className="logo">testing
         </NavLink>
         <div>
         <div className="form-group">
@@ -42,6 +41,6 @@ export default function Header() {
         <div className="user-details">
         { state.auth.isAuthenticated &&<><button type="submit" className="ti-btn" onClick={onLogout}>Log Out</button></>}
         </div>
-    </header>
+        </header>
     )
 }

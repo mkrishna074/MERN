@@ -51,7 +51,7 @@ const AddEvent = () => {
         return formData;
     }, new FormData());
     
-return(<><div className="component-container clear">
+return(<><div className="component-container">
     <form id ="create-event-form" encType="multipart/form-data">
             <div className="form-group">
                 <label >Category</label>

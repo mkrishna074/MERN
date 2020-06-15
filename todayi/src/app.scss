@@ -22,52 +22,37 @@ body{
   min-height: 100vh;
 }
 .logo{
-color: #2c3e50;
-  text-decoration: none;
-}
-header a:hover{
-  color: #2c3e50;
-  text-decoration: none;
-}
-header a:focus{
-  color: #2c3e50;
-  text-decoration: none;
-}
-header,
-.heading,
-nav {
-  display: flex;
-  align-items: center;
-}
-nav{
-float: right;
-}
-.heading{
   font-family:'Indie Flower', cursive;
   text-transform:lowercase;
   font-size: 2.5rem;
-  margin-left: 0.5rem;
+  color: #2c3e50;
+  text-decoration: none;
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration:none;
+}
+nav ul{
+display: flex;
+justify-content: center;
+align-items: center;
+text-decoration:none;
 }
 .active-style{
   color: #64696e;
   background: #ecf0f1;
   text-decoration: none;
 }
-.user-details{
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
-}
-header {
-  justify-content: space-between;
-  text-decoration:none;
-}
 nav ul a {
-  font-family: 'Life Savers', cursive;
+  font-family: 'Life Savers', sans-serif;
   text-transform:uppercase;
   color:$midnight;
   margin:0 15px;
   letter-spacing:1px;
   text-decoration:none;
+  text-align: center;
 }
 nav ul a:hover, nav ul a:focus {
   text-decoration:none;
@@ -104,64 +89,11 @@ label {
   margin-bottom: 0.3rem;
   font-weight: 700;
 }
-.custom-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; 
-  padding-top: 1rem;
-}
 .component-container{
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 1rem;
-}
-.custom-card{
-  border: 0.05rem solid $midnight;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 0.1rem;
-}
-.detail-container{
-  clear: both;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center; 
-  flex-wrap: nowrap;
-}
-.col-detail-card{
-  display: flex;
-  justify-content: flex-start;
-  align-content: center;
-  flex-direction: column;
-}
-.row-detail-card{
-  display: flex;
-  justify-content: flex-start;
-  align-content: center;
-  flex-direction: row;
-}
-.one {
-  width: 38vw;
-}
-
-.two {
-  width: 58vw;
-}
-.detail-header{
-  flex-direction: row;
-  background-color: $clouds;
-  color: $midnight;
-  border-top-right-radius: 0.8rem;
-  border-top-left-radius: 0.8rem;
-  text-transform: capitalize;
-  padding: 0.5rem;
-  font-size: medium;
 }
 form input{
   padding: 0.5rem;
@@ -183,37 +115,6 @@ form input{
   background: $clouds;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-.type-list{
-  list-style: none;
-  min-width: 30vw;
-}
-.type{
-  margin: 0.5rem;
-  background: $clouds;
-  color: $midnight;
-  font-size: 1.5 rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.type li{
-  flex: 1;
-}
-.trash-btn{
-  background: $harderyolk;
-  color:$clouds;
-  padding: 1rem;
-  border: none;
-  cursor: pointer;
-  font-size: 2rem;
-}
-.trash-btn:hover{
-  color: $harderyolk;
-  background:$clouds;
-}
-.margin-auto{
-  margin: auto;
 }
 .error-msg{
   padding: 0 1rem;
@@ -244,6 +145,42 @@ form input{
 .push{
   margin-bottom: 11vh;
 }
+
+.flex-container{
+  display: flex;
+  flex-flow: column;
+  padding-top: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.box{
+  height: 70vh;
+  width: 90vw;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+.one{
+  display: flex;
+  background: red;
+  flex-basis: 10vh;
+  justify-content: center;
+  align-items: center;
+}
+.two{
+  display: flex;
+  background: green;
+  flex-basis: 60vh;
+  justify-content: center;
+  align-items: center;
+}
+.three{
+  display: flex;
+  background: blueviolet;
+  flex-basis: 10vh;
+  justify-content: center;
+  align-items: center;
+}
 @keyframes errorMsgFade {
 from{
   opacity: 1;
@@ -256,15 +193,13 @@ to{
   body{
     font-size: 100%;
   }
-  .row-detail-card{
-    flex-direction: column;
-  }
-  .heading{
-    font-size: 1.6rem;
+  .logo{
+    font-size: 1.8rem;
   }
   nav ul a {
     letter-spacing:0px;
     margin:0 5px;
+    font-size: 0.8rem;
   }
   nav{
     width: 100vw;
@@ -274,14 +209,6 @@ to{
   }
   .ti-search{
     margin-top: 0.5rem;
-  }
-  .custom-card{
-    width: 98vw;
-    margin-left: 1.2rem;
-    margin-right: 1.2rem
-  }
-  .detail-header{
-    width: 97vw;
   }
   .head{
     width: 100vw;

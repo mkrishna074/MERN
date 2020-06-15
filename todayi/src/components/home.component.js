@@ -5,7 +5,7 @@ const Home = () => {
 
   const state = useSelector(state => state, shallowEqual);
 
-   return(<><div className="component-container clear">
+   return(<><div className="component-container">
       {state.auth.isAuthenticated && <h4>Hello {state.auth.username} {state.auth.responseMsg}</h4>}
     </div></>)
 }

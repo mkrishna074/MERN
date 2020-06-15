@@ -36,7 +36,7 @@ const AddEventType = () => {
         document.getElementById("create-type-form").reset();
     }
 return(<>
-    <div className="component-container clear">
+    <div className="component-container">
         <form id="create-type-form">
         <div className="row">
         <div className="form-group col-xs-3">

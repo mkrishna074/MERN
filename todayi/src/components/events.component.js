@@ -23,11 +23,11 @@ const Events = props => {
     console.log(node);
   }
   return (<>
-    <div className="custom-container clear"> 
-    {state.event.events.slice(0, 1).map((i, idx) => {
-      return <Detail {...state.event.events.length === idx +1 ? {ref:lastEvent}:null} key = {i} title = {i}>{i}</Detail>
+  {state.event.events.slice(0, 10).map((i, idx) => {
+        return(<div className="flex-container">
+           <Detail {...state.event.events.length === idx +1 ? {ref:lastEvent}:null} key = {i} title = {i}>{i}</Detail>
+        </div>)
   })}
-    </div>
     <div className="component-container">{ state.event?.loading &&<p>Loading...</p>}</div>
     <div className="component-container">{ state.event?.isError &&<p className="error-msg">{}</p>}</div>
      </>
