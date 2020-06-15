@@ -11,7 +11,8 @@ const AddEvent = () => {
 
         const config = {
             headers: {
-              'Content-Type': 'multipart/form-data'
+              'Content-Type': 'multipart/form-data',
+              'x-auth-token': localStorage.getItem('token')
             }
           };
           if (localStorage.getItem('token')) {
@@ -21,6 +22,13 @@ const AddEvent = () => {
         for (const key of Object.keys(event.media)) {
             formData.append('media', event.media[key]);
         }
+        for (const key of Object.keys(event.highlights)) {
+            formData.append('highlights', event.highlights[key]);
+        }
+        for (const key of Object.keys(event.tags)) {
+            formData.append('tags', event.tags[key]);
+        }
+        console.log(formData);
         axios
         .post('http://localhost:5000/api/todayi/addEvent', formData, config)
         .then(res => {
@@ -29,15 +37,17 @@ const AddEvent = () => {
         })
         .catch(e => {
             setIsError(true);
-            setErrorMsg(e.response.data.message);
+            console.log(e.response);
+            //setErrorMsg(e.response.data.message);
         });
     };
     const clearForm = () => { 
         document.getElementById("create-event-form").reset();
     }
     const getFormData = obj => Object.keys(obj).reduce((formData, key) => {
-        formData.append(key, obj[key]);
-        console.log(formData);
+        if(key === 'category' || key === 'title'){
+            formData.append(key, obj[key]);
+        }
         return formData;
     }, new FormData());
     

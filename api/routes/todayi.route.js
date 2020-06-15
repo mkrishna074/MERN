@@ -21,6 +21,7 @@ router.get('/learns', (req, res) =>{
 })
 
 router.post('/addEvent', verify,  upload.array('media', 12), (req, res, next) =>{
+    console.log(req.body);
     const media = req.files.map(f => f.filename);;
     const newEvent = new event({
       title: req.body.title, 
@@ -31,7 +32,7 @@ router.post('/addEvent', verify,  upload.array('media', 12), (req, res, next) =>
     });
     newEvent.save()
     .then(() => res.json('Event added!'))
-    .catch(err => res.status(400).json('Error: ' + err))
+    .catch(err => res.status(400).json({message:err.message}))
 })
 
 /**
