@@ -7,19 +7,23 @@ const Detail = React.forwardRef((props, ref) => {
   const highlights = ['one', 'two', 'three'];
   const images = ['https://picsum.photos/200/300', '/IMG_2432.JPG', 'https://picsum.photos/200/300', ''];
 
-  return (<><div ref = {ref} key={details.id} className="box">
-
-
-<div className="one" key={details.id} ><p>{props.title}</p>{highlights.map((item, index) => ( <span key={index} className="tag"> {item}</span>))}</div>
-          <div className="two" key={details.id} >
-          <p>{props.title}</p>
-            <p>{props.title}</p>
-            <Carousel key={details.id}imgUrls={images}/>
+  return (<> <div ref = {ref} key={details.id} className="event-border">
+          <div className="one" key={details.id} >
+            <p className="one-one">{props.title}</p>
+              <div  className="one-two">{highlights.map((item, index) => <span key={index} className="tag"> {item}</span>)}</div>
           </div>
-          <div className="three" key={details.id} >test</div>
+          <div className="two" key={details.id}>
+                    <p>{props.title}</p>
+                    <p>{props.title}</p>
+            <Carousel key={details.id} imgUrls={images}></Carousel>
           </div>
-          <div className="component-container">{ error.response &&<p className="error-msg">{error.response}</p>}</div>
-          </>);
+          <div className="three" key={details.id} >test
+          </div>
+          <div className="component-container">
+            { error.response &&<p className="error-msg">{error.response}</p>}
+          </div>
+          
+          </div></>);
 })
       
 export default React.memo(Detail);

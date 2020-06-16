@@ -25,7 +25,7 @@ const Events = props => {
   return (<>
   {state.event.events.slice(0, 10).map((i, idx) => {
         return(<div className="flex-container">
-           <Detail {...state.event.events.length === idx +1 ? {ref:lastEvent}:null} key = {i} title = {i}>{i}</Detail>
+            <Detail {...state.event.events.length === idx +1 ? {ref:lastEvent}:null} key = {i} title = {i}>{i}</Detail>
         </div>)
   })}
     <div className="component-container">{ state.event?.loading &&<p>Loading...</p>}</div>
