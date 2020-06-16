@@ -1,40 +1,25 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch, shallowEqual} from 'react-redux'
+import {addEventType} from '../store/actions/eventActions'
 
 
 const AddEventType = () => {
-    const[type, setType] = useState({});
-    const [isError, setIsError] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
+    const[type, setType] = useState('');
+    const dispatch = useDispatch();
+    const state = useSelector(state => state, shallowEqual);
     const handleInput = (e) => {
-        setType({name: e.target.value});
+        setType(e.target.value);
     }
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        const config = {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          };
-        if (localStorage.getItem('token')) {
-            config.headers['x-auth-token'] = localStorage.getItem('token');
-        }
-        const body = JSON.stringify(type);
-        axios
-        .post('http://localhost:5000/api/todayi/addType',body, config)
-        .then(res => {
-            console.log(res);
-            clearForm();
-        })
-        .catch(e => {
-            setIsError(true);
-            setErrorMsg(e.response.data.message);
-        });
+        dispatch(addEventType({name: type, isActive: true}))
     };
-    const clearForm = () => { 
-        document.getElementById("create-type-form").reset();
-    }
+    useEffect(() => {
+        if(!state.event.isError){
+            document.getElementById("create-type-form").reset();
+        }
+    }, [state.event.isError]);
 return(<>
     <div className="component-container">
         <form id="create-type-form">
@@ -52,7 +37,8 @@ return(<>
             </button>
         </form>
      </div>
-     <div className="component-container">{ isError &&<p className="error-msg">{errorMsg}</p>}</div> </>
+     <div className="component-container">{ state.event.isError &&<p className="error-msg">{state.event.responseMsg}</p>}</div>
+    <div className="component-container">{ state.event.responseMsg !== null &&<p className="success-msg">{state.event.responseMsg}</p>}</div> </>
 );
 }
 export default React.memo(AddEventType);

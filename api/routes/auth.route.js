@@ -23,16 +23,17 @@ router.post('/register', async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const expiresIn = process.env.DB_ENV === 'local' ? '1d' : '7d';
 
     const user = new User({
         name: req.body.name,
         email: req.body.email,
         password: hashedPassword
     })
-        const savedUser = await user.save();
-        const token = jwt.sign({ id: savedUser._id }, process.env.PRIVATE_TOKEN, {
-            expiresIn: 3600
-          });
+    const savedUser = await user.save();
+    const token = jwt.sign({ id: savedUser._id }, process.env.PRIVATE_TOKEN, {
+        expiresIn: expiresIn
+      });
       try {
         res.send({
             token,
@@ -65,7 +66,8 @@ router.post('/login', async (req, res) => {
         if(!validPassword) return res.status(500).json({
           message:'Invalid password!'});
 
-        const token = jwt.sign({_id:user._id}, process.env.PRIVATE_TOKEN, { expiresIn: 3600 });
+        const expiresIn = process.env.DB_ENV === 'local' ? '1d' : '7d';
+        const token = jwt.sign({_id:user._id}, process.env.PRIVATE_TOKEN, { expiresIn: expiresIn });
         if (!token) throw Error('Couldnt sign the token');
 
         res.status(200).json({

@@ -59,9 +59,8 @@ router.get('/', async (req, res) => {
    */
   
   router.post('/addType', verify,  async (req, res) => {
-
     const name = req.body.name;
-    console.log('server' + name);
+    console.log(req.body);
     const newEventType = new eventType({name: name, isActive: true});
     newEventType.save()
     .then(() => res.json('Event type added!'))

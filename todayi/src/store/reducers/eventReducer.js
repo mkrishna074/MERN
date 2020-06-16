@@ -36,7 +36,7 @@ import {
       case ADDED_ITEM:
         return {
           ...state,
-          responseMsg: 'Added event successfully.'
+          responseMsg: action.payload
         };
       case ITEMS_LOADING:
         return {
@@ -46,6 +46,7 @@ import {
       case ITEM_ERROR:
         return {
           ...state,
+          isError: true,
           responseMsg: action.payload?.data?.message.replace(/"/g, '')
         }
       case SEARCH_EVENTS:

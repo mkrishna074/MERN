@@ -115,7 +115,11 @@ label {
   padding: 0 1rem;
   color: white;
   background-color: red;
-//animation: errorMsgFade 4s ease forwards;
+}
+.success-msg{
+  padding: 0 1rem;
+  color: white;
+  background-color: green;
 }
 .tag {
   display: inline;

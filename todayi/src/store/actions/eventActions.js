@@ -44,22 +44,10 @@ export const addType = (item) => (dispatch, getState) => {
       });
     });
   }
-  export const addEventType = ({name, isActive}) => (dispatch, getState) => {
-
-    const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-    
-      // Request body
-      const body = JSON.stringify({name, isActive});
-
-    // User loading
-    dispatch({ type: ADD_ITEM });
+  export const addEventType = (type) => (dispatch, getState) => {
   
     axios
-      .post('/api/todayi/addType',body, config)
+      .post('http://localhost:5000/api/todayi/addType',type, tokenConfig(getState))
       .then(res =>
         dispatch({
           type: ADDED_ITEM,
