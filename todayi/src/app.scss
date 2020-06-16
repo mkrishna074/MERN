@@ -1,6 +1,7 @@
 *{
   border: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;;
 }
 body, html {
@@ -9,14 +10,14 @@ body, html {
 html {
   overflow-y: scroll;
 }
-$midnight: #64696e;
+$midnight: #2c3e50;
 $clouds: #ecf0f1;
 $yolk: #f6d365;
 $hardyolk: #f5a48d;
 $harderyolk: #f3704c;
 body{
   font-family: 'Poppins', sans-serif;
-  font-size: 85%;
+  font-size: 90%;
   background-image: linear-gradient(180deg, $yolk, $yolk);
   min-height: 100vh;
 }
@@ -34,10 +35,11 @@ header{
   text-decoration:none;
 }
 nav ul{
-display: flex;
-justify-content: center;
-align-items: center;
-text-decoration:none;
+  list-style: none;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  text-decoration:none;
 }
 .active-style{
   color: #64696e;
@@ -45,13 +47,14 @@ text-decoration:none;
   text-decoration: none;
 }
 nav ul a {
-  font-family: 'Life Savers', sans-serif;
   text-transform:uppercase;
   color:$midnight;
   margin:0 15px;
   letter-spacing:1px;
   text-decoration:none;
   text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 nav ul a:hover, nav ul a:focus {
   text-decoration:none;
@@ -62,18 +65,18 @@ nav ul a:hover, nav ul a:focus {
   clear: both;
 }
 .form-group {
-  margin-bottom: 5px;
+  margin-bottom: 0.4rem;
 }
 .form-control{
   display: block;
   width: 100%;
   height: 2rem;
-  padding: 0.3rem 0.8rem;
-  font-size: 100%;
+  font-size: 1rem;
+  padding: 0.3rem 0.5rem;
+  font-family: 'Poppins', sans-serif;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
-  background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
@@ -86,18 +89,12 @@ label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 0.3rem;
-  font-weight: 700;
+  font-weight: 500;
 }
 .component-container{
   display: flex;
   justify-content: center;
   align-items: center;
-}
-form input{
-  padding: 0.5rem;
-  border: none;
-  background: $clouds;
-  font-family: 'Poppins', sans-serif;
 }
 .ti-btn{
   background: $harderyolk;
@@ -105,7 +102,7 @@ form input{
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.3s ease;
-  border-radius: 5px;
+  border-radius: 0.3rem;
   padding: 0.5rem;
 }
 .ti-btn:hover{
@@ -124,7 +121,6 @@ form input{
   display: inline;
   padding: .2rem .6rem .3rem;
   font-size: 75%;
-  font-weight: 700;
   line-height: 1;
   color: #fff;
   text-align: center;
@@ -137,16 +133,13 @@ form input{
 .head{
   width: 99vw;
   position: fixed;
-  background-image: linear-gradient(180deg, $yolk, $hardyolk, $harderyolk);
+  background-image: linear-gradient(180deg, $yolk, $yolk);
   top:0;
 }
 .push{
-  margin-bottom: 13vh;
+  margin-bottom: 15vh;
 }
-
 .flex-container{
-  height: 60vh;
-  border: black 3px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -154,12 +147,11 @@ form input{
 .one{
   display: flex;
   flex-basis: 10vh;
-  justify-content: space-around;
+  justify-content: center;
 }
 .two{
   display: flex;
   flex-flow: column;
-  flex-basis: 80vh;
   justify-content: space-between;
   align-items: center;
 }
@@ -176,27 +168,34 @@ form input{
   justify-content: flex-end;
 }
 @keyframes errorMsgFade {
-from{
+  from{
   opacity: 1;
-}
-to{
+  }
+  to{
   opacity: 0;
-}
+  }
 }
 @media screen and (max-width: 768px) {
+  body{
+    font-size: 85%;
+    font-weight: 600;
+  }
   .logo{
     font-size: 1.8rem;
+    font-weight: 400;
   }
   nav ul a {
     letter-spacing:0px;
     margin:0 5px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   nav{
     width: 100vw;
     white-space: nowrap;
-    overflow-x: scroll; 
-    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+  }
+  nav ul{
+    justify-content: flex-start;
   }
   .ti-search{
     margin-top: 0.5rem;
@@ -205,6 +204,6 @@ to{
     width: 100vw;
   }
   .push{
-    margin-bottom: 8vh;
+    margin-bottom: 10vh;
   }
 }

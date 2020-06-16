@@ -28,19 +28,17 @@ export default function Header() {
     }, [state.event.pageNumber])
     return (
         <header>
-        <NavLink to='/' className="logo">testing
-        </NavLink>
-        <div>
-        <div className="form-group">
-            <input type="text" 
-            name="type"
-            className="form-control" 
-            onChange={e => { setSearchTxt(e.target.value);}}></input>
-        </div>
-        </div>
-        <div className="user-details">
-        { state.auth.isAuthenticated &&<><button type="submit" className="ti-btn" onClick={onLogout}>Log Out</button></>}
-        </div>
+            <NavLink to='/' className="logo">testing
+            </NavLink>
+            <div className="form-group">
+                <input type="text" 
+                name="type"
+                className="form-control" 
+                onChange={e => { setSearchTxt(e.target.value);}}></input>
+            </div>
+            <div className="user-details">
+            { state.auth.isAuthenticated &&<><button type="submit" className="ti-btn" onClick={onLogout}>Log Out</button></>}
+            </div>
         </header>
     )
 }
