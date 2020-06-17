@@ -11,6 +11,7 @@ export default function Header() {
     const state = useSelector(state => state);
     const [searchTxt, setSearchTxt] = useState('')
     const [pageNumber, setPagenumber] = useState(1)
+    const [menuToggle, setMenuToggle] = useState(false)
     const onLogout = () => {
         console.log('logout')
       dispatch(logout());
@@ -26,18 +27,27 @@ export default function Header() {
     useEffect(() => {
       setPagenumber(state.event.pageNumber);
     }, [state.event.pageNumber])
+    const menuToggleClick = () =>{
+      setMenuToggle(!menuToggle);
+    }
     return (
         <header>
             <NavLink to='/' className="logo">testing
             </NavLink>
-            <div className="form-group">
-                <input type="text" 
+            <div className="input-border"><i className="fa fa-search"></i><input type="text" 
                 name="type"
-                className="form-control" 
-                onChange={e => { setSearchTxt(e.target.value);}}></input>
-            </div>
-            <div className="user-details">
-            { state.auth.isAuthenticated &&<><button type="submit" className="ti-btn" onClick={onLogout}>Log Out</button></>}
+                className="search-input form-control" 
+                onChange={e => { setSearchTxt(e.target.value);}}></input></div>
+            <div className="dropdown">
+              <button className="dropbtn ti-btn" disabled={!state.auth.isAuthenticated} onClick={menuToggleClick}>
+              <i className="fas fa-user-circle"></i>
+              </button>
+              {(menuToggle && state.auth.isAuthenticated) && <div className="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              <button type="submit" className="ti-btn" onClick={onLogout}>Log Out</button>
+              </div>}
             </div>
         </header>
     )

@@ -3,7 +3,8 @@ import {NavLink} from 'react-router-dom'
 
 const Nav = props => {
     const activeStyle = {
-      color: '#64696e', background: '#ecf0f1', textDecoration: 'none'
+      color: '#f3704c', background: '#ecf0f1', textDecoration: 'none', 
+      borderRadius: '0.3rem'
     };
   return (
     <>

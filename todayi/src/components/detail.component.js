@@ -7,13 +7,13 @@ const Detail = React.forwardRef((props, ref) => {
   const highlights = ['one', 'two', 'three'];
   const images = ['https://picsum.photos/200/300', '/IMG_2432.JPG', 'https://picsum.photos/200/300', ''];
 
-  return (<> <div ref = {ref} key={details.id} className="event-border">
+  return (<> <div ref = {ref} key={details.id}>
           <div className="one" key={details.id} >
-            <p className="one-one">{props.title}</p>
+            <p className="one-one"><h4>{props.title}</h4></p>
               <div  className="one-two">{highlights.map((item, index) => <span key={index} className="tag"> {item}</span>)}</div>
           </div>
           <div className="two" key={details.id}>
-                    <p>{props.title}</p>
+                    <p>{props.title}{props.title}{props.title}</p>
                     <p>{props.title}</p>
             <Carousel key={details.id} imgUrls={images}></Carousel>
           </div>
