@@ -39,14 +39,26 @@ export default function Header() {
                 className="search-input form-control" 
                 onChange={e => { setSearchTxt(e.target.value);}}></input></div>
             <div className="dropdown">
-              <button className="dropbtn ti-btn" disabled={!state.auth.isAuthenticated} onClick={menuToggleClick}>
+              <button className="dropbtn ti-user" 
+              onClick={menuToggleClick}>
               <i className="fas fa-user-circle"></i>
               </button>
-              {(menuToggle && state.auth.isAuthenticated) && <div className="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-              <button type="submit" className="ti-btn" onClick={onLogout}>Log Out</button>
+              {menuToggle && <div className="dropdown-content">
+                {!(state.auth.isAuthenticated) && 
+                <div>
+                  <NavLink to='/login'>Login
+                  </NavLink>
+                  <NavLink to='/register'>Register
+                  </NavLink> 
+                </div>}
+                {state.auth.isAuthenticated && 
+                <div>
+                  <NavLink to='/addtype'>Event Type
+                  </NavLink>
+                  <NavLink to='/addevent'>Event
+                  </NavLink>
+                  <a onClick={onLogout} >Log Out</a>
+                </div>}
               </div>}
             </div>
         </header>

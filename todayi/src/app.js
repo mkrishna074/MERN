@@ -25,11 +25,13 @@ function App() {
       <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/works" exact component={Events} />
-          <ProtectedRoute path="/partners" exact component={AddEvent} />
-          <ProtectedRoute path="/price" exact component={AddEventType} />
+          <Route path="/partners" exact component={Home} />
+          <Route path="/price" exact component={Home} />
           <Route path="/contacts" exact component={Events} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
+          <ProtectedRoute path="/addevent" exact component={AddEvent} />
+          <ProtectedRoute path="/addtype" exact component={AddEventType} />
         </Switch>
     </div>
     </Router>
