@@ -9,8 +9,8 @@ const Detail = React.forwardRef((props, ref) => {
 
   return (<> <div ref = {ref} key={details.id}>
           <div className="one" key={details.id} >
-            <p className="one-one"><h4>{props.title}</h4></p>
-              <div  className="one-two">{highlights.map((item, index) => <span key={index} className="tag"> {item}</span>)}</div>
+            <div className="one-one"><h4>{props.title}</h4></div>
+            <div  className="one-two">{highlights.map((item, index) => <span key={index} className="tag"> #{item}</span>)}</div>
           </div>
           <div className="two" key={details.id}>
                     <p>{props.title}{props.title}{props.title}</p>

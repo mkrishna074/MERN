@@ -8,6 +8,7 @@ export default function useSearch(query, pageNumber) {
     const [hasMore, setHasMore] = useState(false);
 
     useEffect(() => {
+        console.log('useSearch');
         setEvents([]);
     }, [query])
 

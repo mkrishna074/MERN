@@ -5,14 +5,15 @@ import {
     ITEMS_LOADING,
     ITEM_ERROR,
     SEARCH_EVENTS,
-    SET_PAGENUMBER
+    SET_PAGENUMBER,
+    SET_SEARCHTEXT
   } from '../actions/types';
   
   const initialState = {
     events: [],
     loading: false,
     responseMsg: '',
-    searchText: '',
+    searchTxt: '',
     isError: false,
     hasMore: false,
     pageNumber: 1
@@ -59,6 +60,12 @@ import {
         return {
           ...state,
           pageNumber: state.pageNumber + 1
+        }
+      case SET_SEARCHTEXT:
+        console.log('test2');
+        return {
+          ...state,
+          searchTxt: action.payload
         }
       default:
         return state;

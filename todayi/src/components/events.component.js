@@ -1,8 +1,8 @@
-import React, {useEffect, useState, useRef, useCallback} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 import Detail from './detail.component'
 import {withRouter} from 'react-router-dom'
-import {setPageNumber} from '../store/actions/eventActions'
+import {setPageNumber, setStateSearchTxt} from '../store/actions/eventActions'
 
 const Events = props => {
   const state = useSelector(state => state, shallowEqual);
@@ -22,6 +22,10 @@ const Events = props => {
     if(node) observer.current.observe(node);
     console.log(node);
   }
+  useEffect(() => {
+    console.log('test');
+    dispatch(setStateSearchTxt(''))
+  }, [])
   return (<>
   {state.event.events.slice(0, 10).map((i, idx) => {
         return(<div className="flex-container">

@@ -2,11 +2,11 @@ import axios from 'axios';
 
 import {
   ITEMS_LOADING,
-  ADD_ITEM,
   ADDED_ITEM,
   ITEM_ERROR,
   GET_EVENTS,
-  SET_PAGENUMBER
+  SET_PAGENUMBER,
+  SET_SEARCHTEXT
 } from './types';
 
 export const addType = (item) => (dispatch, getState) => {
@@ -76,6 +76,13 @@ export const addType = (item) => (dispatch, getState) => {
     console.log('set page number')
     dispatch({
       type: SET_PAGENUMBER
+    })
+  };
+  export const setStateSearchTxt = (searchTxt) => (dispatch) => {
+    console.log('test1');
+    dispatch({
+      type: SET_SEARCHTEXT,
+      payload: searchTxt
     })
   };
   // Setup config/headers and token

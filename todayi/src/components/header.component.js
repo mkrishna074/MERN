@@ -4,14 +4,14 @@ import '../app.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import { logout } from '../store/actions/authActions';
 import useSearch from '../hooks/useSearch'
-import {setEvents} from '../store/actions/eventActions'
+import {setEvents, setStateSearchTxt} from '../store/actions/eventActions'
 
 export default function Header() {
     const dispatch = useDispatch();
     const state = useSelector(state => state);
-    const [searchTxt, setSearchTxt] = useState('')
-    const [pageNumber, setPagenumber] = useState(1)
-    const [menuToggle, setMenuToggle] = useState(false)
+    const [searchTxt, setSearchTxt] = useState('');
+    const [pageNumber, setPagenumber] = useState(1);
+    const [menuToggle, setMenuToggle] = useState(false);
     const headerRef = useRef();
     const onLogout = () => {
         console.log('logout')
@@ -41,6 +41,10 @@ export default function Header() {
       setPagenumber(state.event.pageNumber);
     }, [state.event.pageNumber])
 
+    useEffect(() => {
+      dispatch(setStateSearchTxt(searchTxt))
+    }, [searchTxt, dispatch])
+
     const menuToggleClick = () =>{
       setMenuToggle(!menuToggle);
     }
@@ -50,8 +54,9 @@ export default function Header() {
             </NavLink>
             <div className="search-box"><i className="fa fa-search"></i><input type="text" 
                 name="type"
-                className="search-input form-control" 
-                onChange={e => { setSearchTxt(e.target.value);}}></input></div>
+                className="search-input form-control"
+                value={state.event.searchTxt}
+                onChange={e => {setSearchTxt(e.target.value);}}></input></div>
             <div ref={headerRef} className="dropdown">
               <button className="dropbtn ti-user" 
               onClick={menuToggleClick}>
