@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {NavLink} from 'react-router-dom'
 import '../app.scss'
 import {useSelector, useDispatch} from 'react-redux'
@@ -12,21 +12,35 @@ export default function Header() {
     const [searchTxt, setSearchTxt] = useState('')
     const [pageNumber, setPagenumber] = useState(1)
     const [menuToggle, setMenuToggle] = useState(false)
+    const headerRef = useRef();
     const onLogout = () => {
         console.log('logout')
       dispatch(logout());
       console.log('logout success')
     }
-    console.log(searchTxt);
     const {isLoading, events, hasMore, isError} = useSearch(searchTxt, pageNumber);
 
     useEffect(() => {
       dispatch(setEvents(events, isLoading, hasMore))
     }, [events, dispatch, isLoading, hasMore])
 
+    const handleClickOutside = e => {
+      if (!headerRef.current.contains(e.target)) {
+        setMenuToggle(false);
+      }
+    };
+
+    useEffect(() => {
+      if(menuToggle){
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+      }
+    }, [menuToggle]);
+
     useEffect(() => {
       setPagenumber(state.event.pageNumber);
     }, [state.event.pageNumber])
+
     const menuToggleClick = () =>{
       setMenuToggle(!menuToggle);
     }
@@ -34,11 +48,11 @@ export default function Header() {
         <header>
             <NavLink to='/' className="logo">testing
             </NavLink>
-            <div className="input-border"><i className="fa fa-search"></i><input type="text" 
+            <div className="search-box"><i className="fa fa-search"></i><input type="text" 
                 name="type"
                 className="search-input form-control" 
                 onChange={e => { setSearchTxt(e.target.value);}}></input></div>
-            <div className="dropdown">
+            <div ref={headerRef} className="dropdown">
               <button className="dropbtn ti-user" 
               onClick={menuToggleClick}>
               <i className="fas fa-user-circle"></i>

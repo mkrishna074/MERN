@@ -3,6 +3,18 @@ $clouds: #ecf0f1;
 $yolk: #f6d365;
 $hardyolk: #f5a48d;
 $harderyolk: #f3704c;
+
+@font-face {
+  font-family: 'ti logo';
+  font-style: oblique;
+  src: url('./assets/fonts/IndieFlower-Regular.ttf') format('truetype')
+}
+@font-face {
+  font-family: 'ti font';
+  font-style: normal;
+  src: url('./assets/fonts/Poppins-Light.ttf') format('truetype')
+}
+
 *{
   border: 0;
   margin: 0;
@@ -16,7 +28,7 @@ html {
   overflow-y: scroll;
 }
 body{
-  font-family: 'Poppins', sans-serif;
+  font-family: 'ti font';
   font-size: 90%;
   background-image: linear-gradient(180deg, $yolk, $yolk);
   min-height: 100vh;
@@ -25,7 +37,7 @@ input {
   outline: none;
 }
 .logo{
-  font-family:'Indie Flower', cursive;
+  font-family: 'ti logo';
   text-transform:lowercase;
   font-size: 2.5rem;
   color: #2c3e50;
@@ -79,7 +91,7 @@ nav ul a:hover, nav ul a:focus {
   height: 2rem;
   font-size: 1rem;
   padding: 0.3rem 0.5rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'ti font';
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
@@ -105,7 +117,7 @@ label {
 .ti-btn{
   background: $harderyolk;
   color: $clouds;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'ti font';
   transition: all 0.3s ease;
   border-radius: 0.3rem;
   padding: 0.4rem;
@@ -130,7 +142,7 @@ label {
 }
 .tag {
   display: inline;
-  padding: .2rem .6rem .3rem;
+  padding: 0 0.1rem;
   font-size: 75%;
   line-height: 1;
   color: #fff;
@@ -230,25 +242,25 @@ label {
   font-size: 2rem ;
 }
 
-.input-border{
+.search-box{
   position: relative;
   right: 3rem;
 }
-.input-border > .fa-search {
+.search-box > .fa-search {
   color: $harderyolk;
   position: absolute;
   top: 0.6rem;
   right: 0.3rem;
 }
-.input-border > input {
+.search-box > input {
   padding-right : 1.2rem;
 }
 .ti-user {
-  color: $clouds;
+  color: $harderyolk;
   background: none;
 }
 .ti-user:hover {
-  color: $harderyolk;
+  color: $clouds;
   background: none;
 }
 .ti-user:focus {
@@ -285,7 +297,7 @@ label {
   .push{
     margin-bottom: 10vh;
   }
-  .input-border{
+  .search-box{
     right: 0;
   }
   .ti-btn{

@@ -42,7 +42,7 @@ const Login = (props) => {
                     onChange={e => { setPassword(e.target.value);}}/>
                 </div>
                 <button type="submit" className="ti-btn" onClick={handleOnSubmit}>
-                    Sign In
+                    Sign in
                 </button>
             </form>
         </div>

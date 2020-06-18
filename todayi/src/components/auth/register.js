@@ -40,7 +40,7 @@ return(<>
                     onChange={e => { setUserEmail(e.target.value);}}/>
         </div>
         <div className="form-group">
-                <label >Password</label> <span className="tag"> Password must contain one uppercase letter, one lowercase letter, one numeric and one symbol. </span>
+                <label >Password</label> <span className="tag"> Password must contain a &#8593; letter, a &#8595; letter, a numeric and a symbol. </span>
             <input type="password" 
                     className="form-control" 
                     onChange={e => { setPassword(e.target.value);}} 
