@@ -44,6 +44,9 @@ summary:before {
   color: #000;
   margin-right: 5px;
 }
+summary:focus {
+  outline: none;
+}
 .logo{
   font-family: 'ti logo';
   text-transform:lowercase;

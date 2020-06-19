@@ -16,12 +16,13 @@ $clouds: #ecf0f1;
   .carousel-arrow {
     position: absolute;
     color: $clouds;
-    padding: 0.2rem 0.2rem;
     top: 40vh;
     cursor: pointer;
     background: none;
     border-radius: 50%;
-    font-size: 2rem;
+    font-size: 1.6rem;
+    height: 2rem;
+    width: 2rem;
   }
   
   .carousel-arrow:hover {
