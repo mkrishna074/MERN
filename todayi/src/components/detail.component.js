@@ -1,29 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Carousel from './controls/carousel.component' 
 
 const Detail = React.forwardRef((props, ref) => {
-  const  [error, setError] =  useState({});
   const  [details,setDetails]= useState({});
   const highlights = ['one', 'two', 'three'];
-  const images = ['https://picsum.photos/200/300', '/IMG_2432.JPG', 'https://picsum.photos/200/300', ''];
+  const images = ['/IMG_2432.JPG'];
 
-  return (<> <div ref = {ref} key={details.id}>
-          <div className="one" key={details.id} >
+  return (<> <details open = {props.idx === 0} ref = {ref}>
+          <summary className="one" key={props.idx} >
             <div className="one-one"><h4>{props.title}</h4></div>
             <div  className="one-two">{highlights.map((item, index) => <span key={index} className="tag"> #{item}</span>)}</div>
+          </summary>
+          <div className="two" key={props.idx}>
+            <Carousel key={props.idx} imgUrls={images}></Carousel>
           </div>
-          <div className="two" key={details.id}>
-                    <p>{props.title}{props.title}{props.title}</p>
-                    <p>{props.title}</p>
-            <Carousel key={details.id} imgUrls={images}></Carousel>
+          <div className="three" key={props.idx} >test
           </div>
-          <div className="three" key={details.id} >test
-          </div>
-          <div className="component-container">
-            { error.response &&<p className="error-msg">{error.response}</p>}
-          </div>
-          
-          </div></>);
+          </details></>);
 })
       
 export default React.memo(Detail);

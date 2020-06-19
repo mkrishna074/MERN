@@ -11,8 +11,7 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  PASSWORD_MATCH,
-  API_ERROR
+  PASSWORD_MATCH
 } from './types';
 
 // Check token & load user

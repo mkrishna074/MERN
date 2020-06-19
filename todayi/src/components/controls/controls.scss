@@ -1,19 +1,45 @@
+$harderyolk: #f3704c;
+$clouds: #ecf0f1;
+
 .leftBtn{
-    position: absolute;
-    left: 12vw;
-    top: 40vh;
-    border-radius: 1rem;
-    border: none;
+    left: 1vw;
   }
   
   .rightBtn{
-    position: absolute;
-    right: 12vw;
-    top: 40vh;
-    border-radius: 1rem;
-    border: none;
+    right: 1vw;
   }
 
+  .carousel-arrow:focus {
+    outline: none;
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    color: $clouds;
+    padding: 0.2rem 0.2rem;
+    top: 40vh;
+    cursor: pointer;
+    background: none;
+    border-radius: 50%;
+    font-size: 2rem;
+  }
+  
+  .carousel-arrow:hover {
+    background-color: $clouds;
+    color: $harderyolk;
+  }
+
+  @media screen and (max-width: 768px) {
+    .carousel-arrow{
+      top: 35vh;
+    }
+    .leftBtn{
+      left: 0.05rem
+    }
+    .rightBtn{
+      right: 0.05rem
+    }
+  }
 
 
 

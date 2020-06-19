@@ -18,7 +18,7 @@ export default function Header() {
       dispatch(logout());
       console.log('logout success')
     }
-    const {isLoading, events, hasMore, isError} = useSearch(searchTxt, pageNumber);
+    const {isLoading, events, hasMore} = useSearch(searchTxt, pageNumber);
 
     useEffect(() => {
       dispatch(setEvents(events, isLoading, hasMore))
@@ -76,7 +76,7 @@ export default function Header() {
                   </NavLink>
                   <NavLink to='/addevent'>Event
                   </NavLink>
-                  <a onClick={onLogout} >Log Out</a>
+                  <button onClick={onLogout} className="logout-btn" >Log Out</button>
                 </div>}
               </div>}
             </div>

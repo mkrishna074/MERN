@@ -36,6 +36,14 @@ body{
 input {
   outline: none;
 }
+summary::-webkit-details-marker {
+  display: none;
+}
+summary:before {
+  content: "\25B8"; /* unicode character of the litle triangle  */
+  color: #000;
+  margin-right: 5px;
+}
 .logo{
   font-family: 'ti logo';
   text-transform:lowercase;
@@ -167,7 +175,7 @@ label {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  border: solid lightslategray;
+  border: solid $harderyolk;
   border-width: 1px;
   border-radius: 0.3rem;
   padding: 0.3rem;
@@ -175,15 +183,15 @@ label {
 .one{
   display: flex;
   flex-basis: 10vh;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0.5rem;
   background: $clouds;
-  border-radius: 1rem;
+  border-radius: 0.3rem;
 }
 .two{
   display: flex;
   flex-flow: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 }
 .three{
@@ -206,13 +214,12 @@ label {
   opacity: 0;
   }
 }
-/* The container <div> - needed to position the dropdown content */
+
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: block;
   position: absolute;
@@ -224,16 +231,15 @@ label {
   border-radius: 0.3rem;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
+.dropdown-content a, .dropdown-content button {
   color: $harderyolk;
   padding: 0.5rem 0.6rem;
   text-decoration: none;
   display: block; 
+  text-align: center;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
+.dropdown-content a:hover, .dropdown-content button:hover {
   background-color: $harderyolk;
   color: $clouds;
   border-radius: 0.3rem;
@@ -266,6 +272,11 @@ label {
 }
 .ti-user:focus {
   outline: none;
+}
+.logout-btn{
+  width: 100%;
+  font-family: 'ti font';
+  border-radius: 0.3rem;
 }
 @media screen and (max-width: 768px) {
   body{

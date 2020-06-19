@@ -20,17 +20,17 @@ const previousSlide = () => {
     setCurrentIndex(index);
   }
 
-return(<div key={props.key} className="container">
+return(<>
         <Arrow
           direction="left"
           clickFunction={ previousSlide }
-          glyph="&#9664;" />
+          glyph="&#60;"/>
     <ImageSlide url={ props.imgUrls[currentIndex] }/>
     <Arrow
           direction="right"
           clickFunction={ nextSlide }
-          glyph="&#9654;" />
-        </div>)
+          glyph="&#62;"/>
+        </>)
 }
 
 const ImageSlide = ({ url }) => {
@@ -39,7 +39,8 @@ const ImageSlide = ({ url }) => {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       height: '40vh',
-      width: '90vw'
+      width: '90vw',
+      margin: '0.5rem'
     };
     return (
       <div className="image-slide" style={styles}></div>
@@ -47,8 +48,8 @@ const ImageSlide = ({ url }) => {
 }
 
 const Arrow = ({ direction, clickFunction, glyph }) => (
-  <button onClick={ clickFunction } className={`${direction}Btn`}> 
-  { glyph }
+  <button onClick={ clickFunction } className={`${direction}Btn carousel-arrow`}>
+    { glyph }
  </button>
   );
 export default React.memo(Carousel);

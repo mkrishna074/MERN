@@ -8,7 +8,6 @@ export default function useSearch(query, pageNumber) {
     const [hasMore, setHasMore] = useState(false);
 
     useEffect(() => {
-        console.log('useSearch');
         setEvents([]);
     }, [query])
 
@@ -23,6 +22,7 @@ export default function useSearch(query, pageNumber) {
             cancelToken: new axios.CancelToken(c => cancel = c)
         })
         .then(res => {
+            console.log(res.data.docs);
             setEvents(prevEvents => {return [...new Set([...prevEvents, ...res.data.docs.map(d => d.title)])]});
             setHasMore(res.data.docs.length > 0);
             setIsLoading(false);
