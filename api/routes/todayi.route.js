@@ -1,4 +1,5 @@
 const router = require('express').Router();
+var path = require('path');
 const verify = require('../middlewares/verifyToken');
 const {eventValidation} = require('../validation');
 let event = require('../models/event.model')
@@ -91,5 +92,15 @@ router.get('/searchEvents', async (req, res) => {
       res.status(400).json({ msg: e.message, success: false });
     }
   });
+
+  /**
+   * @route   Get api/getFile/:fileName
+   * @desc    gets a file
+   * @access  Private
+   */
+
+   router.get('/getFile', async (req, res) => {
+      res.sendFile(path.resolve(path.resolve(`uploads/${req.query.filename}`)));
+   });
 
 module.exports = router;
