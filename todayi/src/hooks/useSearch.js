@@ -17,14 +17,14 @@ export default function useSearch(query, pageNumber) {
         let cancel;
         axios({
             method: 'GET',
-            url: 'https://openlibrary.org/search.json',
+            url: 'http://localhost:5000/api/todayi/searchEvents',
             params: {q: query, page: pageNumber},
             cancelToken: new axios.CancelToken(c => cancel = c)
         })
         .then(res => {
-            console.log(res.data.docs);
-            setEvents(prevEvents => {return [...new Set([...prevEvents, ...res.data.docs.map(d => d.title)])]});
-            setHasMore(res.data.docs.length > 0);
+            console.log(res.data);
+            setEvents(prevEvents => {return [...new Set([...prevEvents, ...res.data.map(d => d)])]});
+            setHasMore(res.data.length > 0);
             setIsLoading(false);
         })
         .catch((e) => {

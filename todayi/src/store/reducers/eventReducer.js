@@ -55,13 +55,12 @@ import {
           searchText: action.payload
         }
       case SET_PAGENUMBER:
-        console.log(state.pageNumber);
+        console.log('SET_PAGENUMBER');
         return {
           ...state,
           pageNumber: state.pageNumber + 1
         }
       case SET_SEARCHTEXT:
-        console.log('test2');
         return {
           ...state,
           searchTxt: action.payload

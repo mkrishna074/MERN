@@ -18,7 +18,7 @@ export default function Header() {
       dispatch(logout());
       console.log('logout success')
     }
-    const {isLoading, events, hasMore} = useSearch(searchTxt, pageNumber);
+    const {isLoading, events, hasMore} = useSearch(state.event.searchTxt, pageNumber);
 
     useEffect(() => {
       dispatch(setEvents(events, isLoading, hasMore))

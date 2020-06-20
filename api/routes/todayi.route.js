@@ -16,10 +16,6 @@ var storage = multer.diskStorage({
 })
 const upload = multer({storage: storage});
 
-router.get('/learns', (req, res) =>{
-  res.json('todayi');
-})
-
 router.post('/addEvent', verify,  upload.array('media', 12), (req, res, next) =>{
     console.log(req.body);
     const media = req.files.map(f => f.filename);;
@@ -36,18 +32,26 @@ router.post('/addEvent', verify,  upload.array('media', 12), (req, res, next) =>
 })
 
 /**
- * @route   GET api/types
- * @desc    Get All types
+ * @route   GET api/searchEvents
+ * @desc    Get events
  * @access  Public
  */
 
-router.get('/', async (req, res) => {
+router.get('/searchEvents', async (req, res) => {
     try {
-      const items = await event.find();
+      console.log(req.query);
+      const items = await event.find().or([{title: {$regex: req.query.q, $options: 'i'}},
+                                      {highlights: {$regex: req.query.q, $options: 'i'}},
+                                      {tags: {$regex: req.query.q, $options: 'i'}},
+                                      {category: {$regex: req.query.q, $options: 'i'}}])         
+      .skip(req.query.page - 1)
+      .limit(5);
+      console.log(items);
       if (!items) throw Error('No items');
   
       res.status(200).json(items);
     } catch (e) {
+      console.log(e);
       res.status(400).json({ msg: e.message });
     }
   });

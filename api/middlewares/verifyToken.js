@@ -10,6 +10,6 @@ module.exports = function(req, res, next){
         next();
     } catch (error) {
         console.log(error);
-        res.status(400).json({message:err.message});
+        res.status(400).json({message:error.message.data.message});
     }
 }

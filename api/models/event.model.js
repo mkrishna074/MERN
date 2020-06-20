@@ -30,5 +30,5 @@ const eventSchema = new mongoose.Schema({
   timestamps: true
 })
 
-
+eventSchema.index({'$**': 'text'});
 module.exports = mongoose.model('Event', eventSchema);

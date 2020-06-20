@@ -37,8 +37,8 @@ const AddEvent = () => {
         })
         .catch(e => {
             setIsError(true);
-            console.log(e.response);
-            //setErrorMsg(e.response.data.message);
+            console.log(e.response.data.message);
+            setErrorMsg(e.response.data.message);
         });
     };
     const clearForm = () => { 

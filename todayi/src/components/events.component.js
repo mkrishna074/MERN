@@ -9,27 +9,26 @@ const Events = props => {
   const dispatch = useDispatch();
   const observer = useRef();
   const lastEvent = (node) => {
-    console.log(node);
+    //console.log(node);
     if(state.event.loading) return
     if(observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(e =>{
-      console.log(state.event.hasMore);
+      // console.log(state.event.hasMore);
       if(e[0].isIntersecting && state.event.hasMore){
-        console.log('inside if');
+        // console.log('inside if');
         dispatch(setPageNumber())
       }
     });
     if(node) observer.current.observe(node);
-    console.log(node);
+    //console.log(node);
   }
   useEffect(() => {
-    console.log('test');
     dispatch(setStateSearchTxt(''))
   }, [dispatch])
   return (<>
   {state.event.events.slice(0, 10).map((i, idx) => {
         return(<div className="flex-container" key = {idx}>
-            <Detail {...state.event.events.length === idx +1 ? {ref:lastEvent}:null} idx = {idx} title = {i}></Detail>
+            <Detail {...state.event.events.length === idx + 1 && state.event?.events?.length > 5 ? {ref:lastEvent}:null} idx = {idx} event = {i}></Detail>
         </div>)
   })}
     <div className="component-container">{ state.event?.loading &&<p>Loading...</p>}</div>
