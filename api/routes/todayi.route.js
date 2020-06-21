@@ -65,7 +65,9 @@ router.get('/searchEvents', async (req, res) => {
   
   router.post('/addType', verify,  async (req, res) => {
     const name = req.body.name;
-    console.log(req.body);
+    const typeExists = await eventType.findOne({name: req.body.name});
+    console.log(typeExists);
+    if(typeExists) return res.status(500).json({message : 'Type already exists!'});
     const newEventType = new eventType({name: name, isActive: true});
     newEventType.save()
     .then(() => res.json('Event type added!'))

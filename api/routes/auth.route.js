@@ -32,21 +32,26 @@ router.post('/register', async (req, res) => {
     })
     const savedUser = await user.save();
     const token = jwt.sign({ id: savedUser._id }, process.env.PRIVATE_TOKEN, {
-        expiresIn: expiresIn
+        expiresIn: '15m'
       });
-      try {
-        res.send({
-            token,
-            user: {
-              id: savedUser.id,
-              name: savedUser.name,
-              email: savedUser.email
-            }
-        });
-      } catch (e) {
-        res.status(500).json({
-          message: e.message });
-     }
+    const refreshToken = jwt.sign({_id:savedUser._id, name:savedUser.name}, process.env.PRIVATE__REFRESH_TOKEN, { expiresIn: '7d' });
+    res.cookie('x-refresh-token', refreshToken, {
+      httpOnly: true
+    });
+
+    try {
+      res.send({
+          token,
+          user: {
+            id: savedUser.id,
+            name: savedUser.name,
+            email: savedUser.email
+          }
+      });
+    } catch (e) {
+      res.status(500).json({
+        message: e.message });
+    }
 })
 
 /**
@@ -66,9 +71,12 @@ router.post('/login', async (req, res) => {
         if(!validPassword) return res.status(500).json({
           message:'Invalid password!'});
 
-        const expiresIn = process.env.DB_ENV === 'local' ? '1d' : '7d';
-        const token = jwt.sign({_id:user._id}, process.env.PRIVATE_TOKEN, { expiresIn: expiresIn });
+        const token = jwt.sign({_id:user._id}, process.env.PRIVATE_TOKEN, { expiresIn: '2m' });
+        const refreshToken = jwt.sign({_id:user._id, name:user.name}, process.env.PRIVATE__REFRESH_TOKEN, { expiresIn: '5m' });
         if (!token) throw Error('Couldnt sign the token');
+        res.cookie('x-refresh-token', refreshToken, {
+          httpOnly: true
+        });
 
         res.status(200).json({
         token,
@@ -84,6 +92,73 @@ router.post('/login', async (req, res) => {
      }
 })
 
+/**
+ * @route   POST api/auth/logout
+ * @desc    Log out user
+ * @access  Public
+ */
+router.post('/logout', async (req, res) => {
+  res.clearCookie('x-refresh-token', {
+    httpOnly: true
+  });
+  res.status(200).json({ message: 'Cleared cookie'});
+});
+
+/**
+ * @route   POST api/auth/refreshToken
+ * @desc    Refresh Token
+ * @access  Public
+ */
+router.post('/refreshToken', async (req, res) => {
+  const token = req.body.headers['x-auth-token'];
+  if(!token) return res.status(401).send('Token expired');
+  try {
+        var cookie = getcookie(req);
+        jwt.verify(token, process.env.PRIVATE_TOKEN, function(err, decoded){
+          console.log(err);
+          console.log(decoded);
+          if( err !== null && err.name === 'TokenExpiredError'){
+            if(cookie.length > 0){
+              jwt.verify(cookie[1], process.env.PRIVATE__REFRESH_TOKEN, function(err1, decoded1){
+                console.log(err1);
+                console.log(decoded1);
+                console.log(1);
+                if(err1 !== null && err1.name === 'TokenExpiredError'){
+                  res.clearCookie('x-refresh-token', {
+                    httpOnly: true
+                  });
+                  res.status(200).json({message : 'Token expired'})
+                }
+                else {
+                  const freshToken = jwt.sign({_id:decoded1._id}, process.env.PRIVATE_TOKEN, { expiresIn: '2m' });
+                  console.log(2);
+                  res.status(200).json({token: freshToken})
+                }
+              })
+            }
+            else {
+              res.clearCookie('x-refresh-token', {
+                httpOnly: true
+              });
+              console.log(3);
+              res.status(200).json({message : 'No cookie'})
+            }
+          }
+          else {
+            console.log(4);
+            res.status(200).json({message : 'Please continue'})
+          }
+        });
+    } catch (error) {
+        console.log(5);
+        console.log(error);
+        res.status(400).json({message:error.message});
+    }
+});
+function getcookie(req) {
+    var cookie = req.headers.cookie;
+    return cookie?cookie.split('='):null;
+  }
 /**
  * @route   GET api/auth/user
  * @desc    Get user data

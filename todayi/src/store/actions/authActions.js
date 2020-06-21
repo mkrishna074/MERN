@@ -103,10 +103,15 @@ export const login = ({ email, password, referer }) => (
 
 // Logout User
 export const logout = () => (dispatch) => {
-  dispatch({
-    type: LOGOUT_SUCCESS
-  });
-  history.push('/');
+  axios
+    .post('http://localhost:5000/api/auth/logout')
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: LOGOUT_SUCCESS
+      });
+      history.push('/');
+    })
 };
 
 

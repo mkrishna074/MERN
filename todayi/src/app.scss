@@ -45,7 +45,7 @@ summary:before {
   margin-right: 5px;
 }
 summary:focus {
-  outline: none;
+  outline: 1px solid $hardyolk;
 }
 .logo{
   font-family: 'ti logo';
@@ -103,7 +103,7 @@ nav ul a:hover, nav ul a:focus {
   height: 2rem;
   font-size: 1rem;
   padding: 0.3rem 0.5rem;
-  font-family: 'ti font';
+  font-family: inherit;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
@@ -129,7 +129,7 @@ label {
 .ti-btn{
   background: $harderyolk;
   color: $clouds;
-  font-family: 'ti font';
+  font-family: inherit;
   transition: all 0.3s ease;
   border-radius: 0.3rem;
   padding: 0.4rem;
@@ -274,11 +274,11 @@ label {
   background: none;
 }
 .ti-user:focus {
-  outline: none;
+  outline: 1px solid $hardyolk;
 }
 .logout-btn{
   width: 100%;
-  font-family: 'ti font';
+  font-family: inherit;
   border-radius: 0.3rem;
 }
 @media screen and (max-width: 768px) {

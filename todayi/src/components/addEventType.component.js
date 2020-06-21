@@ -37,7 +37,7 @@ return(<>
             </button>
         </form>
      </div>
-     <div className="component-container">{ state.event.isError &&<p className="error-msg">{state.event.responseMsg}</p>}</div>
+     <div className="component-container">{ state.event.isError &&<p className="error-msg">{state.event.errorMsg}</p>}</div>
     <div className="component-container">{ state.event.responseMsg !== null &&<p className="success-msg">{state.event.responseMsg}</p>}</div> </>
 );
 }

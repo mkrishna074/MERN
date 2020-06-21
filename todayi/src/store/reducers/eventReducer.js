@@ -16,7 +16,8 @@ import {
     searchTxt: '',
     isError: false,
     hasMore: false,
-    pageNumber: 1
+    pageNumber: 1,
+    errorMsg: ''
   };
   
   export default function(state = initialState, action) {
@@ -36,6 +37,7 @@ import {
       case ADDED_ITEM:
         return {
           ...state,
+          errorMsg: '',
           responseMsg: action.payload
         };
       case ITEMS_LOADING:
@@ -47,7 +49,8 @@ import {
         return {
           ...state,
           isError: true,
-          responseMsg: action.payload?.data?.message.replace(/"/g, '')
+          errorMsg: action.payload?.data?.message.replace(/"/g, ''),
+          responseMsg: ''
         }
       case SEARCH_EVENTS:
         return {

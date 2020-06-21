@@ -10,8 +10,15 @@ require('dotenv').config();
 const app = express();
 const port = process.env.port || 5000;
 
-
-app.use(cors());
+const origin = "http://localhost:3000"
+app.use(
+  cors({
+    credentials: true,
+    'Access-Control-Allow-Credentials' : true,
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
+    origin
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

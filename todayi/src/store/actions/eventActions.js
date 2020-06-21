@@ -9,13 +9,15 @@ import {
   SET_SEARCHTEXT
 } from './types';
 
+axios.defaults.withCredentials = true;
+
 export const addType = (item) => (dispatch, getState) => {
       console.log(item);
       const body = JSON.stringify(item);
       console.log(body);
   
     axios
-      .post('http://localhost:5000/api/todayi/addType',body)
+      .post('http://localhost:5000/api/todayi/addType',body, tokenConfig(getState))
       .then(res =>
         dispatch({
           type: ADDED_ITEM,
@@ -93,7 +95,8 @@ export const tokenConfig = (getState) => {
   // Headers
   const config = {
     headers: {
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
+       'Access-Control-Allow-Origin': 'https://localhost:5000'
     }
   };
 
