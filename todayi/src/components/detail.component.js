@@ -1,25 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import Carousel from './controls/carousel.component' 
-import axios from 'axios'
+import React from 'react';
+import Carousel from './controls/carousel.component'
 
 const Detail = React.forwardRef((props, ref) => {
-  const  [details,setDetails]= useState({});
-  const images = ['/IMG_2432.JPG'];
-
-/*   useEffect(() => {
-    axios({
-      method: 'GET',
-      url: 'http://localhost:5000/api/todayi/getFile',
-      params: {filename: '1592672682968.jpg'}
-  })
-  .then(res => {
-    images.push("data:image/jpg;base64," + Buffer.from(res.data, 'binary').toString('base64'));
-    console.log(images);
-  })
-  .catch((e) => {
-    console.log(e);
-  })
-  }, []) */
 
   return (<> <details open = {props.idx === 0} ref = {ref}>
           <summary className="one">
@@ -27,7 +9,7 @@ const Detail = React.forwardRef((props, ref) => {
             <div  className="one-two">{props.event.tags.map((item, index) => <span key={index} className="tag"> #{item}</span>)}</div>
           </summary>
           <div className="two">
-            <Carousel imgUrls={images}></Carousel>
+            <Carousel imgUrls={props.event.media.map(i => 'http://localhost:5000/api/todayi/getFile?filename=' + i)}></Carousel>
           </div>
           <div className="three">test
           </div>
