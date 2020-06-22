@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { logout } from '../store/actions/authActions';
+import history from './history'
 axios.defaults.withCredentials = true;
 
 // Headers
@@ -33,6 +33,7 @@ const Auth = {
                 console.log('Token expired');
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
+                history.push('/login');
             } else if(res.data.message === 'Please continue'){
                 console.log('Please continue');
                 this.authenticate();
@@ -42,10 +43,12 @@ const Auth = {
                 this.authenticate();
             } else  {
                 this.signout();
+                history.push('/login');
             }
         }
       ).catch(err => {
         this.signout();
+        history.push('/login');
       });
      return await this.isAuth;
     }
