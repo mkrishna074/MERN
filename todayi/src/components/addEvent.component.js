@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch, shallowEqual} from 'react-redux'
+import {getEventTypes} from '../store/actions/eventActions'
 import axios from 'axios';
 
 const AddEvent = () => {
@@ -6,6 +8,13 @@ const AddEvent = () => {
     const [isError, setIsError] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
+    //store
+    const dispatch = useDispatch();
+    const state = useSelector(state => state, shallowEqual);
+
+    useEffect(() => {
+        dispatch(getEventTypes())
+    }, []);
     const handleOnSubmit = (e) => {
         e.preventDefault();
 
@@ -55,10 +64,14 @@ return(<><div className="component-container">
     <form id ="create-event-form" encType="multipart/form-data">
             <div className="form-group">
                 <label >Category</label>
-                <input type="text" 
+                <select
                         name="category" 
                         className="form-control" 
-                        onChange={(e) => setEvent({...event, category: e.target.value})}/>
+                        onChange={(e) => setEvent({...event, category: e.target.value})}>
+                            {state.event.eventTypes.map(fbb =>
+                                <option key={fbb._id} value={fbb.name}>{fbb.name}</option>
+                                )};
+                            </select>
             </div>
             <div className="form-group">
                 <label >Title</label>

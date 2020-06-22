@@ -43,11 +43,15 @@ const Auth = {
                 this.authenticate();
             } else  {
                 this.signout();
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
                 history.push('/login');
             }
         }
       ).catch(err => {
         this.signout();
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         history.push('/login');
       });
      return await this.isAuth;

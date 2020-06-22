@@ -46,7 +46,19 @@ const eventTypeValidation = (data) => {
     return schema.validate(data);
 }
 
+const menuItemValidation = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().min(5).max(25).required(),
+        isActive: Joi.boolean(),
+        component: Joi.string().min(3).max(25).required()
+    });
+    return schema.validate(data);
+}
+
+
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.eventValidation = eventValidation;
 module.exports.eventTypeValidation = eventTypeValidation;
+module.exports.menuItemValidation = menuItemValidation;

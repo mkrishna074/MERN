@@ -18,7 +18,11 @@ var storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 router.post('/addEvent', verify,  upload.array('media', 12), (req, res, next) =>{
-    console.log(req.body);
+    const validationRes = eventValidation(req.body);
+    if(validationRes.error) {
+      console.log(validationRes.error);
+      return res.status(500).json({message:validationRes.error.details[0].message});
+    }
     const media = req.files.map(f => f.filename);;
     const newEvent = new event({
       title: req.body.title, 
@@ -104,5 +108,24 @@ router.get('/searchEvents', async (req, res) => {
    router.get('/getFile', async (req, res) => {
       res.sendFile(path.resolve(path.resolve(`uploads/${req.query.filename}`)));
    });
+
+  /**
+   * @route   Get api/todayi/getEventTypes
+   * @desc    gets the types
+   * @access  Private
+   */
+
+  router.get('/getEventTypes', verify, async (req, res) => {
+    try {
+      const items = await eventType.find();
+      console.log(items);
+      if (!items) res.status(400).json({ message: 'No items.' });
+  
+      res.status(200).json(items);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: e.message });
+    }
+  });
 
 module.exports = router;

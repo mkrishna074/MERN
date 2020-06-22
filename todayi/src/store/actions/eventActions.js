@@ -6,7 +6,8 @@ import {
   ITEM_ERROR,
   GET_EVENTS,
   SET_PAGENUMBER,
-  SET_SEARCHTEXT
+  SET_SEARCHTEXT,
+  GET_ITEMS
 } from './types';
 
 axios.defaults.withCredentials = true;
@@ -47,12 +48,27 @@ export const addType = (item) => (dispatch, getState) => {
     });
   }
   export const addEventType = (type) => (dispatch, getState) => {
-  
     axios
       .post('http://localhost:5000/api/todayi/addType',type, tokenConfig(getState))
       .then(res =>
         dispatch({
           type: ADDED_ITEM,
+          payload: res.data
+        })
+      )
+      .catch(err => {
+        dispatch({
+          type: ITEM_ERROR,
+          payload: err.response
+        });
+      });
+  };
+  export const getEventTypes = () => (dispatch, getState) => {
+    axios
+      .get('http://localhost:5000/api/todayi/getEventTypes', tokenConfig(getState))
+      .then(res =>
+        dispatch({
+          type: GET_ITEMS,
           payload: res.data
         })
       )

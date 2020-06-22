@@ -6,11 +6,13 @@ import {
     ITEM_ERROR,
     SEARCH_EVENTS,
     SET_PAGENUMBER,
-    SET_SEARCHTEXT
+    SET_SEARCHTEXT,
+    GET_ITEMS
   } from '../actions/types';
   
   const initialState = {
     events: [],
+    eventTypes: [],
     loading: false,
     responseMsg: '',
     searchTxt: '',
@@ -28,6 +30,13 @@ import {
           events: action.payload.events,
           loading: action.payload.isLoading,
           hasMore: action.payload.hasMore,
+        };
+      case GET_ITEMS:
+        console.log(action.payload);
+        return {
+          ...state,
+          eventTypes: action.payload,
+          loading: false
         };
       case DELETE_ITEM:
         return {
@@ -49,7 +58,7 @@ import {
         return {
           ...state,
           isError: true,
-          errorMsg: action.payload?.data?.message.replace(/"/g, ''),
+          errorMsg: action.payload,
           responseMsg: ''
         }
       case SEARCH_EVENTS:
