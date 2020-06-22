@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { logout } from '../store/actions/authActions';
 axios.defaults.withCredentials = true;
 
 // Headers
@@ -17,6 +18,7 @@ const Auth = {
     },
     signout() {
         this.isAuth = false;
+        console.log(this.isAuth);
     },
     async getAuth() {
         const token = localStorage.getItem('token');
@@ -26,22 +28,25 @@ const Auth = {
         axios
       .post('http://localhost:5000/api/auth/refreshToken', config)
       .then(res => {
-          console.log(res.data);
             if(res.data.message === 'Token expired' || res.data.message === 'No cookie'){
+                this.signout();
+                console.log('Token expired');
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
-                console.log('Token expired');
-                this.signout();
             } else if(res.data.message === 'Please continue'){
                 console.log('Please continue');
                 this.authenticate();
-            } else {
+            } else if(res.data.token){
                 localStorage.setItem('token', res.data.token);
-                console.log('else');
+                console.log('token');
                 this.authenticate();
+            } else  {
+                this.signout();
             }
         }
-      );
+      ).catch(err => {
+        this.signout();
+      });
      return await this.isAuth;
     }
 };

@@ -110,7 +110,7 @@ export const logout = () => (dispatch) => {
       dispatch({
         type: LOGOUT_SUCCESS
       });
-      history.push('/');
+      history.push('/login');
     })
 };
 
