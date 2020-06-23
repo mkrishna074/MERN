@@ -117,6 +117,7 @@ router.get('/searchEvents', async (req, res) => {
 
   router.get('/getEventTypes', verify, async (req, res) => {
     try {
+      console.log(req);
       const items = await eventType.find();
       console.log(items);
       if (!items) res.status(400).json({ message: 'No items.' });

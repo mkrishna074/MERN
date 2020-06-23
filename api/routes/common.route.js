@@ -31,7 +31,7 @@ router.get('/menuItems', verify, async (req, res) => {
  * @access  Public
  */
 
-router.post('/addMenuItem', async (req, res) => {
+router.post('/addMenuItem', verify, async (req, res) => {
     try {
         const validationRes = menuItemValidation(req.body);
         if(validationRes.error) {

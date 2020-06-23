@@ -39,6 +39,7 @@ const Auth = {
                 this.authenticate();
             } else if(res.data.token){
                 localStorage.setItem('token', res.data.token);
+                localStorage.setItem('user', res.data.user.name);
                 console.log('token');
                 this.authenticate();
             } else  {

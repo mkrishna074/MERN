@@ -60,7 +60,9 @@ router.post('/register', async (req, res) => {
  * @access  Public
  */
 router.post('/login', async (req, res) => {
+  console.log(req.body);
     const validationRes = loginValidation(req.body);
+    console.log(validationRes);
     if(validationRes.error) return res.status(500).json({
       message:validationRes.error.details[0].message});
     try {
@@ -111,6 +113,7 @@ router.post('/logout', async (req, res) => {
  */
 router.post('/refreshToken', async (req, res) => {
   const token = req.body.headers['x-auth-token'];
+  const userName = req.body.headers['x-auth-user'];
   if(!token) return res.status(401).send('Token expired');
   try {
         var cookie = getcookie(req);
@@ -132,7 +135,10 @@ router.post('/refreshToken', async (req, res) => {
                 else {
                   const freshToken = jwt.sign({_id:decoded1._id}, process.env.PRIVATE_TOKEN, { expiresIn: '2m' });
                   console.log(2);
-                  res.status(200).json({token: freshToken})
+                  res.status(200).json({token: freshToken,
+                    user: {
+                        name: userName
+                    }})
                 }
               })
             }

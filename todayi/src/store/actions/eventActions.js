@@ -106,7 +106,7 @@ export const addType = (item) => (dispatch, getState) => {
   // Setup config/headers and token
 export const tokenConfig = (getState) => {
   // Get token from localstorage
-  const token = getState().auth.token;
+  const token = localStorage.getItem('token');
 
   // Headers
   const config = {

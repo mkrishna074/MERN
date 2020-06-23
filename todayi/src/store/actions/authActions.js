@@ -13,6 +13,7 @@ import {
   REGISTER_FAIL,
   PASSWORD_MATCH
 } from './types';
+axios.defaults.withCredentials = true;
 
 // Check token & load user
 export const loadUser = () => (dispatch, getState) => {
@@ -20,7 +21,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axios
-    .get('/api/auth/user', tokenConfig(getState))
+    .get('/api/auth/user')
     .then(res =>
       dispatch({
         type: USER_LOADED,
@@ -86,6 +87,7 @@ export const login = ({ email, password, referer }) => (
   axios
     .post('http://localhost:5000/api/auth/login', body, config)
     .then(res => {
+      console.log(res.data);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
@@ -106,7 +108,6 @@ export const logout = () => (dispatch) => {
   axios
     .post('http://localhost:5000/api/auth/logout')
     .then(res => {
-      console.log(res);
       dispatch({
         type: LOGOUT_SUCCESS
       });
@@ -114,8 +115,48 @@ export const logout = () => (dispatch) => {
     })
 };
 
+//refresh token
+export const refreshToken = () => (dispatch, getState) => {
+  const config = {
+    headers: {
+        'Content-type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://localhost:5000'
+    }
+};
+const token = localStorage.getItem('token');
+const user = localStorage.getItem('user');
+if (token) {
+    config.headers['x-auth-token'] = token;
+    config.headers['x-auth-user'] = user;
+}
+  axios
+  .post('http://localhost:5000/api/auth/refreshToken', config)
+  .then(res => {
+        if(res.data.message === 'Token expired' || res.data.message === 'No cookie'){
+            console.log('Token expired');
+            dispatch({
+              type: LOGOUT_SUCCESS
+            });
+        } else if(res.data.message === 'Please continue'){
+            console.log('Please continue');
+        } else if(res.data.token){
+          dispatch({
+            type: LOGIN_SUCCESS,
+            payload: res.data
+          });
+        } else  {
+          dispatch({
+            type: LOGOUT_SUCCESS
+          });
+        }
+    }
+  ).catch(err => {
+    dispatch({
+      type: LOGOUT_SUCCESS
+    });
+  });
+}
 
-// Setup config/headers and token
 export const tokenConfig = (getState) => {
   // Get token from localstorage
   const token = getState().auth.token;
