@@ -17,7 +17,9 @@ import {
       case ADD_ITEM:
         return {
           ...state,
-          isLoading: true
+          isLoading: true,
+          errorMsg: '',
+          responseMsg: ''
         };
       case ITEM_ERROR:
         return {

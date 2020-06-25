@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
     })
     const savedUser = await user.save();
     const token = jwt.sign({ id: savedUser._id }, process.env.PRIVATE_TOKEN, {
-        expiresIn: '15m'
+        expiresIn: '1h'
       });
     const refreshToken = jwt.sign({_id:savedUser._id, name:savedUser.name}, process.env.PRIVATE__REFRESH_TOKEN, { expiresIn: '7d' });
     res.cookie('x-refresh-token', refreshToken, {

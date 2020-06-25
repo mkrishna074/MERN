@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux'
-import {addEventType} from '../store/actions/eventActions'
+import {addMenuItem} from '../store/actions/commonActions'
 
 
 const AddEventType = () => {
@@ -13,13 +13,14 @@ const AddEventType = () => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        dispatch(addEventType({name: type, isActive: true}))
+        dispatch(addMenuItem({name: type, isActive: true, component: 'Events'}))
     };
     useEffect(() => {
+        console.log(state.event.responseMsg);
         if(!state.event.isError){
             document.getElementById("create-type-form").reset();
         }
-    }, [state.event.isError]);
+    }, [state.event.responseMsg, state.event.isError]);
 return(<>
     <div className="component-container">
         <form id="create-type-form">
@@ -37,8 +38,8 @@ return(<>
             </button>
         </form>
      </div>
-     <div className="component-container">{ state.event.isError &&<p className="error-msg">{state.event.errorMsg}</p>}</div>
-    <div className="component-container">{ state.event.responseMsg !== '' &&<p className="success-msg">{state.event.responseMsg}</p>}</div> </>
+     <div className="component-container">{ state.event?.isError &&<p className="error-msg">{state.event?.errorMsg}</p>}</div>
+    <div className="component-container">{ state.event?.responseMsg !== '' &&<p className="success-msg">{state.event?.responseMsg}</p>}</div> </>
 );
 }
 export default React.memo(AddEventType);

@@ -4,9 +4,13 @@ import '../app.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import { logout } from '../store/actions/authActions';
 import useSearch from '../hooks/useSearch'
-import {setEvents, setStateSearchTxt} from '../store/actions/eventActions'
+import {setEvents, setStateSearchTxt, getEventTypes} from '../store/actions/eventActions'
 
 export default function Header() {
+    const activeStyle = {
+      color: '#f3704c', background: '#ecf0f1', textDecoration: 'none', 
+      borderRadius: '0.3rem'
+    };
     const dispatch = useDispatch();
     const state = useSelector(state => state);
     const [searchTxt, setSearchTxt] = useState('');
@@ -42,13 +46,14 @@ export default function Header() {
     }, [state.event.pageNumber])
 
     useEffect(() => {
-      dispatch(setStateSearchTxt(searchTxt))
-    }, [searchTxt, dispatch])
+      dispatch(setStateSearchTxt(''));
+      dispatch(getEventTypes);
+    }, [])
 
     const menuToggleClick = () =>{
       setMenuToggle(!menuToggle);
     }
-    return (
+    return (<>
         <header>
             <NavLink to='/' className="logo">testing
             </NavLink>
@@ -63,14 +68,14 @@ export default function Header() {
               <i className="fas fa-user-circle"></i>
               </button>
               {menuToggle && <div className="dropdown-content">
-                {!(state.auth.isAuthenticated) && 
+                {(localStorage.getItem('token') === null) && 
                 <div>
                   <NavLink to='/login'>Login
                   </NavLink>
                   <NavLink to='/register'>Register
                   </NavLink> 
                 </div>}
-                {state.auth.isAuthenticated && 
+                {localStorage.getItem('token') !== null && 
                 <div>
                   <NavLink to='/addtype'>Event Type
                   </NavLink>
@@ -81,5 +86,14 @@ export default function Header() {
               </div>}
             </div>
         </header>
+        {/* <nav>
+        <ul>
+        {state.event.eventTypes.map((i, idx) => { return (<NavLink key={idx} exact to='/' activeStyle={activeStyle}>
+            i
+        </NavLink>)
+      })}
+        </ul>
+        </nav> */}
+        </>
     )
 }

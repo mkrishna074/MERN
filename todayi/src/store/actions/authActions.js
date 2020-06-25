@@ -151,27 +151,9 @@ if (token) {
         }
     }
   ).catch(err => {
+    console.log(err.response);
     dispatch({
       type: LOGOUT_SUCCESS
     });
   });
 }
-
-export const tokenConfig = (getState) => {
-  // Get token from localstorage
-  const token = getState().auth.token;
-
-  // Headers
-  const config = {
-    headers: {
-      'Content-type': 'application/json'
-    }
-  };
-
-  // If token, add to headers
-  if (token) {
-    config.headers['x-auth-token'] = token;
-  }
-
-  return config;
-};

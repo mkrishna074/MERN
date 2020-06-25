@@ -64,6 +64,7 @@ export const addType = (item) => (dispatch, getState) => {
       });
   };
   export const getEventTypes = () => (dispatch, getState) => {
+    console.log('getEventTypes');
     axios
       .get('http://localhost:5000/api/todayi/getEventTypes', tokenConfig(getState))
       .then(res =>
@@ -75,7 +76,7 @@ export const addType = (item) => (dispatch, getState) => {
       .catch(err => {
         dispatch({
           type: ITEM_ERROR,
-          payload: err.response
+          payload: err.response.message
         });
       });
   };
