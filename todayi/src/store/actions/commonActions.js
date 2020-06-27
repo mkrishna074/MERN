@@ -3,7 +3,8 @@ import axios from 'axios';
 import {
     ADDED_ITEM,
     ADD_ITEM,
-    ITEM_ERROR
+    ITEM_ERROR,
+    GET_ITEMS
   } from '../actions/types';
 
   axios.defaults.withCredentials = true;
@@ -30,6 +31,25 @@ import {
         });
       });
   }
+
+  export const getMenuItems = () => (dispatch, getState) => {
+    console.log('menu items dispatch');
+    axios
+      .get('http://localhost:5000/api/common/menuItems', tokenConfig(getState))
+      .then(res =>
+        dispatch({
+          type: GET_ITEMS,
+          payload: res.data
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: ITEM_ERROR,
+          payload: err
+        });
+      });
+  };
 
     // Setup config/headers and token
 export const tokenConfig = (getState) => {

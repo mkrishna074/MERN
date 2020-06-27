@@ -3,6 +3,7 @@
     import axios from 'axios';
   
 
+const TokenConfig = () => {
 axios.interceptors.request.use(function (config) {
   console.log('interceptor');
   let serverCallUrl = new URL(config.url)
@@ -38,4 +39,7 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
   console.log('errorInteceptor');
   return Promise.reject(error);
-});
+})
+}
+
+export default TokenConfig;

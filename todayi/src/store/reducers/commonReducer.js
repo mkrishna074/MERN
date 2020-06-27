@@ -1,7 +1,8 @@
 import {
     ADDED_ITEM,
     ADD_ITEM,
-    ITEM_ERROR
+    ITEM_ERROR,
+    GET_ITEMS
   } from '../actions/types';
 
   const initialState = {
@@ -33,6 +34,13 @@ import {
           ...state,
           isLoading: false,
           responseMsg: action.payload
+        };
+      case GET_ITEMS:
+        console.log(action.payload);
+        return {
+          ...state,
+          menuItems: action.payload,
+          loading: false
         };
       default:
         return state;

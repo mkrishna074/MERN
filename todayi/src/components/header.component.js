@@ -1,17 +1,19 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {NavLink} from 'react-router-dom'
 import '../app.scss'
+import history from '../helpers/history'
 import {useSelector, useDispatch} from 'react-redux'
 import { logout } from '../store/actions/authActions';
 import useSearch from '../hooks/useSearch'
-import {setEvents, setStateSearchTxt, getEventTypes} from '../store/actions/eventActions'
+import {setEvents, setStateSearchTxt} from '../store/actions/eventActions'
+import {getMenuItems} from '../store/actions/commonActions'
 
 export default function Header() {
+  const dispatch = useDispatch();
     const activeStyle = {
       color: '#f3704c', background: '#ecf0f1', textDecoration: 'none', 
       borderRadius: '0.3rem'
     };
-    const dispatch = useDispatch();
     const state = useSelector(state => state);
     const [searchTxt, setSearchTxt] = useState('');
     const [pageNumber, setPagenumber] = useState(1);
@@ -22,7 +24,7 @@ export default function Header() {
       dispatch(logout());
       console.log('logout success')
     }
-    const {isLoading, events, hasMore} = useSearch(state.event.searchTxt, pageNumber);
+    const {isLoading, events, hasMore} = useSearch(searchTxt, pageNumber);
 
     useEffect(() => {
       dispatch(setEvents(events, isLoading, hasMore))
@@ -47,22 +49,22 @@ export default function Header() {
 
     useEffect(() => {
       dispatch(setStateSearchTxt(''));
-      dispatch(getEventTypes);
-    }, [])
+      dispatch(getMenuItems());
+      history.push('/learned')
+    }, [dispatch])
 
     const menuToggleClick = () =>{
       setMenuToggle(!menuToggle);
     }
     return (<>
         <header>
-            <NavLink to='/' className="logo">testing
+            <NavLink to='/' className="logo">today i
             </NavLink>
             <div className="search-box"><i className="fa fa-search"></i><input type="text" 
                 name="type"
                 className="search-input form-control"
-                value={state.event.searchTxt}
                 onChange={e => {setSearchTxt(e.target.value);}}></input></div>
-            <div ref={headerRef} className="dropdown">
+            {false && <div ref={headerRef} className="dropdown">
               <button className="dropbtn ti-user" 
               onClick={menuToggleClick}>
               <i className="fas fa-user-circle"></i>
@@ -84,16 +86,16 @@ export default function Header() {
                   <button onClick={onLogout} className="logout-btn" >Log Out</button>
                 </div>}
               </div>}
-            </div>
+            </div>}
         </header>
-        {/* <nav>
+        <nav>
         <ul>
-        {state.event.eventTypes.map((i, idx) => { return (<NavLink key={idx} exact to='/' activeStyle={activeStyle}>
-            i
+        {state.common.menuItems.map((i, idx) => { return (<NavLink key={idx} exact to={'/'+i.name.toLowerCase()} activeStyle={activeStyle}>
+            {i.name}
         </NavLink>)
       })}
         </ul>
-        </nav> */}
+        </nav>
         </>
     )
 }

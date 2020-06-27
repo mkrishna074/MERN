@@ -1,6 +1,5 @@
 import React from 'react';
 import './app.scss';
-import Nav from './components/nav.component'
 import {Router, Switch, Route} from 'react-router-dom'
 import Events from './components/events.component'
 import AddEvent from './components/addEvent.component'
@@ -19,12 +18,11 @@ function App() {
       <div className="push">
         <div className="head">
           <Header/>
-          <Nav/>
         </div>
       </div>
       <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/works" exact component={Events} />
+          <Route path="/learned" exact component={Events} />
           <Route path="/partners" exact component={Home} />
           <Route path="/price" exact component={Home} />
           <Route path="/contacts" exact component={Events} />

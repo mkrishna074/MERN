@@ -51,7 +51,6 @@ router.get('/searchEvents', async (req, res) => {
                                       {category: {$regex: req.query.q, $options: 'i'}}])         
       .skip(req.query.page - 1)
       .limit(5);
-      console.log(items);
       if (!items) throw Error('No items');
   
       res.status(200).json(items);
@@ -117,9 +116,7 @@ router.get('/searchEvents', async (req, res) => {
 
   router.get('/getEventTypes', verify, async (req, res) => {
     try {
-      console.log(req);
       const items = await eventType.find();
-      console.log(items);
       if (!items) res.status(400).json({ message: 'No items.' });
   
       res.status(200).json(items);

@@ -11,9 +11,9 @@ const verify = require('../middlewares/verifyToken');
  * @access  Public
  */
 
-router.get('/menuItems', verify, async (req, res) => {
+router.get('/menuItems', async (req, res) => {
     try {
-      console.log(req.query);
+      console.log('menuItems');
       const items = await menuItem.find();
       console.log(items);
       if (!items) res.status(400).json({ message: 'No items.' });
