@@ -37,6 +37,9 @@ const AddEvent = () => {
         for (const key of Object.keys(event.tags)) {
             formData.append('tags', event.tags[key]);
         }
+        for (const key of Object.keys(event.references)) {
+            formData.append('references', event.references[key]);
+        }
         console.log(formData);
         axios
         .post('http://localhost:5000/api/todayi/addEvent', formData, config)
@@ -59,6 +62,14 @@ const AddEvent = () => {
         }
         return formData;
     }, new FormData());
+    const eventTypeOptions = () => {
+        let items = [];
+        items.push(<option key="notSelected" value="">--Select--</option>);
+        state.event.eventTypes.map(cat =>
+            items.push(<option key={cat._id} value={cat.name}>{cat.name}</option>)
+        )
+        return items;
+    }
     
 return(<><div className="component-container">
     <form id ="create-event-form" encType="multipart/form-data">
@@ -67,10 +78,8 @@ return(<><div className="component-container">
                 <select
                         name="category" 
                         className="form-control" 
-                        onChange={(e) => setEvent({...event, category: e.target.value})}>
-                            {state.event.eventTypes.map(fbb =>
-                                <option key={fbb._id} value={fbb.name}>{fbb.name}</option>
-                                )};
+                        onChange={(e) => {setEvent({...event, category: e.target.value}); console.log(e.target.value)}}>
+                            {eventTypeOptions()}
                             </select>
             </div>
             <div className="form-group">
@@ -93,6 +102,13 @@ return(<><div className="component-container">
                         name="tags" 
                         className="form-control" 
                         onChange={(e) => setEvent({...event, tags: e.target.value.split(',')})}/>
+            </div>
+            <div className="form-group">
+                <label>References</label>
+                <input type="text" 
+                        name="tags" 
+                        className="form-control" 
+                        onChange={(e) => setEvent({...event, references: e.target.value.split(',')})}/>
             </div>
             <div className="form-group">
                 <label>Media</label>

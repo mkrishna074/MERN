@@ -17,19 +17,25 @@ var storage = multer.diskStorage({
 })
 const upload = multer({storage: storage});
 
-router.post('/addEvent', verify,  upload.array('media', 12), (req, res, next) =>{
-    const validationRes = eventValidation(req.body);
+const validateEvent = (req, res, next) => {
+  console.log(req);
+  const validationRes = eventValidation(req.body);
     if(validationRes.error) {
       console.log(validationRes.error);
       return res.status(500).json({message:validationRes.error.details[0].message});
     }
+  return next();
+};
+
+router.post('/addEvent', verify, validateEvent, upload.array('media', 12), async (req, res, next) =>{
     const media = req.files.map(f => f.filename);;
     const newEvent = new event({
       title: req.body.title, 
       category: req.body.category,
       media: media, 
-      highlights: req.body.highlights,
-      tags: req.body.tags
+      highlights: req.body.highlights.map(x => x.trim()),
+      tags: req.body.tags.map(x => x.trim()),
+      references: req.body.references.map(x => x.trim())
     });
     newEvent.save()
     .then(() => res.json('Event added!'))

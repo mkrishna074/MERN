@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 const {registerValidation, loginValidation} = require('../validation')
 const verify = require('../middlewares/verifyToken');
+const tokenExpiration = '1h';
+const refreshTokenExpiration = '7d';
 
 /**
  * @route   POST api/users
@@ -73,8 +75,8 @@ router.post('/login', async (req, res) => {
         if(!validPassword) return res.status(500).json({
           message:'Invalid password!'});
 
-        const token = jwt.sign({_id:user._id}, process.env.PRIVATE_TOKEN, { expiresIn: '2m' });
-        const refreshToken = jwt.sign({_id:user._id, name:user.name}, process.env.PRIVATE__REFRESH_TOKEN, { expiresIn: '5m' });
+        const token = jwt.sign({_id:user._id}, process.env.PRIVATE_TOKEN, { expiresIn: '1h' });
+        const refreshToken = jwt.sign({_id:user._id, name:user.name}, process.env.PRIVATE__REFRESH_TOKEN, { expiresIn: '7d' });
         if (!token) throw Error('Couldnt sign the token');
         res.cookie('x-refresh-token', refreshToken, {
           httpOnly: true
@@ -133,7 +135,7 @@ router.post('/refreshToken', async (req, res) => {
                   res.status(200).json({message : 'Token expired'})
                 }
                 else {
-                  const freshToken = jwt.sign({_id:decoded1._id}, process.env.PRIVATE_TOKEN, { expiresIn: '2m' });
+                  const freshToken = jwt.sign({_id:decoded1._id}, process.env.PRIVATE_TOKEN, { expiresIn: '1h' });
                   console.log(2);
                   res.status(200).json({token: freshToken,
                     user: {

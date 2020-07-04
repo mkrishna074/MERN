@@ -24,6 +24,9 @@ const eventSchema = new mongoose.Schema({
     }],
     media: [{
         type: String
+    }],
+    references: [{
+        type: String
     }]
 },
 {

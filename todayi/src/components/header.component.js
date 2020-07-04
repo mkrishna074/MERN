@@ -50,7 +50,6 @@ export default function Header() {
     useEffect(() => {
       dispatch(setStateSearchTxt(''));
       dispatch(getMenuItems());
-      history.push('/learned')
     }, [dispatch])
 
     const menuToggleClick = () =>{
@@ -64,7 +63,7 @@ export default function Header() {
                 name="type"
                 className="search-input form-control"
                 onChange={e => {setSearchTxt(e.target.value);}}></input></div>
-            {false && <div ref={headerRef} className="dropdown">
+            {true && <div ref={headerRef} className="dropdown">
               <button className="dropbtn ti-user" 
               onClick={menuToggleClick}>
               <i className="fas fa-user-circle"></i>
