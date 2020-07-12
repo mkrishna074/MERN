@@ -1,11 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {NavLink} from 'react-router-dom'
 import '../app.scss'
-import history from '../helpers/history'
 import {useSelector, useDispatch} from 'react-redux'
 import { logout } from '../store/actions/authActions';
 import useSearch from '../hooks/useSearch'
-import {setEvents, setStateSearchTxt} from '../store/actions/eventActions'
+import {setEvents} from '../store/actions/eventActions'
 import {getMenuItems} from '../store/actions/commonActions'
 
 export default function Header() {
@@ -48,7 +47,6 @@ export default function Header() {
     }, [state.event.pageNumber])
 
     useEffect(() => {
-      dispatch(setStateSearchTxt(''));
       dispatch(getMenuItems());
     }, [dispatch])
 

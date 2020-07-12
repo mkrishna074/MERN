@@ -30,8 +30,8 @@ const loginValidation = (data) => {
 
 const eventValidation = (data) => {
     const schema = Joi.object({
-        category: Joi.string().min(6).required(),
-        title: Joi.string().min(10).required(),
+        category: Joi.string().min(4).required(),
+        title: Joi.string().min(10).max(255).required(),
         highlights: Joi.array().min(1).required().items(Joi.string()),
         tags: Joi.array().min(1).required().items(Joi.string()),
         references: Joi.array().items(Joi.string())

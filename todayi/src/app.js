@@ -23,6 +23,9 @@ function App() {
       <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/learned" exact component={Events} />
+          <Route path="/built" exact component={Events} />
+          <Route path="/realized" exact component={Events} />
+          <Route path="/remembered" exact component={Events} />
           <Route path="/partners" exact component={Home} />
           <Route path="/price" exact component={Home} />
           <Route path="/contacts" exact component={Events} />

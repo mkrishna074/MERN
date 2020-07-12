@@ -98,7 +98,7 @@ export const addType = (item) => (dispatch, getState) => {
     })
   };
   export const setStateSearchTxt = (searchTxt) => (dispatch) => {
-    console.log('test1');
+    console.log(searchTxt);
     dispatch({
       type: SET_SEARCHTEXT,
       payload: searchTxt

@@ -27,7 +27,12 @@ const validateEvent = (req, res, next) => {
   return next();
 };
 
-router.post('/addEvent', verify, validateEvent, upload.array('media', 12), async (req, res, next) =>{
+router.post('/addEvent', verify, upload.array('media', 12), async (req, res, next) =>{
+    const validationRes = eventValidation(req.body);
+    if(validationRes.error) {
+      console.log(validationRes.error);
+      return res.status(500).json({message:validationRes.error.details[0].message});
+    }
     const media = req.files.map(f => f.filename);;
     const newEvent = new event({
       title: req.body.title, 

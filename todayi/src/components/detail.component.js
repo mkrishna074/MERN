@@ -11,7 +11,8 @@ const Detail = React.forwardRef((props, ref) => {
           <div className="two">
             <Carousel imgUrls={props.event.media.map(i => 'http://localhost:5000/api/todayi/getFile?filename=' + i)}></Carousel>
           </div>
-          <div className="three">test
+          <div className="three">
+          {props.event.references.map((item, index) => <a target="_blank" rel="noopener noreferrer" href={'https://'+item}> https://{item}</a>)}
           </div>
           </details></>);
 })

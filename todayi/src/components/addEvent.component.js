@@ -28,9 +28,6 @@ const AddEvent = () => {
             config.headers['x-auth-token'] = localStorage.getItem('token');
           }
         let formData = getFormData(event);
-        for (const key of Object.keys(event.media)) {
-            formData.append('media', event.media[key]);
-        }
         for (const key of Object.keys(event.highlights)) {
             formData.append('highlights', event.highlights[key]);
         }
@@ -39,6 +36,9 @@ const AddEvent = () => {
         }
         for (const key of Object.keys(event.references)) {
             formData.append('references', event.references[key]);
+        }
+        for (const key of Object.keys(event.media)) {
+            formData.append('media', event.media[key]);
         }
         console.log(formData);
         axios

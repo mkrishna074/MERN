@@ -1,10 +1,14 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux'
 import Detail from './detail.component'
 import {withRouter} from 'react-router-dom'
-import {setPageNumber, setStateSearchTxt} from '../store/actions/eventActions'
+import {setPageNumber, setEvents} from '../store/actions/eventActions'
+import { useLocation } from 'react-router-dom'
+import useSearch from '../hooks/useSearch'
 
 const Events = props => {
+  let location = useLocation();
+  const [pageNumber, setPagenumber] = useState(1);
   const state = useSelector(state => state, shallowEqual);
   const dispatch = useDispatch();
   const observer = useRef();
@@ -22,9 +26,11 @@ const Events = props => {
     if(node) observer.current.observe(node);
     //console.log(node);
   }
+  const {isLoading, events, hasMore} = useSearch(location.pathname.replace(/\//g, ''), pageNumber);
+
   useEffect(() => {
-    dispatch(setStateSearchTxt(''))
-  }, [dispatch])
+    dispatch(setEvents(events, isLoading, hasMore))
+  }, [events, dispatch, isLoading, hasMore])
   return (<>
   {state.event.events.slice(0, 10).map((i, idx) => {
         return(<div className="flex-container" key = {idx}>
