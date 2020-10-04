@@ -61,7 +61,7 @@ export default function Header() {
                 name="type"
                 className="search-input form-control"
                 onChange={e => {setSearchTxt(e.target.value);}}></input></div>
-            {true && <div ref={headerRef} className="dropdown">
+            {false ? <div ref={headerRef} className="dropdown">
               <button className="dropbtn ti-user" 
               onClick={menuToggleClick}>
               <i className="fas fa-user-circle"></i>
@@ -83,7 +83,7 @@ export default function Header() {
                   <button onClick={onLogout} className="logout-btn" >Log Out</button>
                 </div>}
               </div>}
-            </div>}
+            </div>:<div></div>}
         </header>
         <nav>
         <ul>

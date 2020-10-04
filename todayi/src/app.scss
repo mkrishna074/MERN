@@ -178,7 +178,6 @@ label {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  border: solid $harderyolk;
   border-width: 1px;
   border-radius: 0.3rem;
   padding: 0.3rem;
@@ -314,5 +313,8 @@ label {
   }
   .ti-btn{
     padding: 0.2rem;
+  }
+  .flex-container{
+    margin-top: 6rem;
   }
 }
