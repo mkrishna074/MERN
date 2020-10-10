@@ -30,6 +30,16 @@ $clouds: #ecf0f1;
     color: $harderyolk;
   }
 
+  p{
+    font-weight: bold;
+    overflow-wrap: break-word;
+      word-wrap: break-word;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      hyphens: auto;
+  }
+
   @media screen and (max-width: 768px) {
     .carousel-arrow{
       top: 35vh;

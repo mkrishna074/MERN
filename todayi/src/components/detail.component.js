@@ -9,7 +9,7 @@ const Detail = React.forwardRef((props, ref) => {
             <div  className="one-two">{props.event.tags.map((item, index) => <span key={index} className="tag"> #{item}</span>)}</div>
           </summary>
           <div className="two">
-            <Carousel imgUrls={props.event.media.map(i => 'http://localhost:5000/api/todayi/getFile?filename=' + i)}></Carousel>
+            <Carousel highlights={props.event.highlights} imgUrls={props.event.media.map(i => '/api/todayi/getFile?filename=' + i)}></Carousel>
           </div>
           <div className="three">
           {props.event.references.map((item, index) => <a target="_blank" rel="noopener noreferrer" href={'https://'+item}> https://{item}</a>)}

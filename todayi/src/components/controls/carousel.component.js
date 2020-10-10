@@ -25,6 +25,7 @@ return(<>
           direction="left"
           clickFunction={ previousSlide }
           glyph="&#60;"/>
+    <div><p className="bold">{props.highlights[currentIndex]}</p></div>
     <ImageSlide url={ props.imgUrls[currentIndex] }/>
     <Arrow
           direction="right"
