@@ -1,5 +1,14 @@
 const mongoose = require('mongoose');
 
+const mediaType = new Object({
+    address:{
+        type: String,
+    },
+    type:{
+        type: String,
+    }
+})
+
 const eventSchema = new mongoose.Schema({
     category: {
         type: String,
@@ -22,7 +31,7 @@ const eventSchema = new mongoose.Schema({
         trim: true,
     }],
     media: [{
-        type: String
+        type: mediaType
     }],
     references: [{
         type: String

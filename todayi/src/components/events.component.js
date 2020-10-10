@@ -17,14 +17,11 @@ const Events = props => {
     if(state.event.loading) return
     if(observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(e =>{
-      // console.log(state.event.hasMore);
       if(e[0].isIntersecting && state.event.hasMore){
-        // console.log('inside if');
         dispatch(setPageNumber())
       }
     });
     if(node) observer.current.observe(node);
-    //console.log(node);
   }
   const {isLoading, events, hasMore} = useSearch(location.pathname.replace(/\//g, ''), pageNumber);
 

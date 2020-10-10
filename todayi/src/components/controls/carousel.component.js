@@ -21,13 +21,13 @@ const previousSlide = () => {
   }
 
 return(<>
-        <Arrow
+        <Arrow key={(currentIndex + props.idx + 100) * 10}
           direction="left"
           clickFunction={ previousSlide }
           glyph="&#60;"/>
     <div><p className="bold">{props.highlights[currentIndex]}</p></div>
     <ImageSlide url={ props.imgUrls[currentIndex] }/>
-    <Arrow
+    <Arrow key={(currentIndex + props.idx + 100) * -10}
           direction="right"
           clickFunction={ nextSlide }
           glyph="&#62;"/>
@@ -41,7 +41,8 @@ const ImageSlide = ({ url }) => {
       backgroundPosition: 'center',
       height: '40vh',
       width: '90vw',
-      margin: '0.5rem'
+      marginLeft: 'auto',
+      marginRight: 'auto'
     };
     return (
       <div className="image-slide" style={styles}></div>
