@@ -4,7 +4,8 @@
   "description": "Gets, sets data",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix todayi && npm run build --prefix todayi"
   },
   "author": "EmKay",
   "license": "ISC",

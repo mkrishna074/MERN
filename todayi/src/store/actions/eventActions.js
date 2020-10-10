@@ -18,7 +18,7 @@ export const addType = (item) => (dispatch, getState) => {
       console.log(body);
   
     axios
-      .post('http://localhost:5000/api/todayi/addType',body, tokenConfig(getState))
+      .post('/api/todayi/addType',body, tokenConfig(getState))
       .then(res =>
         dispatch({
           type: ADDED_ITEM,
@@ -34,7 +34,7 @@ export const addType = (item) => (dispatch, getState) => {
 
   export const getEvents = (query) => (dispatch, state) => {
     axios
-    .get('http://localhost:5000/api/todayi/getEvents',query)
+    .get('/api/todayi/getEvents',query)
     .then(res =>
       dispatch({
         type: GET_EVENTS,
@@ -49,7 +49,7 @@ export const addType = (item) => (dispatch, getState) => {
   }
   export const addEventType = (type) => (dispatch, getState) => {
     axios
-      .post('http://localhost:5000/api/todayi/addType',type, tokenConfig(getState))
+      .post('/api/todayi/addType',type, tokenConfig(getState))
       .then(res =>
         dispatch({
           type: ADDED_ITEM,
@@ -66,7 +66,7 @@ export const addType = (item) => (dispatch, getState) => {
   export const getEventTypes = () => (dispatch, getState) => {
     console.log('getEventTypes');
     axios
-      .get('http://localhost:5000/api/todayi/getEventTypes', tokenConfig(getState))
+      .get('/api/todayi/getEventTypes', tokenConfig(getState))
       .then(res =>
         dispatch({
           type: GET_ITEMS,

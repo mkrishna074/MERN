@@ -17,7 +17,7 @@ import {
     const body = JSON.stringify(item);
     console.log(body);
     axios
-      .post('http://localhost:5000/api/common/addMenuItem',body, tokenConfig(getState))
+      .post('/api/common/addMenuItem',body, tokenConfig(getState))
       .then(res =>
         dispatch({
           type: ADDED_ITEM,
@@ -35,7 +35,7 @@ import {
   export const getMenuItems = () => (dispatch, getState) => {
     console.log('menu items dispatch');
     axios
-      .get('http://localhost:5000/api/common/menuItems', tokenConfig(getState))
+      .get('/api/common/menuItems', tokenConfig(getState))
       .then(res =>
         dispatch({
           type: GET_ITEMS,
@@ -59,8 +59,7 @@ export const tokenConfig = (getState) => {
   // Headers
   const config = {
     headers: {
-      'Content-type': 'application/json',
-       'Access-Control-Allow-Origin': 'https://localhost:5000'
+      'Content-type': 'application/json'
     }
   };
 

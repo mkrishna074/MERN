@@ -8,6 +8,15 @@ const commonRouter = require('./routes/common.route');
 
 require('dotenv').config();
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('todayi/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'todayi', 'build', 'index.html'));
+  })
+}
+
+
 const app = express();
 const port = process.env.port || 5000;
 

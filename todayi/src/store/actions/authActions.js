@@ -54,7 +54,7 @@ export const register = ({ name, email, password, confirmPassword }) => (
   }
 
   axios
-    .post('http://localhost:5000/api/auth/register', { name, email, password }, config)
+    .post('/api/auth/register', { name, email, password }, config)
     .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
@@ -85,7 +85,7 @@ export const login = ({ email, password, referer }) => (
   const body = JSON.stringify({ email, password });
 
   axios
-    .post('http://localhost:5000/api/auth/login', body, config)
+    .post('/api/auth/login', body, config)
     .then(res => {
       console.log(res.data);
       dispatch({
@@ -106,7 +106,7 @@ export const login = ({ email, password, referer }) => (
 // Logout User
 export const logout = () => (dispatch) => {
   axios
-    .post('http://localhost:5000/api/auth/logout')
+    .post('/api/auth/logout')
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS
@@ -130,7 +130,7 @@ if (token) {
     config.headers['x-auth-user'] = user;
 }
   axios
-  .post('http://localhost:5000/api/auth/refreshToken', config)
+  .post('/api/auth/refreshToken', config)
   .then(res => {
         if(res.data.message === 'Token expired' || res.data.message === 'No cookie'){
             console.log('Token expired');
