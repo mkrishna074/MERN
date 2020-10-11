@@ -31,7 +31,7 @@ const eventSchema = new mongoose.Schema({
         trim: true,
     }],
     media: [{
-        type: mediaType
+        type: String
     }],
     references: [{
         type: String

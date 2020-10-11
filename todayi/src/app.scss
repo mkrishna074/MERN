@@ -204,6 +204,12 @@ label {
   padding: 0.5rem;
   flex-basis: calc(var(--width) / var(--columns) * 100%);
 }
+.one{
+  --width: 1;
+}
+.ten{
+  --width: 10;
+}
 .half{
   --width: 6;
 }
@@ -231,6 +237,16 @@ label {
 .refs{
   word-break: break-all;;
 }
+a.refs {
+  display: inline-block;
+  transition: .3s;
+  font-weight:bold;
+  text-decoration:none;
+  }
+a.refs:hover {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  }
 @keyframes errorMsgFade {
   from{
   opacity: 1;

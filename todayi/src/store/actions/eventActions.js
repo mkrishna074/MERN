@@ -35,12 +35,12 @@ export const addType = (item) => (dispatch, getState) => {
   export const getEvents = (query) => (dispatch, state) => {
     axios
     .get('/api/todayi/getEvents',query)
-    .then(res =>
+    .then(res => {console.log(res.data);
       dispatch({
         type: GET_EVENTS,
         payload: res.data
       })
-    )
+    })
     .catch(err => {
       dispatch({
         type: ITEM_ERROR

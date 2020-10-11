@@ -20,18 +20,22 @@ const previousSlide = () => {
     setCurrentIndex(index);
   }
 
-return(<>
-        <Arrow key={(currentIndex + props.idx + 100) * 10}
+return(<div className="detail-container">
+  <div className="one column">
+        <Arrow
           direction="left"
           clickFunction={ previousSlide }
           glyph="&#60;"/>
+          </div>
+          <div className="ten column">
     <div><p className="bold">{props.highlights[currentIndex]}</p></div>
-    <ImageSlide url={ props.imgUrls[currentIndex] }/>
-    <Arrow key={(currentIndex + props.idx + 100) * -10}
+    <ImageSlide url={ props.imgUrls[currentIndex] }/></div>
+    <div className="one column">
+    <Arrow
           direction="right"
           clickFunction={ nextSlide }
-          glyph="&#62;"/>
-        </>)
+          glyph="&#62;"/></div>
+        </div>)
 }
 
 const ImageSlide = ({ url }) => {

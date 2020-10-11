@@ -30,8 +30,8 @@ const Events = props => {
   }, [events, dispatch, isLoading, hasMore])
   return (<>
   {state.event.events.slice(0, 10).map((i, idx) => {
-        return(<div className="flex-container" key = {idx}>
-            <Detail {...state.event.events.length === idx + 1 && state.event?.events?.length > 5 ? {ref:lastEvent}:null} idx = {idx} event = {i}></Detail>
+        return(<div className="flex-container" key = {i._id}>
+            <Detail {...state.event.events.length === idx + 1 && state.event?.events?.length > 5 ? {ref:lastEvent}:null} idx = {i._id} event = {i}></Detail>
         </div>)
   })}
     <div className="component-container">{ state.event?.loading &&<p>Loading...</p>}</div>

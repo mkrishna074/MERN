@@ -6,6 +6,7 @@ import { logout } from '../store/actions/authActions';
 import useSearch from '../hooks/useSearch'
 import {setEvents} from '../store/actions/eventActions'
 import {getMenuItems} from '../store/actions/commonActions'
+import{ProtectedRoute} from '../helpers/protectedRoute'
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -76,10 +77,10 @@ export default function Header() {
                 </div>}
                 {localStorage.getItem('token') !== null && 
                 <div>
-                  <NavLink to='/addtype'>Event Type
-                  </NavLink>
-                  <NavLink to='/addevent'>Event
-                  </NavLink>
+                  <ProtectedRoute to='/addtype'>Event Type
+                  </ProtectedRoute>
+                  <ProtectedRoute to='/addevent'>Event
+                  </ProtectedRoute>
                   <button onClick={onLogout} className="logout-btn" >Log Out</button>
                 </div>}
               </div>}

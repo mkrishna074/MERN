@@ -13,10 +13,10 @@ const Detail = React.forwardRef((props, ref) => {
             <Carousel highlights={props.event.highlights} idx={props.idx} imgUrls={props.event.media.map(i => '/api/todayi/getFile?filename=' + i)}></Carousel>
           </main>
           <main className="ref-content column"> <div><p> References</p> </div>
-          {props.event.references.map((item, index) => <div><a target="_blank" rel="noopener noreferrer" className="refs" href={'https://'+item}> https://{item}</a></div>)}
+          {props.event.references.map((item, index) => <div key={index}><a target="_blank" rel="noopener noreferrer" className="refs" href={'https://'+item}> https://{item}</a></div>)}
           </main>
           <aside className="misc-content column"> <div><p> Misc.</p> </div>
-          {props.event.references.map((item, index) => <div><a target="_blank" rel="noopener noreferrer" className="refs" href={'https://'+item}> https://{item}</a></div>)}
+          {props.event.references.map((item, index) => <div key={index}><a target="_blank" rel="noopener noreferrer" className="refs" href={'https://'+item}> https://{item}</a></div>)}
           </aside>
           </div>
           </details>);
