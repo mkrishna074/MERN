@@ -45,7 +45,7 @@ summary:before {
   margin-right: 5px;
 }
 summary:focus {
-  outline: 1px solid $hardyolk;
+  outline: none; // 1px solid $hardyolk;
 }
 .logo{
   font-family: 'ti logo';
@@ -188,14 +188,13 @@ label {
   justify-content: space-between;
   padding: 0.5rem;
   background: $clouds;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
 }
 
 .detail-container{
   --columns: 12;
   display: flex;
   flex-wrap: wrap;
-  max-width: 95vw;
   text-align: center;
 }
 .column {
@@ -204,11 +203,8 @@ label {
   padding: 0.5rem;
   flex-basis: calc(var(--width) / var(--columns) * 100%);
 }
-.one{
-  --width: 1;
-}
-.ten{
-  --width: 10;
+.full{
+  --width: 12;
 }
 .half{
   --width: 6;
@@ -225,7 +221,7 @@ label {
   // border: $clouds 0.0125rem solid;
 }
 .ref-content {
-  --width: 6;
+  --width: 12;
   height: 10rem;
   // border: $clouds 0.0125rem solid;
 }
@@ -247,16 +243,16 @@ a.refs:hover {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
   }
-@keyframes errorMsgFade {
-  from{
-  opacity: 1;
-  }
-  to{
-  opacity: 0;
-  }
+details[open] summary ~ * {
+  animation: sweep .5s ease-in-out;
 }
 
-.dropdown {
+@keyframes sweep {
+  0%    {opacity: 0; margin-left: -10px}
+  100%  {opacity: 1; margin-left: 0px}
+}
+
+/* .dropdown {
   position: relative;
   display: inline-block;
 }
@@ -288,7 +284,7 @@ a.refs:hover {
 
 .fa-user-circle{
   font-size: 2rem ;
-}
+} */
 
 .search-box{
   position: relative;
@@ -360,7 +356,7 @@ a.refs:hover {
     height: 25rem;
   }
   .ref-content{
-    height: 15rem;
+    height: 10rem;
     max-width: 95vw;
   }
   .misc-content{

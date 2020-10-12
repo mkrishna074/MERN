@@ -15,9 +15,9 @@ const Detail = React.forwardRef((props, ref) => {
           <main className="ref-content column"> <div><p> References</p> </div>
           {props.event.references.map((item, index) => <div key={index}><a target="_blank" rel="noopener noreferrer" className="refs" href={'https://'+item}> https://{item}</a></div>)}
           </main>
-          <aside className="misc-content column"> <div><p> Misc.</p> </div>
+          {/* <aside className="misc-content column"> <div><p> Misc.</p> </div>
           {props.event.references.map((item, index) => <div key={index}><a target="_blank" rel="noopener noreferrer" className="refs" href={'https://'+item}> https://{item}</a></div>)}
-          </aside>
+          </aside> */}
           </div>
           </details>);
 })

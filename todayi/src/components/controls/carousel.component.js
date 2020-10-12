@@ -21,20 +21,18 @@ const previousSlide = () => {
   }
 
 return(<div className="detail-container">
-  <div className="one column">
+  <div className="full column">
         <Arrow
           direction="left"
           clickFunction={ previousSlide }
           glyph="&#60;"/>
-          </div>
-          <div className="ten column">
     <div><p className="bold">{props.highlights[currentIndex]}</p></div>
-    <ImageSlide url={ props.imgUrls[currentIndex] }/></div>
-    <div className="one column">
+    <ImageSlide url={ props.imgUrls[currentIndex] }/>
     <Arrow
           direction="right"
           clickFunction={ nextSlide }
-          glyph="&#62;"/></div>
+          glyph="&#62;"/>
+        </div>
         </div>)
 }
 
@@ -42,11 +40,7 @@ const ImageSlide = ({ url }) => {
     const styles = {
       backgroundImage: `url(${url})`, 
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      height: '40vh',
-      width: '90vw',
-      marginLeft: 'auto',
-      marginRight: 'auto'
+      backgroundPosition: 'center'
     };
     return (
       <div className="image-slide" style={styles}></div>

@@ -2,53 +2,47 @@ $harderyolk: #f3704c;
 $clouds: #ecf0f1;
 
 .leftBtn{
-    left: 1vw;
-  }
-  
-  .rightBtn{
-    right: 1vw;
-  }
+  left: 0;
+}
+.rightBtn{
+  right: 0;
+}
 
-  .carousel-arrow:focus {
-    outline: none;
-  }
+.carousel-arrow:focus {
+  outline: none;
+}
 
-  .carousel-arrow {
-    position: absolute;
-    color: $clouds;
-    cursor: pointer;
-    background: none;
-    border-radius: 50%;
-    font-size: 1.6rem;
-    height: 2rem;
-    width: 2rem;
-  }
-  
-  .carousel-arrow:hover {
-    background-color: $clouds;
-    color: $harderyolk;
-  }
+.carousel-arrow {
+  position: absolute;
+  color: $clouds;
+  cursor: pointer;
+  background: none;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  height: 2rem;
+  width: 2rem;
+}
 
-  p{
-    font-weight: bold;
-    overflow-wrap: break-word;
-      word-wrap: break-word;
-      -webkit-hyphens: auto;
-      -ms-hyphens: auto;
-      -moz-hyphens: auto;
-      hyphens: auto;
-  }
+.carousel-arrow:hover {
+  background-color: $clouds;
+  color: $harderyolk;
+}
 
+p{
+  font-weight: bold;
+  overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.image-slide{
+  height: 40vh;
+  margin: 0 auto;
+}
   @media screen and (max-width: 768px) {
-    .carousel-arrow{
-      top: 35vh;
-    }
-    .leftBtn{
-      left: 0.05rem
-    }
-    .rightBtn{
-      right: 0.05rem
-    }
   }
 
 
