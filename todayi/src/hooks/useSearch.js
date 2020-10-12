@@ -17,7 +17,7 @@ export default function useSearch(query, pageNumber) {
         let cancel;
         axios({
             method: 'GET',
-            url: 'http://localhost:5000/api/todayi/searchEvents',
+            url: '/api/todayi/searchEvents',
             params: {q: query, page: pageNumber},
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

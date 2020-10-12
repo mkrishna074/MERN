@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix todayi",
-    "start": "nodemon server.js",
+    "server": "nodemon server.js",
     "client": "npm start --prefix todayi",
-    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix todayi && npm run build --prefix todayi"
   },
   "author": "EmKay",

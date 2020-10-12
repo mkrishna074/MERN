@@ -32,9 +32,9 @@ export const addType = (item) => (dispatch, getState) => {
       });
   };
 
-  export const getEvents = (query) => (dispatch, state) => {
+  export const getEvents = (query) => (dispatch, getState) => {
     axios
-    .get('/api/todayi/getEvents',query)
+    .get('/api/todayi/getEvents',query, tokenConfig(getState))
     .then(res => {console.log(res.data);
       dispatch({
         type: GET_EVENTS,
@@ -112,8 +112,7 @@ export const tokenConfig = (getState) => {
   // Headers
   const config = {
     headers: {
-      'Content-type': 'application/json',
-       'Access-Control-Allow-Origin': 'https://localhost:5000'
+      'Content-type': 'application/json'
     }
   };
 

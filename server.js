@@ -8,27 +8,10 @@ const commonRouter = require('./routes/common.route');
 
 require('dotenv').config();
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('todayi/build'));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'todayi', 'build', 'index.html'));
-  })
-}
-
-
 const app = express();
 const port = process.env.port || 5000;
 
-const origin = "http://localhost:3000"
-app.use(
-  cors({
-    credentials: true,
-    'Access-Control-Allow-Credentials' : true,
-    'Access-Control-Allow-Origin': 'http://localhost:3000',
-    origin
-  }),
-);
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -47,3 +30,11 @@ app.use('/api/common', commonRouter);
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
+
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('todayi/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'todayi', 'build', 'index.html'));
+  })
+}
