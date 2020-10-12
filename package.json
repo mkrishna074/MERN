@@ -4,7 +4,10 @@
   "description": "Gets, sets data",
   "main": "server.js",
   "scripts": {
+    "client-install": "npm install --prefix todayi",
     "start": "nodemon server.js",
+    "client": "npm start --prefix todayi",
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix todayi && npm run build --prefix todayi"
   },
   "author": "EmKay",
@@ -20,7 +23,8 @@
     "joi-password-complexity": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.16",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "concurrently": "5.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
