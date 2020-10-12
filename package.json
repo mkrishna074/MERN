@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Gets, sets data",
   "main": "server.js",
+  "engines": {
+    "npm": "6.14.6",
+    "node": "12.18.4"
+  },
   "scripts": {
     "client-install": "npm install --prefix todayi",
     "start": "node server.js",
