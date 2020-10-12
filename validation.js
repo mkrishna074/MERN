@@ -1,4 +1,4 @@
-const Joi = require('@hapi/Joi');
+const Joi = require('Joi');
 const passwordComplexity = require("joi-password-complexity");
 
 const complexityOptions = {
