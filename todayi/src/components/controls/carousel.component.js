@@ -22,18 +22,18 @@ const previousSlide = () => {
 
 return(<div className="detail-container">
   <div className="full column">
-        <Arrow
-          direction="left"
-          clickFunction={ previousSlide }
-          glyph="&#60;"/>
-    <div><p className="bold">{props.highlights[currentIndex]}</p></div>
+    <div><p>{props.highlights[currentIndex]}</p></div>
+    <Arrow
+      direction="left"
+      clickFunction={ previousSlide }
+      glyph="&#60;"/>
     <ImageSlide url={ props.imgUrls[currentIndex] }/>
     <Arrow
           direction="right"
           clickFunction={ nextSlide }
           glyph="&#62;"/>
         </div>
-        </div>)
+    </div>)
 }
 
 const ImageSlide = ({ url }) => {
