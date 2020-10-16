@@ -15,23 +15,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// connect to DB
-var options = { 
-  server: { 
-    socketOptions: { 
-      keepAlive: 300000, connectTimeoutMS: 30000 
-    } 
-  }, 
-  replset: { 
-    socketOptions: { 
-      keepAlive: 300000, 
-      connectTimeoutMS : 30000 
-    } 
-  } 
-};
-
+   // DB connection
 const dbConn = mongoose.connect(process.env.DB_CONNECTION, 
-    { ...options, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
     () => console.log('Connected to DB.'));
 
     // test endpoint
