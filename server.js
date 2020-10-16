@@ -15,18 +15,36 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// connect to DB
+var options = { 
+  server: { 
+    socketOptions: { 
+      keepAlive: 300000, connectTimeoutMS: 30000 
+    } 
+  }, 
+  replset: { 
+    socketOptions: { 
+      keepAlive: 300000, 
+      connectTimeoutMS : 30000 
+    } 
+  } 
+};
+
 const dbConn = mongoose.connect(process.env.DB_CONNECTION, 
-    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+    { ...options, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
     () => console.log('Connected to DB.'));
 
+    // test endpoint
 app.get('/createitem', function(req, res) {
         res.sendFile(path.join(__dirname + '/index.html'));
     });
     
+    // routes
 app.use('/api/todayi', todayiRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/common', commonRouter);
 
+    //port
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
