@@ -8,12 +8,13 @@
     "node": "12.18.4"
   },
   "scripts": {
-    "client-install": "npm install --prefix todayi",
+    "install-client": "cd todayi && npm install",
+    "build": "cd todayi && npm run build",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix todayi",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix todayi && npm run build --prefix todayi"
+    "client": "cd client && npm start",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "EmKay",
   "license": "ISC",
